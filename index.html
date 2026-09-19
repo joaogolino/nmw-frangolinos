@@ -1,0 +1,962 @@
+teste
+  linha2 <b>x</b><!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F0E0C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NMW">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F0E0C'/%3E%3Ctext x='32' y='41' font-family='Georgia' font-size='22' fill='%23C9A24B' text-anchor='middle'%3ENMW%3C/text%3E%3C/svg%3E">
+<title>NMW Frangolinos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+html{padding-top:env(safe-area-inset-top,0px)}
+:root{
+color-scheme: dark;
+--bg:#0F0E0C;
+--card:#181613;
+--card-2:#201D19;
+--line:#2C2823;
+--line-soft:#221F1B;
+--gold:#C9A24B;
+--gold-soft:rgba(201,162,75,.14);
+--gold-dim:#8A6E33;
+--text:#EDE7DC;
+--muted:#948C80;
+--faint:#6A6358;
+--ok:#86A872;
+--ok-soft:rgba(134,168,114,.14);
+--sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+--serif:'Fraunces',Georgia,'Times New Roman',serif;
+--r:12px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg)}
+body{
+margin:0;color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;
+padding-inline:16px;
+padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));
+}
+.wrap{max-width:600px;margin:0 auto}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.top{padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.mark{font-family:var(--serif);font-size:.78rem;letter-spacing:.24em;color:var(--gold);margin:0}
+.top h1{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1;margin:.2rem 0 0;text-wrap:balance}
+.who{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.who small{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.who select{
+appearance:none;-webkit-appearance:none;background:var(--card);border:1px solid var(--line);
+color:var(--text);border-radius:999px;padding:.42rem 2rem .42rem .9rem;font-weight:700;font-size:.9rem;
+background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
+background-position:calc(100% - 15px) 55%,calc(100% - 10px) 55%;background-size:5px 5px;background-repeat:no-repeat;
+}
+.sticky{
+position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);
+margin-inline:-16px;padding:12px 16px 10px;border-bottom:1px solid var(--line-soft);
+}
+.rail{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.rail button{
+background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.45rem 0 .4rem;
+display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;
+}
+.rail b{font-size:.8rem;font-weight:800;letter-spacing:.04em}
+.rail i{font-style:normal;font-size:.62rem;color:var(--faint);white-space:nowrap}
+.rail button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:#17130B}
+.rail button[aria-selected="true"] i{color:#4A3B17}
+.rail button.done:not([aria-selected="true"]) i{color:var(--ok)}
+.dayhead{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 0 6px}
+.dayhead .eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
+.dayhead h2{font-family:var(--serif);font-weight:400;font-size:1.45rem;line-height:1.15;margin:.15rem 0 0;text-wrap:balance}
+.ring{flex:none;width:58px;height:58px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-size:.78rem;font-weight:700}
+.daynote{color:var(--muted);font-size:.86rem;margin:.2rem 0 0;max-width:62ch}
+.blocks{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.block{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.bhead{
+width:100%;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;
+padding:12px 14px;background:none;border:0;text-align:left;
+}
+.letter{
+width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+font-family:var(--serif);font-size:1.05rem;color:var(--gold);background:var(--gold-soft);
+}
+.block.complete .letter{color:var(--ok);background:var(--ok-soft)}
+.bhead h3{margin:0;font-size:.98rem;font-weight:700;line-height:1.25}
+.bhead .meta{display:block;font-size:.76rem;color:var(--muted);font-weight:500;margin-top:1px}
+.bcount{font-size:.76rem;color:var(--faint);display:flex;align-items:center;gap:8px}
+.chev{width:9px;height:9px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);margin-top:-4px;transition:transform .2s}
+.block.closed .chev{transform:rotate(-45deg);margin-top:0}
+.bbody{padding:0 14px 14px;border-top:1px solid var(--line-soft)}
+.block.closed .bbody{display:none}
+.intro{font-size:.84rem;color:var(--muted);margin:12px 0 0;max-width:62ch}
+.grp{margin-top:12px}
+.glabel{
+display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+color:var(--gold);margin:0 0 2px;
+}
+.items{list-style:none;margin:0;padding:0}
+.item{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+.items li:last-child .item{border-bottom:0}
+.item input[type=checkbox]{
+appearance:none;-webkit-appearance:none;width:22px;height:22px;margin:1px 0 0;border-radius:6px;
+border:1.5px solid var(--faint);background:transparent;display:grid;place-items:center;cursor:pointer;
+}
+.item input[type=checkbox]:checked{background:var(--ok);border-color:var(--ok)}
+.item input[type=checkbox]:checked::after{content:"";width:5px;height:10px;border:solid #10140D;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.item .t{font-weight:600;font-size:.95rem}
+.item.checked .t{color:var(--muted)}
+.item .d{display:block;font-size:.8rem;color:var(--muted);font-weight:400;margin-top:2px;max-width:62ch}
+.item .d a{color:var(--gold)}
+.rest{display:inline-block;margin-top:4px;font-size:.74rem;color:var(--faint);font-weight:600}
+.loads{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.load{
+background:var(--card-2);border:1px solid var(--line);border-radius:8px;padding:4px 9px;
+display:flex;flex-direction:column;align-items:flex-start;line-height:1.2;
+}
+.load b{font-size:.92rem;color:var(--gold);font-weight:700}
+.load small{font-size:.66rem;color:var(--faint);letter-spacing:.02em}
+.loadbase{flex-basis:100%;font-size:.7rem;color:var(--faint)}
+.missing{font-size:.76rem;color:var(--muted);margin-top:6px;border:1px dashed var(--line);border-radius:8px;padding:6px 9px}
+.missing button{background:none;border:0;color:var(--gold);font-weight:700;padding:0;text-decoration:underline}
+.note{
+margin-top:8px;font-size:.8rem;padding:7px 10px;border-radius:8px;
+background:var(--card-2);border:1px solid var(--line);color:var(--muted);
+}
+.note b{color:var(--text)}
+.note.mine{border-color:var(--gold-dim);background:var(--gold-soft);color:var(--text)}
+.note.mine b{color:var(--gold)}
+.log{display:grid;gap:8px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.log label{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:10px;font-size:.8rem;color:var(--muted)}
+.log input,.field input{
+width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.45rem .6rem;font-size:.9rem;
+}
+.log input:focus,.field input:focus{border-color:var(--gold-dim);outline:none}
+.actions{display:flex;justify-content:center;margin:22px 0 4px}
+.ghost{background:none;border:1px solid var(--line);border-radius:999px;padding:.5rem 1.1rem;color:var(--muted);font-size:.82rem}
+.restday{padding:38px 8px;text-align:center;color:var(--muted)}
+.restday p{font-family:var(--serif);font-size:1.5rem;color:var(--text);margin:0 0 .3rem}
+.seg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.seg::-webkit-scrollbar{display:none}
+.seg button{
+flex:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;
+font-size:.8rem;font-weight:700;color:var(--muted);
+}
+.seg button[aria-selected="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.tests{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.test{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.test header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.test h4{margin:0;font-size:.95rem;font-weight:700}
+.test h4 small{display:block;font-weight:500;color:var(--faint);font-size:.74rem}
+.fill{font-size:.72rem;color:var(--faint);white-space:nowrap}
+.rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 14px;margin-top:8px}
+.row{display:flex;justify-content:space-between;gap:8px;font-size:.84rem;padding:4px 0;border-bottom:1px solid var(--line-soft)}
+.row span{color:var(--muted)}
+.row em{font-style:normal;font-weight:700;text-align:right}
+.row.empty em{color:var(--faint);font-weight:400}
+.row.me{border-bottom-color:var(--gold-dim)}
+.row.me span{color:var(--gold);font-weight:700}
+.mybest{margin-top:8px;font-size:.78rem;color:var(--muted)}
+.profile{margin-top:18px}
+.profile h2{font-family:var(--serif);font-weight:400;font-size:1.9rem;margin:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stat small{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.stat b{font-size:1.15rem}
+.sect{margin-top:22px}
+.sect h3{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:800}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.field{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:grid;gap:4px}
+.field span{font-size:.76rem;color:var(--muted)}
+.field .in{display:flex;align-items:center;gap:6px}
+.field .in small{color:var(--faint);font-size:.74rem}
+.field.edited{border-color:var(--gold-dim)}
+.hint{font-size:.78rem;color:var(--faint);margin-top:8px}
+.tabs{
+position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(15,14,12,.96);
+border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom,0px));
+backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.tabs .in{max-width:600px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tabs button{background:none;border:0;border-radius:10px;padding:.5rem 0;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--faint);font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.tabs svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-selected="true"]{color:var(--gold)}
+@media (max-width:380px){
+.rail i{display:none}
+.stats{grid-template-columns:repeat(2,1fr)}
+.fields{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.sync{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--faint);margin-top:4px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+.dot.on{background:var(--ok)} .dot.busy{background:var(--gold)} .dot.off{background:#B5654A}
+.row .edit{background:none;border:0;padding:0;font-weight:700;color:var(--gold);text-align:right;display:flex;gap:6px;align-items:center}
+.row .edit svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.editor{display:flex;gap:6px;grid-column:1/-1;padding:6px 0}
+.editor input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--gold-dim);border-radius:8px;padding:.45rem .6rem;font-size:.9rem}
+.btn{background:var(--gold);color:#17130B;border:0;border-radius:8px;padding:.45rem .9rem;font-weight:800;font-size:.82rem}
+.btn[disabled]{opacity:.5}
+.btn.sec{background:none;color:var(--muted);border:1px solid var(--line)}
+.login{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:16px}
+.login p{margin:0 0 10px;font-size:.84rem;color:var(--muted)}
+.login .in{display:flex;gap:8px}
+.login input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem;font-size:1rem;letter-spacing:.3em}
+.err{color:#D98A6E;font-size:.8rem;margin-top:8px}
+.banner{margin-top:14px;font-size:.8rem;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:8px 12px}
+.banner b{color:var(--gold)}
+.field input[readonly]{border-color:transparent;background:transparent;padding-left:0}
+.sets{margin-top:10px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.srow{display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,.8fr) minmax(0,.9fr);gap:8px;align-items:center;padding:6px 10px;border-bottom:1px solid var(--line-soft)}
+.srow.h{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:800;padding-block:7px;background:var(--card-2)}
+.srow .sn{font-size:.78rem;color:var(--muted);font-weight:700}
+.srow input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:.38rem .5rem;font-size:.92rem;text-align:center}
+.srow input:focus{border-color:var(--gold-dim);outline:none}
+.srow input::placeholder{color:var(--faint)}
+.srow .sv{text-align:right;font-size:.82rem;color:var(--muted)}
+.sfoot{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 10px;background:var(--card-2)}
+.sfoot .mini{background:none;border:1px solid var(--line);border-radius:7px;padding:.28rem .6rem;font-size:.74rem;color:var(--muted);font-weight:700}
+.sfoot .mini.gold{color:var(--gold);border-color:var(--gold-dim)}
+.sfoot .tot{margin-left:auto;font-size:.8rem;color:var(--muted)}
+.sfoot .tot b{color:var(--gold);font-size:.95rem}
+.dayvol{margin:.35rem 0 0;font-size:.82rem;color:var(--muted)}
+.dayvol b{color:var(--gold)}
+.comment{margin-top:12px;display:grid;gap:4px}
+.comment span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:800}
+.comment textarea{width:100%;min-height:52px;resize:vertical;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.5rem .6rem;font:inherit;font-size:.88rem;color:var(--text)}
+.comment textarea:focus{border-color:var(--gold-dim);outline:none}
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:18px;background:#1F6F4A;color:#F2FFF7;border:0;border-radius:12px;padding:.85rem 1rem;font-weight:800;font-size:.95rem;text-decoration:none}
+.wa svg{width:20px;height:20px;fill:currentColor}
+.wahint{text-align:center;font-size:.74rem;color:var(--faint);margin:.5rem 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+<div>
+<p class="mark">NO MATTER WHAT</p>
+<h1>Frangolinos</h1>
+</div>
+<div class="who">
+<small>Atleta</small>
+<select id="athlete" aria-label="Escolher atleta"></select>
+<span class="sync" id="sync"><span class="dot"></span><span>—</span></span>
+</div>
+</div>
+<main id="view-treino"></main>
+<main id="view-testes" hidden></main>
+<main id="view-atleta" hidden></main>
+</div>
+<nav class="tabs" aria-label="Seções">
+<div class="in" role="tablist">
+<button role="tab" data-tab="treino" aria-selected="true">
+<svg viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></svg>Treino
+</button>
+<button role="tab" data-tab="testes" aria-selected="false">
+<svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Testes
+</button>
+<button role="tab" data-tab="atleta" aria-selected="false">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Atleta
+</button>
+</div>
+</nav>
+<script>
+var ATHLETES = ['Daniel','Jessica','João','Matheus','Sarah','Victor'];
+var FLEX_A = [
+{t:'15 reps cada lado — mobilidade de tornozelo na caixa',d:'Sem tirar o calcanhar do apoio.'},
+{t:'0:45 couch stretch cada lado'},
+{t:'0:45 alongamento de posterior de coxa cada lado',d:'Deitado no chão, puxe a perna com uma superband e empine o bumbum na posição.'},
+{t:'0:45 pigeon cada lado'},
+{t:'0:45 alongamento dorsal na caixa',d:'Inspire fundo enchendo a torácica e solte esvaziando o abdome. Cotovelos alinhados com o punho, palma da mão totalmente pra cima.'},
+{t:'0:45 t-spine rotation',d:'Mesma respiração, dessa vez no primeiro ponto de restrição.'}
+];
+var FLEX_B = [
+{t:'0:45 alongamento de peitoral no rack cada lado'},
+{t:'0:45 alongamento dorsal na caixa',d:'Inspire fundo enchendo a torácica e solte esvaziando o abdome. Cotovelos alinhados com o punho, palma da mão totalmente pra cima.'},
+{t:'8 updown dog'},
+{t:'0:45 t-spine rotation',d:'Mesma respiração, dessa vez no primeiro ponto de restrição.'}
+];
+var WEEK = [
+{id:'seg',short:'SEG',name:'Segunda',focus:'LPO + Força',blocks:[
+{l:'A',n:'Flexibilidade',items:FLEX_A},
+{l:'B',n:'Aquecimento geral',groups:[
+{items:[{t:'3:00 air bike',d:'3 tiros de 5" a cada minuto.'}]},
+{g:'2 séries',items:[{t:'12/12 low to high superband woodchopper'},{t:'12/12 single leg hip thrust'}]},
+{g:'Depois — 2 séries',items:[
+{t:'10 good morning @ barra vazia'},
+{t:'5 strict muscle snatch + 3 clean grip OHS devagar + 3 snatch grip Sots press + 5 snatch balance @ 45/35',d:'Sots press com base confortável de agachamento, mesmo que sacrifique ADM.'}
+]}
+]},
+{l:'B2',n:'Aquecimento técnico',meta:'A cada 1:30, por 2 séries · 75/55 a 135/85',items:[
+{t:'1 snatch high pull + 1 hang muscle snatch + 1 OHS + 1 snatch balance + 1 squat snatch @ 135–155 / 75–110',d:'Pare no chão em todas as reps que saem de lá.',
+notes:[{w:'Victor',x:'1 snatch deadlift + 1 snatch pull + 1 snatch high pull + 1 hang snatch high pull @ 95–135.'}]}
+]},
+{l:'C',n:'LPO e força',items:[
+{t:'Squat snatch — 3-3-2-2-5 @ 85-90-90-90-75%',d:'Do 1RM mais recente. Só a série de 5 é touch and go.',rest:'Pausa 1:30–2:00',
+L:{b:'ss',sch:[[3,85],[3,90],[2,90],[2,90],[5,75]]},log:1,
+notes:[{w:'Victor',x:'Pode fazer 5×3 de power snatch @ 95–125 lb.'}]},
+{t:'Overhead squat com pausa no bottom — 3 × 3–5',d:'Maior peso da semana passada em todas as séries. Pode aquecer antes se precisar.',rest:'Pausa 1:30',log:1},
+{t:'Snatch high pull — 3 × 3 @ 110–113%',d:'Do 1RM mais recente de snatch. Levante a barra o mais alto que der.',rest:'Pausa 1:30',L:{b:'ss',lo:110,hi:113},log:1},
+{t:'Back squat — 3 × 6 @ mpp da semana passada',d:'Aqueça com séries de 5–6 até o peso alvo e só então comece a contar.',rest:'Pausa 2:00–3:00, conforme peso e esforço',log:1},
+{t:'Glute ham raise — 8-8-6-6',d:'Peso máximo no peito ou menor elástico possível.',rest:'Pausa 1:30'}
+]},
+{l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
+{t:'30–40 min bike erg ou remo @ 130–140 bpm',
+notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'}]}
+]}
+]},
+{id:'ter',short:'TER',name:'Terça',focus:'Ginástica',blocks:[
+{l:'A',n:'Flexibilidade',items:FLEX_B},
+{l:'B',n:'Aquecimento geral',groups:[
+{items:[{t:'3:00 ski erg em ritmo moderado'}]},
+{g:'2 séries',items:[{t:'10 scap pull up devagar'},{t:'10 banded victory'},{t:'10 medball overhead walking lunge @ 20/14 lb',d:'Braço esticado.'}]},
+{g:'Depois — 2 séries',items:[
+{t:'10 ring rows pegada neutra, rente ao corpo',d:'Não fique tão inclinado a ponto de falhar.'},
+{t:'10 swings na argola bem conectados'},
+{t:'0:10 dip hold embaixo + 0:10 em cima + 5 dips'}
+]}
+]},
+{l:'C',n:'LPO + força',items:[
+{t:'Press into jerk — 3-3-2 @ 33–45%',rest:'Pausa 1:00',L:{b:'jk',lo:33,hi:45}},
+{t:'Pause split jerk — 3-2-2 @ 65–80%',d:'Pausa de 2" no dip antes de lançar.',rest:'Pausa 1:30',L:{b:'jk',lo:65,hi:80},log:1},
+{t:'Split jerk — 2-1-1 @ 85% até o mpp do dia',rest:'Pausa 1:30–2:00',L:{b:'jk',lo:85},log:1,
+notes:[{w:'Victor',x:'Faça com cuidado, sem procurar mpp.'}]},
+{t:'Depois: 5 split jerks @ 75%, sem touch and go',L:{b:'jk',lo:75}}
+]},
+{l:'D',n:'Força',meta:'3 séries',items:[
+{t:'2 legless (1–2 RIR)'},
+{t:'Pausa 1:00 ativa leve',d:'Bike erg, ou só as pernas na air bike.'},
+{t:'5 bench press @ 90–100% do 5RM mais recente',rest:'Pausa 2:00',log:1}
+]},
+{l:'E',n:'Acumulação de ginástica',meta:'Ring muscle up e bar muscle up',items:[
+{t:'30/24 ring muscle ups por tempo'},
+{t:'5:00 girando leve na bike'},
+{t:'35/26 bar muscle ups por tempo'}
+],logs:['Tempo — ring muscle ups','Tempo — bar muscle ups']}
+]},
+{id:'qua',short:'QUA',name:'Quarta',focus:'Potência + Endurance',blocks:[
+{l:'A',n:'Warm up geral',intro:'Objetivo: melhorar a rigidez das pernas e o padrão de corrida com educativos que se repetem toda semana e, às vezes, evoluem para exercícios mais complexos.',groups:[
+{g:'2 séries',items:[
+{t:'20 pogo hops'},
+{t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril. Comece devagar pra entender. <a href="https://www.youtube.com/watch?v=m9IjQFYE-uI" target="_blank" rel="noopener">Vídeo de progressão</a>'},
+{t:'50 m A-skips'},
+{t:'100 m corrida leve'},
+{t:'Pausa 1:00'}
+]}
+]},
+{l:'B',n:'Potência',items:[
+{t:'Clean high pull — 3 × 3 @ 100–110%',d:'Do 1RM mais recente de clean. Aqueça com 70–80% antes de começar a contar. Maior altura possível na barra.',rest:'Pausa 1:30',L:{b:'sc',lo:100,hi:110},log:1},
+{t:'Power clean — 4 séries de 5 touch and go @ 215–235 / 125–135',rest:'Pausa 2:00',log:1},
+{t:'Squat box jump — 3 × 6',d:'Pausa de 1" embaixo antes de saltar. Maior altura da semana passada em todas.',rest:'Pausa 1:00'}
+]},
+{l:'C',n:'Parte principal — VO₂max',groups:[
+{items:[{t:'1 km @ ritmo livre'}]},
+{g:'2 séries',items:[{t:'0:12 tiro submáximo',d:'Acelere, mas sem exagerar.'},{t:'2:00 caminhando'}]},
+{g:'3 séries',items:[
+{t:'600 m @ 100–105% da velocidade do teste de 12 min',R:{dist:600,lo:100,hi:105}},
+{t:'2:00 trote leve ou caminhada',d:'Conforme o quão difíceis forem os 600 m.'}
+]},
+{g:'Depois',items:[{t:'1 km @ trote livre'},{t:'3:00 caminhada de volta à calma'}]}
+],logs:['Tempos dos 600 m']},
+{l:'D',n:'Alongamentos',items:[
+{t:'1:00 pigeon cada lado'},{t:'1:00 couch stretch cada lado'},{t:'1:00 posterior de coxa cada lado'},
+{t:'1:00 panturrilha (leve) cada lado'},{t:'1:00 rotação torácica isométrica no solo, cada lado'}
+]}
+]},
+{id:'qui',short:'QUI',name:'Quinta',focus:'Zona 2 ou full rest — o que precisar',blocks:[
+{l:'A',n:'Flexibilidade',items:FLEX_A},
+{l:'B',n:'Remo — limiar',meta:'Optativo, pra quem não consegue ficar parado',groups:[
+{g:'3 séries',items:[
+{t:'8:00 @ 5–10% mais lento que o teste de 12 min'},
+{t:'2:30 @ 20–30% mais lento que o teste de 12 min'}
+]},
+{g:'Depois',items:[{t:'+30 min de endurance leve',d:'Bike erg, echo bike e/ou ski erg, em ritmo leve e livre.'}]}
+]},
+{l:'C',n:'Rolinho',meta:'1:30 em cada parte, cada lado',items:[
+{t:'Adutores (devagar)'},{t:'Lateral do quadríceps'},{t:'Glúteos'},{t:'Posterior de coxa'},{t:'Panturrilhas'}
+]}
+]},
+{id:'sex',short:'SEX',name:'Sexta',focus:'LPO + Força + VO₂max',blocks:[
+{l:'A',n:'Flexibilidade',items:FLEX_A},
+{l:'B',n:'Aquecimento geral',meta:'2 séries',items:[
+{t:'15/12 cal air bike'},
+{t:'8/8 single leg deadlift',d:'Halter do lado da perna de apoio, peso livre pra aquecer sem entortar o corpo.',
+notes:[{w:'Daniel',x:'Pode fazer 10 pontes de quadril unilaterais.'}]},
+{t:'6 behind the neck shoulder press (barra vazia, pegada de jerk) + 6 close grip OHS'},
+{t:'0:30/0:30 side plank rotation'}
+]},
+{l:'C',n:'LPO e força',items:[
+{t:'2 séries: 1 clean high pull + 1 muscle clean & press + 1 jerk balance + 1 tall squat clean + 1 split jerk @ 30–40%',d:'Do 1RM de clean & jerk. Jerk balance: desça a barra até a linha da testa, pare 2" e bata o jerk.',rest:'Pausa 1:00',L:{b:'cj',lo:30,hi:40}},
+{t:'2 séries: 1 power clean + 1 thruster + 1 hang squat clean + 1 split jerk com pausa de 2" na recepção @ 55–70%',rest:'Pausa 1:30',L:{b:'cj',lo:55,hi:70},log:1},
+{t:'3 séries: 1 squat clean + 3 front squats + 1 jerk @ 75–85%',d:'Do 1RM de clean & jerk.',rest:'Pausa 2:00',L:{b:'cj',lo:75,hi:85},log:1,
+notes:[{w:'Victor',x:'Pode fazer só o clean com front squat.'}]},
+{t:'Single arm KB overhead squat — 6/6',d:'Peso desafiador que mantenha a postura boa. Não tente agachar mais perdendo o padrão; ganhe ADM aos poucos.',rest:'Pausa 1:00–1:30',log:1}
+]},
+{l:'D',n:'WOD — interval VO₂max',intro:'O objetivo não é bater recorde de 50 reps por tempo, e sim treinar na zona de VO₂max com exercícios da modalidade. Não é esforço de 100%: tem que sobrar energia em TODAS as séries, inclusive na última de bike.',groups:[
+{g:'Por tempo',items:[
+{t:'50 thrusters @ 95/65'},{t:'Pausa 3:00'},{t:'50 bar facing burpees'},{t:'Pausa 3:00'},{t:'50 cal air bike'}
+]}
+],logs:['Tempo — thrusters','Tempo — burpees','Tempo — air bike','Tempo total (com pausas)']}
+]},
+{id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + WOD',blocks:[
+{l:'A',n:'Flexibilidade',items:FLEX_B},
+{l:'B',n:'Aquecimento geral',groups:[
+{items:[{t:'800 m corrida'}]},
+{g:'Depois — 2 séries',items:[
+{t:'8 scap pull ups devagar + 8 ring rows close grip'},
+{t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
+{t:'5 inch worm to push up',d:'2 push ups por rep.'},
+{t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
+]}
+]},
+{l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 10:00',items:[
+{t:'Shoulder press + push press — 5 × (1+2)',d:'90% do peso da semana passada até o mpp do dia.',log:1}
+]},
+{l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
+{t:'1 snatch high pull + 2 power snatch touch and go @ 80–90%',d:'Do 1RM de power snatch.',L:{b:'ps',lo:80,hi:90},log:1}
+]},
+{l:'E',n:'WOD',meta:'Por tempo · cap 15:00',groups:[
+{g:'Round 1',items:[{t:'25 m single arm DB overhead walking lunge @ 50/35'},{t:'20 alternating DB snatch'},{t:'20 pull ups'}]},
+{g:'Round 2',items:[{t:'25 m single arm DB overhead walking lunge @ 50/35'},{t:'20 alternating DB snatch'},{t:'20 chest to bar'}]},
+{g:'Round 3',items:[{t:'25 m single arm DB overhead walking lunge @ 50/35'},{t:'20 alternating DB snatch'},{t:'20 ring muscle ups'}]}
+],logs:['Tempo final (ou reps no cap)']}
+]},
+{id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
+];
+var SET_PLAN = [
+['seg','Squat snatch',[3,3,2,2,5]],
+['seg','Overhead squat',[3,3,3],'3–5'],
+['seg','Snatch high pull',[3,3,3]],
+['seg','Back squat',[6,6,6]],
+['seg','Glute ham raise',[8,8,6,6]],
+['ter','Press into jerk',[3,3,2]],
+['ter','Pause split jerk',[3,2,2]],
+['ter','Split jerk',[2,1,1]],
+['ter','Depois: 5 split jerks',[1,1,1,1,1]],
+['ter','5 bench press',[5,5,5]],
+['qua','Clean high pull',[3,3,3]],
+['qua','Power clean',[5,5,5,5]],
+['sex','2 séries: 1 clean high pull',[5,5]],
+['sex','2 séries: 1 power clean',[4,4]],
+['sex','3 séries: 1 squat clean',[5,5,5]],
+['sex','Single arm KB overhead squat',[12],'6/6'],
+['sab','Shoulder press + push press',[3,3,3,3,3]],
+['sab','1 snatch high pull + 2 power snatch',[3,3,3,3,3]]
+];
+WEEK.forEach(function(d){ d.blocks.forEach(function(b){ (b.groups||[{items:b.items}]).forEach(function(g){ g.items.forEach(function(it){
+SET_PLAN.forEach(function(p){ if(p[0]===d.id && it.t.indexOf(p[1])===0 && !it.sets){ it.sets=p[2]; it.repHint=p[3]; delete it.log; } });
+}); }); }); });
+var TESTS = [
+{cat:'Engine',items:[
+{n:'CSS natação',u:'/100 m',v:{Victor:'2:24',Daniel:'2:08',Matheus:'1:51'}},
+{n:'50 cal air bike',s:'Anaeróbico glicolítico',v:{}},
+{n:'50 cal remo',s:'Anaeróbico glicolítico',v:{Jessica:'3:59 · 840 cal/h'}},
+{n:'2k remo',s:'vVO₂max',v:{Daniel:'7:21 · 260 W',Matheus:'7:00 · 298 W',Victor:'7:29 · 247 W'}},
+{n:'1600 m corrida',s:'vVO₂max',v:{}},
+{n:'5k remo',s:'FTP',v:{Victor:'N/A'}},
+{n:'20 min bike',s:'FTP',v:{Daniel:'224 W',Matheus:'242 W',Sarah:'190 W · FTP 180',Victor:'215 W · FTP 193,5'}},
+{n:'5 km corrida',s:'FTP',v:{Daniel:'22:56 · 4:35/km',Jessica:'22:53',Matheus:'22:37 · 4:31/km',Sarah:'4:37/km (10 km)',Victor:'23:59 · 4:48/km'}},
+{n:'Teste de 12 min corrida',k:'run12',v:{Sarah:'2240 m (esteira)'}}
+]},
+{cat:'Ginástica',items:[
+{n:'Double under UB',v:{Jessica:'100',Matheus:'170',Sarah:'240',Victor:'150'}},
+{n:'Strict HSPU UB',v:{Matheus:'44',Sarah:'12'}},
+{n:'3 min strict HSPU',v:{Matheus:'80',Sarah:'24'}},
+{n:'Kipping HSPU UB',v:{Matheus:'54',Sarah:'20',Victor:'40'}},
+{n:'3 min kipping HSPU',v:{}},
+{n:'HS walk UB',v:{}},
+{n:'3 min HS walk',v:{Daniel:'45 m',Matheus:'80 m',Sarah:'25 m'}},
+{n:'Ring muscle up UB',v:{Daniel:'19',Matheus:'24',Sarah:'9',Victor:'20'}},
+{n:'5 min ring muscle up',v:{Daniel:'36',Matheus:'49',Sarah:'20 (corda longa)',Victor:'36'}},
+{n:'Bar muscle up UB',v:{Matheus:'36',Sarah:'30'}},
+{n:'5 min bar muscle up',v:{}},
+{n:'Toes to bar UB',v:{Matheus:'51'}},
+{n:'3 min toes to bar',v:{}},
+{n:'Chest to bar UB',v:{}},
+{n:'3 min chest to bar',v:{}},
+{n:'Strict pull up UB',v:{Matheus:'21',Sarah:'11'}},
+{n:'Push up UB',v:{}},
+{n:'10 rope climbs',s:'Por tempo',v:{}},
+{n:'8 legless',s:'Por tempo',v:{}}
+]},
+{cat:'Força',items:[
+{n:'Back squat 1RM',k:'bs',u:'lb',v:{Daniel:'385',Matheus:'460',Sarah:'235',Victor:'405 (lifetime 415)'}},
+{n:'Máx. reps back squat @ 85%',v:{Matheus:'12',Sarah:'10',Victor:'8'}},
+{n:'Front squat 1RM',k:'fs',u:'lb',v:{Daniel:'345',Matheus:'405',Sarah:'205',Victor:'355 (lifetime 375)'}},
+{n:'Máx. reps front squat @ 85%',v:{Daniel:'5',Matheus:'6',Sarah:'5',Victor:'5'}},
+{n:'Deadlift 1RM',k:'dl',u:'lb',v:{Daniel:'410',Sarah:'250',Victor:'425'}},
+{n:'Máx. reps deadlift @ 85%',v:{}},
+{n:'Shoulder press 1RM',k:'sp',u:'lb',v:{Daniel:'195',Matheus:'220',Sarah:'100',Victor:'205'}},
+{n:'Máx. reps shoulder press @ 85%',v:{}},
+{n:'Bench press 1RM',k:'bp',u:'lb',v:{Daniel:'290',Matheus:'275',Sarah:'135',Victor:'305'}},
+{n:'Máx. reps bench press @ 85%',v:{Daniel:'7',Matheus:'6',Sarah:'15',Victor:'5'}},
+{n:'6RM front rack Bulgarian split squat',u:'lb',v:{Matheus:'115'}},
+{n:'150 wall balls @ 20/14',s:'Por tempo',v:{}}
+]},
+{cat:'LPO',items:[
+{n:'Hang power snatch 1RM',u:'lb',v:{Matheus:'185',Victor:'205'}},
+{n:'Power snatch 1RM',k:'ps',u:'lb',v:{Matheus:'245',Sarah:'135',Victor:'220'}},
+{n:'Hang squat snatch 1RM',u:'lb',v:{Matheus:'185',Victor:'225'}},
+{n:'Squat snatch 1RM',k:'ss',u:'lb',v:{Matheus:'255',Sarah:'145',Victor:'240'}},
+{n:'3 position power snatch',u:'lb',v:{}},
+{n:'3 position squat snatch',u:'lb',v:{}},
+{n:'Hang power clean 1RM',u:'lb',v:{Victor:'285'}},
+{n:'Power clean 1RM',k:'pc',u:'lb',v:{Matheus:'315',Sarah:'175',Victor:'305'}},
+{n:'Hang squat clean 1RM',u:'lb',v:{Victor:'315'}},
+{n:'Squat clean 1RM',k:'sc',u:'lb',v:{Matheus:'335',Sarah:'180',Victor:'330'}},
+{n:'3 position power clean',u:'lb',v:{Matheus:'265'}},
+{n:'3 position squat clean',u:'lb',v:{}},
+{n:'Push press 1RM',u:'lb',v:{Sarah:'145'}},
+{n:'Push jerk 1RM',u:'lb',v:{Sarah:'155',Victor:'300'}},
+{n:'Split jerk 1RM',k:'sj',u:'lb',v:{Sarah:'180'}},
+{n:'Power clean & jerk 1RM',u:'lb',v:{Sarah:'175',Victor:'300'}},
+{n:'Squat clean & jerk 1RM',k:'cj',u:'lb',v:{Sarah:'175',Victor:'320'}},
+{n:'25 snatches @ 75% 1RM',s:'Por tempo',v:{}},
+{n:'25 clean & jerks @ 75% 1RM',s:'Por tempo',v:{}}
+]},
+{cat:'Benchmarks',items:[
+{n:'Helena',s:'Glicolítico triplet',v:{},extra:['Marco Antonio','Nat']},
+{n:'Fran',s:'Altamente glicolítico · push & pull',v:{Victor:'2:24'},extra:['Marco Antonio','Nat']},
+{n:'DT',s:'Barbell endurance',v:{Matheus:'5:34',Victor:'6:31'}},
+{n:'Diane',s:'Altamente glicolítico · push & pull',v:{Victor:'2:52'}},
+{n:'Isabel',s:'30 snatches @ 135/95',v:{Matheus:'1:45'}},
+{n:'Grace',s:'30 clean & jerks @ 135/95',v:{Victor:'1:56'}},
+{n:'100 OHS @ 95/65',s:'Por tempo',v:{}}
+]}
+];
+var BASES = {
+ss:{n:'Squat snatch'}, ps:{n:'Power snatch'}, sc:{n:'Squat clean'}, pc:{n:'Power clean'},
+cj:{n:'Clean & jerk'}, sj:{n:'Split jerk'}, bs:{n:'Back squat'}, fs:{n:'Front squat'},
+dl:{n:'Deadlift'}, sp:{n:'Shoulder press'}, bp:{n:'Bench press'}
+};
+var BASE_ORDER = ['ss','ps','sc','pc','cj','sj','bs','fs','dl','sp','bp'];
+var API_URL = 'https://script.google.com/macros/s/AKfycbwxKV3ucyyckvD-WXm5Pr5dlSrhomY2fPu5VyWYxSW9pFT3mny4r7N_pUai7DYC9Wt0/exec';
+var KEY='nmw-frangolinos-v1';
+var S={athlete:'Matheus',tab:'treino',day:null,cat:'Força',checks:{},logs:{},sets:{},notes:{},closed:{},auth:null,cache:null};
+try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); for(var k in o) S[k]=o[k];}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+var CATS=['Engine','Ginástica','Força','LPO','Benchmarks'];
+function applyRemote(d){
+if(!d || !d.tests) return;
+var groups={};
+d.tests.forEach(function(t){ (groups[t.cat]=groups[t.cat]||[]).push({n:t.n,s:t.s||'',u:t.u||'',k:t.k||'',v:t.v||{}}); });
+var order=CATS.filter(function(c){return groups[c]}).concat(Object.keys(groups).filter(function(c){return CATS.indexOf(c)<0}));
+TESTS=order.map(function(c){return {cat:c,items:groups[c]}});
+if(d.athletes && d.athletes.length) ATHLETES=d.athletes.slice();
+}
+if(S.cache) applyRemote(S.cache);
+var SYNC={state:API_URL?'busy':'local',at:S.cache?S.cache.updated:null};
+function syncUI(){
+var el=document.getElementById('sync'); if(!el) return;
+var dot=el.firstChild, txt=el.lastChild, t='';
+dot.className='dot'+(SYNC.state==='on'?' on':SYNC.state==='busy'?' busy':SYNC.state==='off'?' off':'');
+if(SYNC.state==='local') t='dados da planilha';
+else if(SYNC.state==='busy') t='sincronizando…';
+else if(SYNC.state==='off') t='offline';
+else { var d=new Date(SYNC.at); t='atualizado '+(isNaN(d)?'':d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})); }
+txt.textContent=t;
+}
+function api(body){
+var opt= body ? {method:'POST',body:JSON.stringify(body)} : {method:'GET'};
+return fetch(API_URL, opt).then(function(r){ return r.json(); });
+}
+function pull(){
+if(!API_URL) return;
+SYNC.state='busy'; syncUI();
+api().then(function(d){
+if(!d.ok) throw new Error('bad');
+S.cache=d; applyRemote(d); save(); SYNC.state='on'; SYNC.at=d.updated; fillAthletes(); render();
+}).catch(function(){ SYNC.state='off'; syncUI(); });
+}
+function isMe(){ return S.auth && S.auth.athlete===S.athlete; }
+function findTest(name){
+for(var c=0;c<TESTS.length;c++) for(var i=0;i<TESTS[c].items.length;i++) if(TESTS[c].items[i].n===name) return TESTS[c].items[i];
+return null;
+}
+function saveResult(test,value){
+if(!API_URL || !isMe()) return Promise.reject({error:'Entre com seu PIN para editar.'});
+SYNC.state='busy'; syncUI();
+return api({action:'set',athlete:S.auth.athlete,pin:S.auth.pin,test:test,value:value}).then(function(d){
+if(!d.ok){ SYNC.state='on'; syncUI(); throw {error:d.error}; }
+S.cache=d.data; applyRemote(d.data); save(); SYNC.state='on'; SYNC.at=d.data.updated; return d;
+},function(){ SYNC.state='off'; syncUI(); throw {error:'Sem conexão. Tente de novo.'}; });
+}
+function defaultMax(ath,key){
+for(var c=0;c<TESTS.length;c++) for(var i=0;i<TESTS[c].items.length;i++){
+var t=TESTS[c].items[i];
+if(t.k===key && t.v[ath]){var n=parseFloat(String(t.v[ath]).replace(',','.')); return isNaN(n)?null:n;}
+}
+return null;
+}
+function getMax(ath,key){ return defaultMax(ath,key); }
+function testForKey(key){
+for(var c=0;c<TESTS.length;c++) for(var i=0;i<TESTS[c].items.length;i++) if(TESTS[c].items[i].k===key) return TESTS[c].items[i];
+return null;
+}
+function jerkBase(ath){
+var sj=getMax(ath,'sj'); if(sj) return {v:sj,n:'Split jerk'};
+var cj=getMax(ath,'cj'); if(cj) return {v:cj,n:'Clean & jerk'};
+return null;
+}
+function baseFor(ath,b){
+if(b==='jk') return jerkBase(ath);
+var v=getMax(ath,b); return v?{v:v,n:BASES[b].n}:null;
+}
+function r5(x){return Math.round(x/5)*5}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function fmtTime(sec){var m=Math.floor(sec/60),s=Math.round(sec%60); if(s===60){m++;s=0} return m+':'+(s<10?'0':'')+s}
+function todayId(){var m={0:'dom',1:'seg',2:'ter',3:'qua',4:'qui',5:'sex',6:'sab'}; return m[new Date().getDay()];}
+if(!S.day) S.day=todayId();
+function allItems(day){
+var out=[];
+day.blocks.forEach(function(b,bi){
+blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){ out.push(day.id+'.'+bi+'.'+gi+'.'+ii); }); });
+});
+return out;
+}
+function blockGroups(b){return b.groups ? b.groups : [{items:b.items}];}
+function ck(){ var a=S.athlete; if(!S.checks[a]) S.checks[a]={}; return S.checks[a]; }
+function lg(){ var a=S.athlete; if(!S.logs[a]) S.logs[a]={}; return S.logs[a]; }
+function dayProgress(day){
+var ids=allItems(day), c=ck(), d=0; ids.forEach(function(id){ if(c[id]) d++; }); return {d:d,t:ids.length};
+}
+function loadHTML(L){
+var ath=S.athlete, base=baseFor(ath,L.b);
+if(!base){
+var want = L.b==='jk' ? 'split jerk ou clean & jerk' : BASES[L.b].n.toLowerCase();
+return '<div class="missing">Sem 1RM de '+want+' para '+esc(ath)+'. <button type="button" data-goto="atleta">Registrar</button></div>';
+}
+var h='<div class="loads num">';
+if(L.sch){
+L.sch.forEach(function(s,i){ h+='<div class="load"><b>'+r5(base.v*s[1]/100)+'</b><small>S'+(i+1)+' · '+s[0]+' rep · '+s[1]+'%</small></div>'; });
+} else if(L.hi){
+h+='<div class="load"><b>'+r5(base.v*L.lo/100)+'–'+r5(base.v*L.hi/100)+' lb</b><small>'+L.lo+'–'+L.hi+'%</small></div>';
+} else {
+h+='<div class="load"><b>'+r5(base.v*L.lo/100)+' lb</b><small>'+L.lo+'%</small></div>';
+}
+h+='<span class="loadbase">Base: '+base.n+' '+base.v+' lb · arredondado a 5 lb</span></div>';
+return h;
+}
+function runHTML(R){
+var t=testForKey('run12');
+var val = t && t.v[S.athlete] ? parseFloat(String(t.v[S.athlete]).replace('.','')) : null;
+if(!val) return '<div class="missing">Sem teste de 12 min para '+esc(S.athlete)+' — ritmo pela percepção até o teste.</div>';
+var v=val/720; // m/s
+var slow=R.dist/(v*R.lo/100), fast=R.dist/(v*R.hi/100);
+return '<div class="loads num"><div class="load"><b>'+fmtTime(fast)+'–'+fmtTime(slow)+'</b><small>alvo para '+R.dist+' m</small></div><span class="loadbase">Base: teste de 12 min — '+val+' m</span></div>';
+}
+function itemHTML(it,id){
+var c=ck()[id];
+var h='<li><div class="item'+(c?' checked':'')+'"><input type="checkbox" id="c-'+id+'" data-id="'+id+'"'+(c?' checked':'')+' aria-label="Concluído">';
+h+='<label for="c-'+id+'"><span class="t">'+esc(it.t)+'</span>';
+if(it.d) h+='<span class="d">'+it.d+'</span>';
+if(it.rest) h+='<span class="rest">'+esc(it.rest)+'</span>';
+h+='</label><div style="grid-column:2">';
+if(it.L) h+=loadHTML(it.L);
+if(it.R) h+=runHTML(it.R);
+(it.notes||[]).forEach(function(n){
+h+='<div class="note'+(n.w===S.athlete?' mine':'')+'"><b>'+esc(n.w)+'</b> — '+esc(n.x)+'</div>';
+});
+if(it.sets) h+=setsHTML(it,id);
+if(it.log){
+var v=lg()[id]||'';
+h+='<div class="log" style="margin-top:8px;padding-top:8px"><label for="l-'+id+'">Carga / resultado<input id="l-'+id+'" data-log="'+id+'" value="'+esc(v)+'" placeholder="ex.: 225 lb · RPE 8" autocomplete="off"></label></div>';
+}
+h+='</div></div></li>';
+return h;
+}
+function renderTreino(){
+var day=WEEK.filter(function(d){return d.id===S.day})[0]||WEEK[0];
+var h='<div class="sticky"><div class="rail" role="tablist" aria-label="Dias da semana">';
+WEEK.forEach(function(d){
+var p=dayProgress(d), full=p.t && p.d===p.t;
+var sub = d.rest ? 'rest' : (p.d ? p.d+'/'+p.t : d.focus.split(/[ +—]/)[0]);
+h+='<button role="tab" data-day="'+d.id+'" aria-selected="'+(d.id===day.id)+'" class="'+(full?'done':'')+'"><b>'+d.short+'</b><i>'+esc(full?'✓ feito':sub)+'</i></button>';
+});
+h+='</div></div>';
+var p=dayProgress(day), pct=p.t?p.d/p.t:0, C=2*Math.PI*24;
+var hasSets=!day.rest && day.blocks.some(function(b){ return blockGroups(b).some(function(g){ return g.items.some(function(it){return it.sets}); }); });
+h+='<div class="dayhead"><div><p class="eyebrow">'+day.name+'</p><h2>'+esc(day.focus)+'</h2>'+(hasSets?'<p class="dayvol num">Volume de força: <b id="dayvol">'+fmtN(dayVol(day))+'</b> lb</p>':'')+'</div>';
+if(!day.rest) h+='<div class="ring" aria-label="'+p.d+' de '+p.t+' itens concluídos"><svg viewBox="0 0 58 58"><circle cx="29" cy="29" r="24" fill="none" stroke="#2C2823" stroke-width="5"/><circle cx="29" cy="29" r="24" fill="none" stroke="'+(pct===1?'#86A872':'#C9A24B')+'" stroke-width="5" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+(C*(1-pct))+'"/></svg><span class="num">'+Math.round(pct*100)+'%</span></div>';
+h+='</div>';
+if(day.rest){
+h+='<div class="restday"><p>Full rest.</p>Sem treino hoje. Sono, comida e o resto da vida.</div>';
+document.getElementById('view-treino').innerHTML=h; return;
+}
+h+='<div class="blocks">';
+day.blocks.forEach(function(b,bi){
+var gs=blockGroups(b), ids=[], c=ck();
+gs.forEach(function(g,gi){ g.items.forEach(function(it,ii){ ids.push(day.id+'.'+bi+'.'+gi+'.'+ii); }); });
+var done=ids.filter(function(id){return c[id]}).length, complete=done===ids.length;
+var bkey=S.athlete+'.'+day.id+'.'+bi;
+var closed = S.closed[bkey]!=null ? S.closed[bkey] : false;
+h+='<section class="block'+(complete?' complete':'')+(closed?' closed':'')+'">';
+h+='<button class="bhead" type="button" data-toggle="'+bkey+'" aria-expanded="'+(!closed)+'"><span class="letter">'+b.l+'</span><span><h3>'+esc(b.n)+'</h3>'+(b.meta?'<span class="meta">'+esc(b.meta)+'</span>':'')+'</span><span class="bcount num">'+done+'/'+ids.length+'<span class="chev"></span></span></button>';
+h+='<div class="bbody">';
+if(b.intro) h+='<p class="intro">'+esc(b.intro)+'</p>';
+gs.forEach(function(g,gi){
+h+='<div class="grp">'+(g.g?'<span class="glabel">'+esc(g.g)+'</span>':'')+'<ul class="items">';
+g.items.forEach(function(it,ii){ h+=itemHTML(it,day.id+'.'+bi+'.'+gi+'.'+ii); });
+h+='</ul></div>';
+});
+if(b.logs){
+h+='<div class="log">';
+b.logs.forEach(function(lab,li){
+var id=day.id+'.'+bi+'.log'+li, v=lg()[id]||'';
+h+='<label for="l-'+id+'">'+esc(lab)+'<input id="l-'+id+'" data-log="'+id+'" value="'+esc(v)+'" placeholder="0:00" autocomplete="off"></label>';
+});
+h+='</div>';
+}
+var nk=day.id+'.'+bi;
+h+='<label class="comment" for="n-'+nk+'"><span>Comentário</span><textarea id="n-'+nk+'" data-note="'+nk+'" placeholder="Como foi? Dor, técnica, ajuste de carga…">'+esc(nt()[nk]||'')+'</textarea></label>';
+h+='</div></section>';
+});
+h+='</div><button type="button" class="wa" data-wa="'+day.id+'"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3z"/></svg>Enviar resumo no WhatsApp</button><p class="wahint">Abre o WhatsApp com o resumo pronto — escolha o grupo e envie.</p><div class="actions"><button class="ghost" type="button" data-reset="'+day.id+'">Limpar marcações de '+day.name.toLowerCase()+'</button></div>';
+document.getElementById('view-treino').innerHTML=h;
+}
+function st(){ var a=S.athlete; if(!S.sets[a]) S.sets[a]={}; return S.sets[a]; }
+function nt(){ var a=S.athlete; if(!S.notes[a]) S.notes[a]={}; return S.notes[a]; }
+function num(v){ var n=parseFloat(String(v==null?'':v).replace(',','.')); return isNaN(n)?0:n; }
+function fmtN(n){ return Math.round(n).toLocaleString('pt-BR'); }
+function getSets(it,id){
+var arr=st()[id];
+if(!arr){ arr=it.sets.map(function(){return {w:'',r:''}}); }
+return arr;
+}
+function targetFor(it,i,n){
+if(!it.L) return null;
+var base=baseFor(S.athlete,it.L.b); if(!base) return null;
+if(it.L.sch){ var sc=it.L.sch[Math.min(i,it.L.sch.length-1)]; return r5(base.v*sc[1]/100); }
+if(it.L.hi && n>1){ return r5(base.v*(it.L.lo+(it.L.hi-it.L.lo)*i/(n-1))/100); }
+return r5(base.v*it.L.lo/100);
+}
+function plannedReps(it,i){ return it.sets[Math.min(i,it.sets.length-1)]; }
+function setVol(it,s,i){ var w=num(s.w); if(!w) return 0; var r=num(s.r)||plannedReps(it,i); return w*r; }
+function itemVol(it,id){ return getSets(it,id).reduce(function(a,s,i){ return a+setVol(it,s,i); },0); }
+function dayVol(day){
+var v=0;
+day.blocks.forEach(function(b,bi){ blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){ if(it.sets) v+=itemVol(it,day.id+'.'+bi+'.'+gi+'.'+ii); }); }); });
+return v;
+}
+function findItem(id){
+var p=id.split('.'), d=WEEK.filter(function(x){return x.id===p[0]})[0];
+return blockGroups(d.blocks[+p[1]])[+p[2]].items[+p[3]];
+}
+function setsHTML(it,id){
+var arr=getSets(it,id), n=arr.length;
+var h='<div class="sets num" data-sets="'+id+'"><div class="srow h"><span>Série</span><span>Carga (lb)</span><span>Reps</span><span style="text-align:right">Volume</span></div>';
+arr.forEach(function(s,i){
+var tg=targetFor(it,i,n), pr=plannedReps(it,i), v=setVol(it,s,i);
+h+='<div class="srow"><span class="sn">S'+(i+1)+'</span>'+
+'<input id="w-'+id+'-'+i+'" data-sw="'+id+'|'+i+'" inputmode="decimal" value="'+esc(s.w)+'" placeholder="'+(tg||'lb')+'" aria-label="Carga série '+(i+1)+'">'+
+'<input id="r-'+id+'-'+i+'" data-sr="'+id+'|'+i+'" inputmode="numeric" value="'+esc(s.r)+'" placeholder="'+(i===0&&it.repHint?esc(it.repHint):pr)+'" aria-label="Reps série '+(i+1)+'">'+
+'<span class="sv" data-sv="'+id+'|'+i+'">'+(v?fmtN(v):'—')+'</span></div>';
+});
+h+='<div class="sfoot">'+(it.L?'<button type="button" class="mini gold" data-fill="'+id+'">Preencher alvo</button>':'')+
+'<button type="button" class="mini" data-addset="'+id+'">+ série</button>'+(n>1?'<button type="button" class="mini" data-delset="'+id+'">− série</button>':'')+
+'<span class="tot">Volume <b data-iv="'+id+'">'+fmtN(itemVol(it,id))+'</b> lb</span></div></div>';
+return h;
+}
+function refreshVol(id){
+var it=findItem(id), arr=getSets(it,id);
+arr.forEach(function(s,i){ var el=document.querySelector('[data-sv="'+id+'|'+i+'"]'); if(el){ var v=setVol(it,s,i); el.textContent=v?fmtN(v):'—'; } });
+var iv=document.querySelector('[data-iv="'+id+'"]'); if(iv) iv.textContent=fmtN(itemVol(it,id));
+var dv=document.getElementById('dayvol'); if(dv){ var day=WEEK.filter(function(d){return d.id===id.split('.')[0]})[0]; dv.textContent=fmtN(dayVol(day)); }
+}
+function shortName(t){ return t.split(' — ')[0].replace(/^(\d séries: |Depois: )/,''); }
+function summary(day){
+var L=[], c=ck(), p=dayProgress(day);
+L.push('*NMW · Frangolinos*');
+L.push('*'+day.name+' — '+day.focus+'*');
+L.push('Atleta: *'+S.athlete+'*');
+L.push('Concluído: '+p.d+'/'+p.t+' itens ('+(p.t?Math.round(p.d/p.t*100):0)+'%)');
+day.blocks.forEach(function(b,bi){
+var lines=[];
+blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){
+var id=day.id+'.'+bi+'.'+gi+'.'+ii;
+if(it.sets){
+var arr=getSets(it,id), parts=[];
+arr.forEach(function(s,i){ if(num(s.w)) parts.push(s.w+'×'+(num(s.r)||plannedReps(it,i))); });
+if(parts.length) lines.push('• '+shortName(it.t)+': '+parts.join(', ')+' → vol '+fmtN(itemVol(it,id))+' lb');
+} else if(it.log && lg()[id]){
+lines.push('• '+shortName(it.t)+': '+lg()[id]);
+}
+}); });
+(b.logs||[]).forEach(function(lab,li){ var v=lg()[day.id+'.'+bi+'.log'+li]; if(v) lines.push('• '+lab+': '+v); });
+var note=nt()[day.id+'.'+bi];
+if(note) lines.push('💬 '+note.trim());
+if(lines.length){ L.push(''); L.push('*'+b.l+') '+b.n+'*'); L=L.concat(lines); }
+});
+var dv=dayVol(day);
+if(dv){ L.push(''); L.push('*Volume total de força: '+fmtN(dv)+' lb*'); }
+return L.join('\n');
+}
+var EDITING=null; // nome do teste em edição
+var PEN='<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>';
+function loginHTML(){
+if(!API_URL) return '<div class="banner">Edição desligada: o app ainda não foi ligado à planilha (API_URL vazio).</div>';
+if(isMe()) return '<div class="banner">Editando como <b>'+esc(S.auth.athlete)+'</b>. Toque no seu resultado para alterar. <button class="btn sec" type="button" data-logout="1" style="margin-left:6px;padding:.2rem .6rem">Sair</button></div>';
+if(S.auth) return '<div class="banner">Você entrou como <b>'+esc(S.auth.athlete)+'</b>. Selecione seu nome lá em cima para editar.</div>';
+return '<div class="login"><p>É o <b>'+esc(S.athlete)+'</b>? Digite seu PIN para editar seus resultados.</p>'+
+'<form class="in" data-login="1"><input id="pin" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="PIN" aria-label="PIN"><button class="btn" type="submit">Entrar</button></form><div class="err" id="loginErr" hidden></div></div>';
+}
+function renderTestes(){
+var h='<div class="sticky"><div class="seg" role="tablist" aria-label="Categorias de teste">';
+TESTS.forEach(function(c){ h+='<button role="tab" data-cat="'+esc(c.cat)+'" aria-selected="'+(c.cat===S.cat)+'">'+esc(c.cat)+'</button>'; });
+h+='</div></div>';
+var cat=TESTS.filter(function(c){return c.cat===S.cat})[0]||TESTS[0];
+h+='<div class="dayhead"><div><p class="eyebrow">Testes e PRs</p><h2>'+esc(cat.cat)+'</h2></div></div>';
+h+=loginHTML();
+h+='<div class="tests">';
+var me=isMe();
+cat.items.forEach(function(t){
+var who=ATHLETES.slice();
+var filled=who.filter(function(a){return t.v[a]}).length;
+h+='<article class="test"><header><h4>'+esc(t.n)+(t.s?'<small>'+esc(t.s)+'</small>':'')+'</h4><span class="fill num">'+filled+'/'+who.length+'</span></header><div class="rows num">';
+who.forEach(function(a){
+var v=t.v[a], mine=a===S.athlete;
+var shown=v?esc(v)+(t.u&&/^\d+([.,]\d+)?$/.test(v)?' '+esc(t.u):''):'—';
+if(mine && me){
+if(EDITING===t.n){
+h+='<form class="editor" data-save="'+esc(t.n)+'"><input id="ed" value="'+esc(v||'')+'" placeholder="'+(t.u==='lb'?'ex.: 255':'ex.: 2:24 ou 45')+'" autocomplete="off" maxlength="60"><button class="btn" type="submit">Salvar</button><button class="btn sec" type="button" data-cancel="1">×</button></form>';
+} else {
+h+='<div class="row me"><span>'+esc(a)+'</span><button type="button" class="edit" data-edit="'+esc(t.n)+'">'+(v?shown:'adicionar')+PEN+'</button></div>';
+}
+} else {
+h+='<div class="row'+(v?'':' empty')+(mine?' me':'')+'"><span>'+esc(a)+'</span><em>'+shown+'</em></div>';
+}
+});
+h+='</div><div class="err" data-errfor="'+esc(t.n)+'" hidden></div></article>';
+});
+h+='</div>';
+document.getElementById('view-testes').innerHTML=h;
+var ed=document.getElementById('ed'); if(ed){ ed.focus(); ed.select(); }
+}
+function renderAtleta(){
+var a=S.athlete, total=0, mine=0, me=isMe();
+TESTS.forEach(function(c){ c.items.forEach(function(t){ total++; if(t.v[a]) mine++; }); });
+var css=(findTest('CSS natação')||{v:{}}).v[a]||'—';
+var wk=0,wt=0; WEEK.forEach(function(d){var p=dayProgress(d); wk+=p.d; wt+=p.t;});
+var h='<div class="profile"><p class="eyebrow" style="font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0">Perfil do atleta</p><h2>'+esc(a)+'</h2>';
+h+='<div class="stats num"><div class="stat"><small>Semana</small><b>'+(wt?Math.round(wk/wt*100):0)+'%</b></div><div class="stat"><small>Testes feitos</small><b>'+mine+'/'+total+'</b></div><div class="stat"><small>CSS natação</small><b>'+esc(css)+'</b></div></div>';
+h+=loginHTML();
+h+='<div class="sect"><h3>1RMs usados nas cargas (lb)</h3><div class="fields">';
+BASE_ORDER.forEach(function(k){
+var t=testForKey(k); if(!t) return;
+var v=t.v[a]||'';
+h+='<div class="field"><span>'+BASES[k].n+'</span><div class="in"><input id="m-'+k+'" data-max="'+esc(t.n)+'" inputmode="decimal" value="'+esc(v)+'" placeholder="—" aria-label="1RM '+BASES[k].n+'"'+(me?'':' readonly')+'><small>lb</small></div></div>';
+});
+h+='</div><p class="hint">'+(me?'Altere e saia do campo para salvar na planilha. As cargas da semana recalculam na hora.':'Os valores vêm da planilha de testes. Para alterar, entre com seu PIN.')+'</p><div class="err" id="maxErr" hidden></div></div></div>';
+document.getElementById('view-atleta').innerHTML=h;
+}
+function render(){
+['treino','testes','atleta'].forEach(function(t){ document.getElementById('view-'+t).hidden = t!==S.tab; });
+document.querySelectorAll('.tabs button').forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.tab===S.tab)); });
+if(S.tab==='treino') renderTreino();
+if(S.tab==='testes') renderTestes();
+if(S.tab==='atleta') renderAtleta();
+syncUI();
+}
+var sel=document.getElementById('athlete');
+function fillAthletes(){
+sel.innerHTML='';
+ATHLETES.forEach(function(a){ var o=document.createElement('option'); o.value=a; o.textContent=a; sel.appendChild(o); });
+if(ATHLETES.indexOf(S.athlete)<0) S.athlete=ATHLETES[0];
+sel.value=S.athlete;
+}
+fillAthletes();
+sel.addEventListener('change',function(){ S.athlete=sel.value; EDITING=null; save(); render(); });
+document.querySelector('.tabs').addEventListener('click',function(e){
+var b=e.target.closest('button[data-tab]'); if(!b) return;
+S.tab=b.dataset.tab; EDITING=null; save(); render(); window.scrollTo(0,0);
+});
+function showErr(el,msg){ if(!el) return; el.textContent=msg; el.hidden=false; }
+document.addEventListener('click',function(e){
+var t;
+if((t=e.target.closest('[data-day]'))){ S.day=t.dataset.day; save(); render(); window.scrollTo(0,0); return; }
+if((t=e.target.closest('[data-cat]'))){ S.cat=t.dataset.cat; EDITING=null; save(); render(); return; }
+if((t=e.target.closest('[data-toggle]'))){ var k=t.dataset.toggle; var sec=t.parentNode; var closed=!sec.classList.contains('closed'); S.closed[k]=closed; sec.classList.toggle('closed',closed); t.setAttribute('aria-expanded',String(!closed)); save(); return; }
+if((t=e.target.closest('[data-goto]'))){ S.tab=t.dataset.goto; save(); render(); window.scrollTo(0,0); return; }
+if((t=e.target.closest('[data-reset]'))){
+var d=t.dataset.reset, c=ck(); Object.keys(c).forEach(function(k){ if(k.indexOf(d+'.')===0) delete c[k]; }); save(); render(); return;
+}
+if((t=e.target.closest('[data-wa]'))){
+var dd=WEEK.filter(function(x){return x.id===t.dataset.wa})[0];
+window.open('https://wa.me/?text='+encodeURIComponent(summary(dd)),'_blank','noopener'); return;
+}
+if((t=e.target.closest('[data-fill]'))){
+var fid=t.dataset.fill, fit=findItem(fid), arr=getSets(fit,fid).map(function(x){return {w:x.w,r:x.r}});
+arr.forEach(function(x,i){ var tg=targetFor(fit,i,arr.length); if(tg) x.w=String(tg); if(!x.r) x.r=String(plannedReps(fit,i)); });
+st()[fid]=arr; save(); var y1=window.scrollY; renderTreino(); window.scrollTo(0,y1); return;
+}
+if((t=e.target.closest('[data-addset]'))){
+var aid=t.dataset.addset, ait=findItem(aid), a2=getSets(ait,aid).slice(); var last=a2[a2.length-1]||{w:'',r:''};
+a2.push({w:last.w,r:last.r}); st()[aid]=a2; save(); var y2=window.scrollY; renderTreino(); window.scrollTo(0,y2); return;
+}
+if((t=e.target.closest('[data-delset]'))){
+var did=t.dataset.delset, dit=findItem(did), a3=getSets(dit,did).slice(); a3.pop(); st()[did]=a3; save(); var y3=window.scrollY; renderTreino(); window.scrollTo(0,y3); return;
+}
+if((t=e.target.closest('[data-edit]'))){ EDITING=t.dataset.edit; renderTestes(); return; }
+if((t=e.target.closest('[data-cancel]'))){ EDITING=null; renderTestes(); return; }
+if((t=e.target.closest('[data-logout]'))){ S.auth=null; EDITING=null; save(); render(); return; }
+});
+document.addEventListener('submit',function(e){
+var f=e.target;
+if(f.dataset.login){
+e.preventDefault();
+var pin=document.getElementById('pin').value.trim(), err=document.getElementById('loginErr'), btn=f.querySelector('button');
+if(!pin){ showErr(err,'Digite seu PIN.'); return; }
+btn.disabled=true; btn.textContent='…';
+api({action:'login',athlete:S.athlete,pin:pin}).then(function(d){
+if(d.ok){ S.auth={athlete:S.athlete,pin:pin}; save(); render(); }
+else { btn.disabled=false; btn.textContent='Entrar'; showErr(err,d.error||'PIN incorreto.'); }
+},function(){ btn.disabled=false; btn.textContent='Entrar'; showErr(err,'Sem conexão. Tente de novo.'); });
+}
+if(f.dataset.save){
+e.preventDefault();
+var name=f.dataset.save, val=document.getElementById('ed').value.trim(), b=f.querySelector('button[type=submit]');
+b.disabled=true; b.textContent='Salvando…';
+saveResult(name,val).then(function(){ EDITING=null; render(); },function(x){
+b.disabled=false; b.textContent='Salvar';
+showErr(document.querySelector('[data-errfor="'+CSS.escape(name)+'"]'), x.error||'Não salvou.');
+});
+}
+});
+document.addEventListener('change',function(e){
+var t=e.target;
+if(t.matches('input[type=checkbox][data-id]')){
+var c=ck(); if(t.checked) c[t.dataset.id]=1; else delete c[t.dataset.id];
+save();
+var y=window.scrollY; renderTreino(); window.scrollTo(0,y);
+}
+if(t.dataset.max && !t.readOnly){
+var name=t.dataset.max, cur=(findTest(name)||{v:{}}).v[S.athlete]||'';
+if(t.value.trim()===cur) return;
+t.disabled=true;
+saveResult(name,t.value.trim()).then(function(){ renderAtleta(); },function(x){ t.disabled=false; showErr(document.getElementById('maxErr'),x.error||'Não salvou.'); });
+}
+});
+document.addEventListener('input',function(e){
+var t=e.target;
+if(t.dataset.log){ lg()[t.dataset.log]=t.value; save(); }
+if(t.dataset.note){ nt()[t.dataset.note]=t.value; save(); }
+if(t.dataset.sw || t.dataset.sr){
+var ref=(t.dataset.sw||t.dataset.sr).split('|'), sid=ref[0], si=+ref[1], sit=findItem(sid);
+var arr=getSets(sit,sid).map(function(x){return {w:x.w,r:x.r}});
+if(t.dataset.sw) arr[si].w=t.value; else arr[si].r=t.value;
+st()[sid]=arr; save(); refreshVol(sid);
+}
+});
+document.addEventListener('visibilitychange',function(){ if(!document.hidden) pull(); });
+render();
+pull();
+</script>
+</body>
+</html>
