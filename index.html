@@ -82,6 +82,27 @@ display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;
 .fillall button.undo{border-color:var(--line);color:var(--muted)}
 .vid{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:.76rem;font-weight:700;color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.22rem .7rem .22rem .5rem;background:var(--card-2)}
 .vid svg{width:14px;height:14px;fill:currentColor}
+.board{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}
+.boardbtn{background:none;border:0;padding:0;color:var(--gold);font-weight:800;font-size:.8rem;display:flex;align-items:center;gap:6px}
+.boardbtn small{color:var(--faint);font-weight:600}
+.boardbody{margin-top:8px;display:grid;gap:10px}
+.metric h5{margin:0 0 4px;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rank{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:baseline;font-size:.84rem;padding:3px 0;border-bottom:1px solid var(--line-soft)}
+.rank .pos{color:var(--faint);font-weight:800}
+.rank.p1 .pos{color:var(--gold)}
+.rank .nm{color:var(--text)}
+.rank.me .nm{color:var(--gold);font-weight:800}
+.rank .val{font-weight:700;text-align:right}
+.rank .val small{display:block;font-weight:500;color:var(--faint);font-size:.7rem}
+.boardempty{font-size:.8rem;color:var(--faint)}
+.scales{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:14px}
+.scale label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:.84rem;font-weight:700}
+.scale label small{display:block;font-weight:500;color:var(--faint);font-size:.72rem}
+.scale label b{font-size:1.2rem;color:var(--gold);min-width:2.2em;text-align:right}
+.scale input[type=range]{width:100%;accent-color:#C9A24B;margin-top:6px}
+.scale.unset input[type=range]{opacity:.45}
+.scale .ends{display:flex;justify-content:space-between;font-size:.66rem;color:var(--faint)}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--text);color:var(--bg);font-weight:800;font-size:.84rem;padding:.6rem 1rem;border-radius:999px;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .rail button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:#17130B}
 .rail button[aria-selected="true"] i{color:#4A3B17}
 .rail button.done:not([aria-selected="true"]) i{color:var(--ok)}
@@ -586,7 +607,8 @@ dl:{n:'Deadlift'}, sp:{n:'Shoulder press'}, bp:{n:'Bench press'}
 var BASE_ORDER = ['ss','ps','sc','pc','cj','sj','bs','fs','dl','sp','bp'];
 var API_URL = 'https://script.google.com/macros/s/AKfycbwxKV3ucyyckvD-WXm5Pr5dlSrhomY2fPu5VyWYxSW9pFT3mny4r7N_pUai7DYC9Wt0/exec';
 var KEY='nmw-frangolinos-v1';
-var S={athlete:'Matheus',tab:'treino',day:null,cat:'Força',checks:{},logs:{},sets:{},notes:{},closed:{},auth:null,cache:null};
+var S={athlete:'Matheus',tab:'treino',day:null,cat:'Força',checks:{},logs:{},sets:{},notes:{},closed:{},auth:null,cache:null,rpe:{},sent:{}};
+if(!S.rpe) S.rpe={}; if(!S.sent) S.sent={};
 try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); for(var k in o) S[k]=o[k];}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 var CATS=['Engine','Ginástica','Força','LPO','Benchmarks'];
@@ -790,11 +812,12 @@ h+='<label for="l-'+id+'">'+esc(lab)+'<input id="l-'+id+'" data-log="'+id+'" val
 });
 h+='</div>';
 }
+if(isRankable(b)) h+=boardShell(day,bi);
 var nk=day.id+'.'+bi;
 h+='<label class="comment" for="n-'+nk+'"><span>Comentário</span><textarea id="n-'+nk+'" data-note="'+nk+'" placeholder="Como foi? Dor, técnica, ajuste de carga…">'+esc(nt()[nk]||'')+'</textarea></label>';
 h+='</div></section>';
 });
-h+='</div><button type="button" class="wa" data-wa="'+day.id+'"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3z"/></svg>Enviar resumo no WhatsApp</button><p class="wahint">Abre o WhatsApp com o resumo pronto — escolha o grupo e envie.</p><div class="actions"><button class="ghost" type="button" data-reset="'+day.id+'">Limpar marcações de '+day.name.toLowerCase()+' '+ddmm(day.id)+'</button></div>';
+h+='</div>'+scalesHTML(day)+'<button type="button" class="wa" data-wa="'+day.id+'"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3z"/></svg>Enviar resumo no WhatsApp</button><p class="wahint">Copia o resumo e abre o WhatsApp — escolha o grupo e envie (ou cole).</p><div class="actions"><button class="ghost" type="button" data-reset="'+day.id+'">Limpar marcações de '+day.name.toLowerCase()+' '+ddmm(day.id)+'</button></div>';
 document.getElementById('view-treino').innerHTML=h;
 }
 function st(){ var a=S.athlete; if(!S.sets[a]) S.sets[a]={}; return S.sets[a]; }
@@ -846,33 +869,122 @@ arr.forEach(function(s,i){ var el=document.querySelector('[data-sv="'+id+'|'+i+'
 var iv=document.querySelector('[data-iv="'+id+'"]'); if(iv) iv.textContent=fmtN(itemVol(it,id));
 var dv=document.getElementById('dayvol'); if(dv){ var day=dayFor(id.split('.')[0]); dv.textContent=fmtN(dayVol(day)); }
 }
-function shortName(t){ return t.split(' — ')[0].replace(/^(\d séries: |Depois: )/,''); }
+function cap(x){ x=String(x); return x.charAt(0).toUpperCase()+x.slice(1); }
+function shortName(t){ var x=t.split(' — ')[0].replace(/^(\d séries: |Depois: )/,'').split(' @')[0].replace(/^\d+ (?=[a-zA-Z])/,''); return cap(x); }
+function rp(date){ var a=S.athlete; if(!S.rpe[a]) S.rpe[a]={}; if(!S.rpe[a][date]) S.rpe[a][date]={}; return S.rpe[a][date]; }
+function fmtSets(it,id){ var arr=getSets(it,id), ws=[], rs=[], plan=true; arr.forEach(function(s,i){ if(num(s.w)){ ws.push(String(s.w).trim()); var r=num(s.r)||plannedReps(it,i); rs.push(r); if(r!==plannedReps(it,i)) plan=false; } }); if(!ws.length) return ''; return plan?'@'+ws.join('/'):ws.map(function(w,i){return w+'×'+rs[i]}).join(' / '); }
 function summary(day){
-var L=[], c=ck(), p=dayProgress(day);
-L.push('*NMW · Frangolinos*');
-L.push('*'+day.name+' '+ddmm(day.id)+' — '+day.focus+'*');
-L.push('Atleta: *'+S.athlete+'*');
-L.push('Concluído: '+p.d+'/'+p.t+' itens ('+(p.t?Math.round(p.d/p.t*100):0)+'%)');
+var L=['*Treino '+day.name.toLowerCase()+' '+ddmm(day.id)+'*',''], c=ck(), pend=[];
+function flush(){ if(pend.length){ L.push(pend.map(function(b){return b.l}).join('+')+') '+pend.map(function(b){return b.n}).join(' + ')+' ✅'); L.push(''); pend=[]; } }
 day.blocks.forEach(function(b,bi){
-var lines=[];
-blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){
-var id=day.id+'.'+bi+'.'+gi+'.'+ii;
-if(it.sets){
-var arr=getSets(it,id), parts=[];
-arr.forEach(function(s,i){ if(num(s.w)) parts.push(s.w+'×'+(num(s.r)||plannedReps(it,i))); });
-if(parts.length) lines.push('• '+shortName(it.t)+': '+parts.join(', ')+' → vol '+fmtN(itemVol(it,id))+' lb');
-} else if(it.log && lg()[id]){
-lines.push('• '+shortName(it.t)+': '+lg()[id]);
-}
+var ids=[], data=[];
+blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){ var id=day.id+'.'+bi+'.'+gi+'.'+ii; ids.push(id);
+if(it.sets){ var f=fmtSets(it,id); if(f) data.push([shortName(it.t),f]); }
+else if(it.log && lg()[id]) data.push([shortName(it.t),lg()[id]]);
 }); });
-(b.logs||[]).forEach(function(lab,li){ var v=lg()[day.id+'.'+bi+'.log'+li]; if(v) lines.push('• '+lab+': '+v); });
-var note=nt()[day.id+'.'+bi];
-if(note) lines.push('💬 '+note.trim());
-if(lines.length){ L.push(''); L.push('*'+b.l+') '+b.n+'*'); L=L.concat(lines); }
+(b.logs||[]).forEach(function(lab,li){ var v=lg()[day.id+'.'+bi+'.log'+li]; if(v) data.push([cap(lab.replace(/^Tempo — /,'')),v]); });
+var done=ids.filter(function(x){return c[x]}).length, full=ids.length&&done===ids.length, note=(nt()[day.id+'.'+bi]||'').trim();
+if(!data.length && !note){ if(full){ pend.push(b); return; } flush(); L.push(b.l+') '+b.n+(done?': '+done+'/'+ids.length+' feitos':': não realizado')); L.push(''); return; }
+flush();
+L.push(b.l+') '+b.n+(full?' ✅':''));
+if(data.length===1) L.push(data[0][0]+': '+data[0][1]);
+else data.forEach(function(d,i){ L.push((i+1)+'. '+d[0]+': '+d[1]); });
+if(note){ L.push(''); L.push(note); }
+L.push('');
 });
-var dv=dayVol(day);
-if(dv){ L.push(''); L.push('*Volume total de força: '+fmtN(dv)+' lb*'); }
+flush();
+var dv=dayVol(day); if(dv){ L.push('Volume total de força: '+fmtN(dv)+' lb'); L.push(''); }
+var r=rp(day.id);
+if(r.pse!=null && r.pse!=='') L.push('PSE '+String(r.pse).replace('.',','));
+if(r.psr!=null && r.psr!=='') L.push('PSR '+String(r.psr).replace('.',','));
+while(L.length && L[L.length-1]==='') L.pop();
 return L.join('\n');
+}
+function scalesHTML(day){
+var r=rp(day.id);
+function one(k,t,sub,lo,hi){ var v=r[k], set=v!=null&&v!==''; return '<div class="scale'+(set?'':' unset')+'"><label for="sc-'+k+'"><span>'+t+'<small>'+sub+'</small></span><b id="scv-'+k+'">'+(set?String(v).replace('.',','):'–')+'</b></label><input type="range" id="sc-'+k+'" min="0" max="10" step="0.5" value="'+(set?v:5)+'" data-scale="'+k+'" data-date="'+day.id+'"><div class="ends"><span>'+lo+'</span><span>'+hi+'</span></div></div>'; }
+return '<div class="scales">'+one('pse','PSE','Percepção subjetiva de esforço do treino','0 · nada','10 · máximo')+one('psr','PSR','Percepção subjetiva de recuperação do dia','0 · nada recuperado','10 · totalmente')+'</div>';
+}
+function toast(msg){ var t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(function(){ t.remove(); },2600); }
+function copyText(txt){
+if(navigator.clipboard && window.isSecureContext){ return navigator.clipboard.writeText(txt).then(function(){return true},function(){return legacyCopy(txt)}); }
+return Promise.resolve(legacyCopy(txt));
+}
+function legacyCopy(txt){ var ta=document.createElement('textarea'); ta.value=txt; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); var ok=false; try{ ok=document.execCommand('copy'); }catch(e){} ta.remove(); return ok; }
+/* ---------- ranking do dia ---------- */
+var RES={}, RESAT={}, RESQ={}, RESQT=null, OPENB={};
+function isRankable(b){ if(/flexib|aquecimento|warm up/i.test(b.n)) return false; if(b.logs&&b.logs.length) return true; return blockGroups(b).some(function(g){ return g.items.some(function(it){ return it.sets||it.log; }); }); }
+function sent(){ var a=S.athlete; if(!S.sent[a]) S.sent[a]={}; return S.sent[a]; }
+function setSummary(it,id){ var arr=getSets(it,id), top=0, parts=[]; arr.forEach(function(s,i){ var w=num(s.w); if(w){ top=Math.max(top,w); parts.push(String(s.w).trim()+'×'+(num(s.r)||plannedReps(it,i))); } }); return parts.length?JSON.stringify({top:top,vol:Math.round(itemVol(it,id)),s:parts.join(', ')}):''; }
+function dayValues(day){
+var o={};
+day.blocks.forEach(function(b,bi){ blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){ var id=day.id+'.'+bi+'.'+gi+'.'+ii, k=bi+'.'+gi+'.'+ii;
+if(it.sets) o['S'+k]=setSummary(it,id); else if(it.log) o['I'+k]=lg()[id]||''; }); });
+(b.logs||[]).forEach(function(lab,li){ o['L'+bi+'.'+li]=lg()[day.id+'.'+bi+'.log'+li]||''; }); });
+var r=rp(day.id); o.PSE=r.pse!=null?String(r.pse):''; o.PSR=r.psr!=null?String(r.psr):'';
+return o;
+}
+function syncDay(date){
+if(!API_URL || !S.auth || S.auth.athlete!==S.athlete) return;
+var day=dayFor(date); if(day.empty) return;
+var cur=dayValues(day), prev=sent()[date]||{}, q=RESQ[date]||{}, any=false;
+Object.keys(cur).forEach(function(k){ if((prev[k]||'')!==cur[k]){ q[k]=cur[k]; any=true; } });
+if(any){ RESQ[date]=q; clearTimeout(RESQT); RESQT=setTimeout(flushRes,1500); }
+}
+function flushRes(){
+Object.keys(RESQ).forEach(function(date){
+var q=RESQ[date]; delete RESQ[date];
+var items=Object.keys(q).map(function(k){return {k:k,v:q[k]}});
+api({action:'results',athlete:S.auth.athlete,pin:S.auth.pin,date:date,items:items}).then(function(d){
+if(d.ok){ var st=sent(); st[date]=st[date]||{}; items.forEach(function(i){ st[date][i.k]=i.v; }); save(); if(d.results){ RES[date]=d.results; RESAT[date]=Date.now(); refreshBoards(date); } }
+},function(){ var r=RESQ[date]=RESQ[date]||{}; items.forEach(function(i){ if(!(i.k in r)) r[i.k]=i.v; }); clearTimeout(RESQT); RESQT=setTimeout(flushRes,15000); });
+});
+}
+function loadRes(date,force){
+if(!API_URL) return;
+if(!force && RESAT[date] && Date.now()-RESAT[date]<60000) return;
+RESAT[date]=Date.now();
+fetch(API_URL+'?date='+encodeURIComponent(date)).then(function(r){return r.json()}).then(function(d){ if(d.ok && d.results){ RES[date]=d.results; refreshBoards(date); } }).catch(function(){});
+}
+function parseRank(v){
+var x=String(v).replace(/[’´']/g,':').replace(/[”"]/g,'').replace(/::/g,':');
+var ts=x.match(/\d{1,2}:\d{2}(?::\d{2})?/g);
+if(ts){ var sum=0; ts.forEach(function(t){ var p=t.split(':').map(Number); sum+=p.length===3?p[0]*3600+p[1]*60+p[2]:p[0]*60+p[1]; }); return {t:0,n:sum/ts.length}; }
+var n=parseFloat(x.replace(',','.')); if(!isNaN(n)) return {t:1,n:n};
+return {t:2,n:0};
+}
+function boardEntries(date,key){
+var me=S.auth&&S.auth.athlete, list=(RES[date]||[]).filter(function(r){return r.k===key && r.v!=='' && r.a!==me});
+if(me && me===S.athlete){ var mine=dayValues(dayFor(date))[key]; if(mine) list.push({a:me,k:key,v:mine}); }
+else if(me){ var m2=(RES[date]||[]).filter(function(r){return r.k===key && r.a===me && r.v!==''})[0]; if(m2) list.push(m2); }
+return list;
+}
+function boardInner(day,bi){
+var b=day.blocks[bi], h='', any=false, me=S.auth&&S.auth.athlete;
+function rows(list){ return list.map(function(r,i){ return '<div class="rank'+(i===0?' p1':'')+(r.a===me?' me':'')+'"><span class="pos">'+(i+1)+'º</span><span class="nm">'+esc(r.a)+'</span><span class="val">'+r.html+'</span></div>'; }).join(''); }
+blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){
+var k=bi+'.'+gi+'.'+ii;
+if(it.sets){ var L=boardEntries(day.id,'S'+k).map(function(r){ var o={}; try{o=JSON.parse(r.v)}catch(e){} return {a:r.a,top:+o.top||0,html:(o.top||'–')+' lb<small>vol '+fmtN(o.vol||0)+' · '+esc(o.s||'')+'</small>'}; }).filter(function(r){return r.top}).sort(function(x,y){return y.top-x.top});
+if(L.length){ any=true; h+='<div class="metric"><h5>'+esc(shortName(it.t))+' · maior carga</h5>'+rows(L)+'</div>'; } }
+else if(it.log){ var L2=boardEntries(day.id,'I'+k).map(function(r){ var p=parseRank(r.v); return {a:r.a,p:p,html:esc(r.v)}; }).sort(cmpRank);
+if(L2.length){ any=true; h+='<div class="metric"><h5>'+esc(shortName(it.t))+'</h5>'+rows(L2)+'</div>'; } }
+}); });
+(b.logs||[]).forEach(function(lab,li){
+var L3=boardEntries(day.id,'L'+bi+'.'+li).map(function(r){ var p=parseRank(r.v); return {a:r.a,p:p,html:esc(r.v)}; }).sort(cmpRank);
+if(L3.length){ any=true; h+='<div class="metric"><h5>'+esc(lab)+'</h5>'+rows(L3)+'</div>'; }
+});
+return any?h:'<p class="boardempty">Ninguém anotou ainda hoje. Os resultados aparecem aqui conforme os atletas preenchem.</p>';
+}
+function cmpRank(x,y){ if(x.p.t!==y.p.t) return x.p.t-y.p.t; return x.p.t===0?x.p.n-y.p.n:y.p.n-x.p.n; }
+function boardShell(day,bi){
+var key=day.id+'.'+bi, open=!!OPENB[key];
+if(open) loadRes(day.id,false);
+return '<div class="board" data-board="'+key+'"><button type="button" class="boardbtn" data-boardt="'+key+'" aria-expanded="'+open+'">🏆 Ranking do dia <small>'+(open?'ocultar':'ver')+'</small></button><div class="boardbody"'+(open?'':' hidden')+'>'+(open?boardInner(day,bi):'')+'</div></div>';
+}
+function refreshBoards(date){
+if(S.tab!=='treino' || S.day!==date) return;
+var day=dayFor(date);
+document.querySelectorAll('.board[data-board]').forEach(function(el){ var k=el.dataset.board; if(!OPENB[k]) return; var bi=+k.split('.')[1]; el.querySelector('.boardbody').innerHTML=boardInner(day,bi); });
 }
 var EDITING=null; // nome do teste em edição
 var PEN='<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>';
@@ -977,8 +1089,16 @@ if((t=e.target.closest('[data-reset]'))){
 var d=t.dataset.reset, c=ck(); Object.keys(c).forEach(function(k){ if(k.indexOf(d+'.')===0) delete c[k]; }); save(); render(); return;
 }
 if((t=e.target.closest('[data-wa]'))){
-var dd=dayFor(t.dataset.wa);
-window.open('https://wa.me/?text='+encodeURIComponent(summary(dd)),'_blank','noopener'); return;
+var dd=dayFor(t.dataset.wa), txt=summary(dd);
+syncDay(dd.id); flushRes();
+copyText(txt).then(function(ok){ toast(ok?'Resumo copiado — é só colar no grupo':'Resumo pronto no WhatsApp'); });
+window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank','noopener'); return;
+}
+if((t=e.target.closest('[data-boardt]'))){
+var bk=t.dataset.boardt; OPENB[bk]=!OPENB[bk]; var bw=t.parentNode, bd=bw.querySelector('.boardbody');
+t.setAttribute('aria-expanded',String(OPENB[bk])); t.querySelector('small').textContent=OPENB[bk]?'ocultar':'ver';
+bd.hidden=!OPENB[bk]; if(OPENB[bk]){ var bdate=bk.split('.')[0]; bd.innerHTML=boardInner(dayFor(bdate),+bk.split('.')[1]); loadRes(bdate,true); }
+return;
 }
 if((t=e.target.closest('[data-fillall]'))){
 var fp=t.dataset.fillall.split('.'), fday=dayFor(fp[0]), fb=fday.blocks[+fp[1]], fids=[], fc=ck();
@@ -990,14 +1110,14 @@ save(); var yf=window.scrollY; renderTreino(); window.scrollTo(0,yf); return;
 if((t=e.target.closest('[data-fill]'))){
 var fid=t.dataset.fill, fit=findItem(fid), arr=getSets(fit,fid).map(function(x){return {w:x.w,r:x.r}});
 arr.forEach(function(x,i){ var tg=targetFor(fit,i,arr.length); if(tg) x.w=String(tg); if(!x.r) x.r=String(plannedReps(fit,i)); });
-st()[fid]=arr; save(); var y1=window.scrollY; renderTreino(); window.scrollTo(0,y1); return;
+st()[fid]=arr; save(); syncDay(fid.split('.')[0]); var y1=window.scrollY; renderTreino(); window.scrollTo(0,y1); return;
 }
 if((t=e.target.closest('[data-addset]'))){
 var aid=t.dataset.addset, ait=findItem(aid), a2=getSets(ait,aid).slice(); var last=a2[a2.length-1]||{w:'',r:''};
-a2.push({w:last.w,r:last.r}); st()[aid]=a2; save(); var y2=window.scrollY; renderTreino(); window.scrollTo(0,y2); return;
+a2.push({w:last.w,r:last.r}); st()[aid]=a2; save(); syncDay(aid.split('.')[0]); var y2=window.scrollY; renderTreino(); window.scrollTo(0,y2); return;
 }
 if((t=e.target.closest('[data-delset]'))){
-var did=t.dataset.delset, dit=findItem(did), a3=getSets(dit,did).slice(); a3.pop(); st()[did]=a3; save(); var y3=window.scrollY; renderTreino(); window.scrollTo(0,y3); return;
+var did=t.dataset.delset, dit=findItem(did), a3=getSets(dit,did).slice(); a3.pop(); st()[did]=a3; save(); syncDay(did.split('.')[0]); var y3=window.scrollY; renderTreino(); window.scrollTo(0,y3); return;
 }
 if((t=e.target.closest('[data-edit]'))){ EDITING=t.dataset.edit; renderTestes(); return; }
 if((t=e.target.closest('[data-cancel]'))){ EDITING=null; renderTestes(); return; }
@@ -1053,16 +1173,17 @@ saveResult(name,t.value.trim()).then(function(){ renderAtleta(); },function(x){ 
 });
 document.addEventListener('input',function(e){
 var t=e.target;
-if(t.dataset.log){ lg()[t.dataset.log]=t.value; save(); }
+if(t.dataset.log){ lg()[t.dataset.log]=t.value; save(); syncDay(t.dataset.log.split('.')[0]); }
+if(t.dataset.scale){ var sr=rp(t.dataset.date); sr[t.dataset.scale]=+t.value; save(); var sv=document.getElementById('scv-'+t.dataset.scale); if(sv) sv.textContent=String(t.value).replace('.',','); t.closest('.scale').classList.remove('unset'); syncDay(t.dataset.date); }
 if(t.dataset.note){ nt()[t.dataset.note]=t.value; save(); }
 if(t.dataset.sw || t.dataset.sr){
 var ref=(t.dataset.sw||t.dataset.sr).split('|'), sid=ref[0], si=+ref[1], sit=findItem(sid);
 var arr=getSets(sit,sid).map(function(x){return {w:x.w,r:x.r}});
 if(t.dataset.sw) arr[si].w=t.value; else arr[si].r=t.value;
-st()[sid]=arr; save(); refreshVol(sid);
+st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
-document.addEventListener('visibilitychange',function(){ if(!document.hidden) pull(); });
+document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
 render();
 pull();
 if(S.auth && API_URL){ api({action:'login',athlete:S.auth.athlete,pin:S.auth.pin}).then(function(d){ if(!d.ok){ S.auth=null; save(); applyAuth(); render(); } },function(){}); }
