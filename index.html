@@ -77,6 +77,11 @@ display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;
 .wknav span em{font-style:normal;color:var(--gold)}
 .wknav button{background:var(--card);border:1px solid var(--line);border-radius:8px;width:34px;height:28px;color:var(--text);font-size:1rem;line-height:1}
 .wknav button[disabled]{opacity:.3}
+.fillall{display:flex;justify-content:flex-end;margin-top:10px}
+.fillall button{background:none;border:1px solid var(--gold-dim);color:var(--gold);border-radius:8px;padding:.35rem .75rem;font-size:.76rem;font-weight:800}
+.fillall button.undo{border-color:var(--line);color:var(--muted)}
+.vid{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:.76rem;font-weight:700;color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:.22rem .7rem .22rem .5rem;background:var(--card-2)}
+.vid svg{width:14px;height:14px;fill:currentColor}
 .rail button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:#17130B}
 .rail button[aria-selected="true"] i{color:#4A3B17}
 .rail button.done:not([aria-selected="true"]) i{color:var(--ok)}
@@ -368,7 +373,7 @@ notes:[{w:'Victor',x:'Faça com cuidado, sem procurar mpp.'}]},
 {l:'A',n:'Warm up geral',intro:'Objetivo: melhorar a rigidez das pernas e o padrão de corrida com educativos que se repetem toda semana e, às vezes, evoluem para exercícios mais complexos.',groups:[
 {g:'2 séries',items:[
 {t:'20 pogo hops'},
-{t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril. Comece devagar pra entender. <a href="https://www.youtube.com/watch?v=m9IjQFYE-uI" target="_blank" rel="noopener">Vídeo de progressão</a>'},
+{t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril. Comece devagar pra entender.'},
 {t:'50 m A-skips'},
 {t:'100 m corrida leve'},
 {t:'Pausa 1:00'}
@@ -476,6 +481,17 @@ var SET_PLAN = [
 WEEK.forEach(function(d){ d.blocks.forEach(function(b){ (b.groups||[{items:b.items}]).forEach(function(g){ g.items.forEach(function(it){
 SET_PLAN.forEach(function(p){ if(p[0]===d.id && it.t.indexOf(p[1])===0 && !it.sets){ it.sets=p[2]; it.repHint=p[3]; delete it.log; } });
 }); }); }); });
+var VIDEO_PLAN = [
+['0:45 t-spine rotation','https://youtu.be/EHZJns1bXPM'],
+['20 pogo hops','https://youtu.be/j0nl5dWuqN4'],
+['50 m ankle dribbles','https://www.youtube.com/watch?v=m9IjQFYE-uI'],
+['Press into jerk','https://youtu.be/i4ZluNUMXBw'],
+['Pause split jerk','https://youtu.be/xxFqQ-d_P4M']
+];
+WEEK.forEach(function(d){ d.blocks.forEach(function(b){ (b.groups||[{items:b.items}]).forEach(function(g){ g.items.forEach(function(it){
+VIDEO_PLAN.forEach(function(p){ if(it.t.indexOf(p[0])===0) it.vid=p[1]; });
+}); }); }); });
+var FILLABLE=/flexib|aquecimento|warm up|wod/i;
 var TESTS = [
 {cat:'Engine',items:[
 {n:'CSS natação',u:'/100 m',v:{Victor:'2:24',Daniel:'2:08',Matheus:'1:51'}},
@@ -702,6 +718,7 @@ h+='<label for="c-'+id+'"><span class="t">'+esc(it.t)+'</span>';
 if(it.d) h+='<span class="d">'+it.d+'</span>';
 if(it.rest) h+='<span class="rest">'+esc(it.rest)+'</span>';
 h+='</label><div style="grid-column:2">';
+if(it.vid) h+='<a class="vid" href="'+esc(it.vid)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver vídeo</a>';
 if(it.L) h+=loadHTML(it.L);
 if(it.R) h+=runHTML(it.R);
 (it.notes||[]).forEach(function(n){
@@ -744,10 +761,11 @@ var gs=blockGroups(b), ids=[], c=ck();
 gs.forEach(function(g,gi){ g.items.forEach(function(it,ii){ ids.push(day.id+'.'+bi+'.'+gi+'.'+ii); }); });
 var done=ids.filter(function(id){return c[id]}).length, complete=done===ids.length;
 var bkey=S.athlete+'.'+day.id+'.'+bi;
-var closed = S.closed[bkey]!=null ? S.closed[bkey] : false;
+var closed = S.closed[bkey]!=null ? S.closed[bkey] : true;
 h+='<section class="block'+(complete?' complete':'')+(closed?' closed':'')+'">';
 h+='<button class="bhead" type="button" data-toggle="'+bkey+'" aria-expanded="'+(!closed)+'"><span class="letter">'+b.l+'</span><span><h3>'+esc(b.n)+'</h3>'+(b.meta?'<span class="meta">'+esc(b.meta)+'</span>':'')+'</span><span class="bcount num">'+done+'/'+ids.length+'<span class="chev"></span></span></button>';
 h+='<div class="bbody">';
+if(FILLABLE.test(b.n)) h+='<div class="fillall"><button type="button" class="'+(complete?'undo':'')+'" data-fillall="'+day.id+'.'+bi+'">'+(complete?'Desmarcar tudo':'✓ Preencher tudo')+'</button></div>';
 if(b.intro) h+='<p class="intro">'+esc(b.intro)+'</p>';
 gs.forEach(function(g,gi){
 h+='<div class="grp">'+(g.g?'<span class="glabel">'+esc(g.g)+'</span>':'')+'<ul class="items">';
@@ -951,6 +969,13 @@ var d=t.dataset.reset, c=ck(); Object.keys(c).forEach(function(k){ if(k.indexOf(
 if((t=e.target.closest('[data-wa]'))){
 var dd=dayFor(t.dataset.wa);
 window.open('https://wa.me/?text='+encodeURIComponent(summary(dd)),'_blank','noopener'); return;
+}
+if((t=e.target.closest('[data-fillall]'))){
+var fp=t.dataset.fillall.split('.'), fday=dayFor(fp[0]), fb=fday.blocks[+fp[1]], fids=[], fc=ck();
+blockGroups(fb).forEach(function(g,gi){ g.items.forEach(function(it,ii){ fids.push(fday.id+'.'+fp[1]+'.'+gi+'.'+ii); }); });
+var all=fids.every(function(x){return fc[x]});
+fids.forEach(function(x){ if(all) delete fc[x]; else fc[x]=1; });
+save(); var yf=window.scrollY; renderTreino(); window.scrollTo(0,yf); return;
 }
 if((t=e.target.closest('[data-fill]'))){
 var fid=t.dataset.fill, fit=findItem(fid), arr=getSets(fit,fid).map(function(x){return {w:x.w,r:x.r}});
