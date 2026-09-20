@@ -492,6 +492,14 @@ WEEK.forEach(function(d){ d.blocks.forEach(function(b){ (b.groups||[{items:b.ite
 VIDEO_PLAN.forEach(function(p){ if(it.t.indexOf(p[0])===0) it.vid=p[1]; });
 }); }); }); });
 var FILLABLE=/flexib|aquecimento|warm up|wod/i;
+var VIDEOS=null;
+function normTxt(x){return String(x).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim()}
+function vidFor(it){
+if(!VIDEOS) return it.vid||null;
+var t=normTxt(it.t), best=null, bl=0;
+VIDEOS.forEach(function(v){ var n=normTxt(v.n); if(n && t.indexOf(n)>=0 && n.length>bl){ best=v.u; bl=n.length; } });
+return best;
+}
 var TESTS = [
 {cat:'Engine',items:[
 {n:'CSS natação',u:'/100 m',v:{Victor:'2:24',Daniel:'2:08',Matheus:'1:51'}},
@@ -589,6 +597,7 @@ d.tests.forEach(function(t){ (groups[t.cat]=groups[t.cat]||[]).push({n:t.n,s:t.s
 var order=CATS.filter(function(c){return groups[c]}).concat(Object.keys(groups).filter(function(c){return CATS.indexOf(c)<0}));
 TESTS=order.map(function(c){return {cat:c,items:groups[c]}});
 if(d.athletes && d.athletes.length) ATHLETES=d.athletes.slice();
+if(Array.isArray(d.videos)) VIDEOS=d.videos;
 }
 if(S.cache) applyRemote(S.cache);
 var SYNC={state:API_URL?'busy':'local',at:S.cache?S.cache.updated:null};
@@ -718,7 +727,8 @@ h+='<label for="c-'+id+'"><span class="t">'+esc(it.t)+'</span>';
 if(it.d) h+='<span class="d">'+it.d+'</span>';
 if(it.rest) h+='<span class="rest">'+esc(it.rest)+'</span>';
 h+='</label><div style="grid-column:2">';
-if(it.vid) h+='<a class="vid" href="'+esc(it.vid)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver vídeo</a>';
+var vu=vidFor(it);
+if(vu) h+='<a class="vid" href="'+esc(vu)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver vídeo</a>';
 if(it.L) h+=loadHTML(it.L);
 if(it.R) h+=runHTML(it.R);
 (it.notes||[]).forEach(function(n){
