@@ -817,7 +817,7 @@ var WEEK2 = [
      {t:'2 séries: 1 power clean + 1 thruster + 1 hang squat clean + 1 split jerk com pausa de 2" na recepção @ 55–70%',rest:'Pausa 1:30',L:{b:'cj',lo:55,hi:70},sets:[4,4]},
      {t:'2 séries: 1 squat clean + 3 front squats + 1 jerk @ 75–85%',d:'Do 1RM de clean & jerk.',rest:'Pausa 2:00',L:{b:'cj',lo:75,hi:85},sets:[5,5],
       notes:[{w:'Victor',x:'Pode fazer só o clean com front squat.'}]},
-     {t:'Single arm KB overhead squat — 6/6',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[12],repHint:'6/6'}
+     {t:'Single arm KB overhead squat — 3 × 6/6',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[12,12,12],repHint:'6/6'}
    ]},
    {l:'D',n:'WOD',meta:'Por tempo · cap 12:00 · 115/80 lb',groups:[
      {g:'Parte 1',items:[{t:'10 shuttle runs (7,5 m ida / 7,5 m volta)'},{t:'20 overhead squats @ 115/80'},{t:'30 burpees over the bar'}]},
@@ -1378,7 +1378,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-20b';
+var APP_VER='2026-09-20c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
