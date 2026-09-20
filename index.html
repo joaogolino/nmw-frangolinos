@@ -943,7 +943,9 @@ var vu=vidFor(it);
 if(vu) h+='<a class="vid" href="'+esc(vu)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver vídeo</a>';
 if(it.L) h+=loadHTML(it.L);
 if(it.R) h+=runHTML(it.R);
+var coachAll=S.auth&&S.auth.athlete===COACH&&S.athlete===COACH;
 (it.notes||[]).forEach(function(n){
+if(n.w!==S.athlete && !coachAll) return;
 h+='<div class="note'+(n.w===S.athlete?' mine':'')+'"><b>'+esc(n.w)+'</b> — '+esc(n.x)+'</div>';
 });
 if(it.sets) h+=setsHTML(it,id);
