@@ -682,7 +682,182 @@ var v=getMax(ath,b); return v?{v:v,n:BASES[b].n}:null;
 function r5(x){return Math.round(x/5)*5}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function fmtTime(sec){var m=Math.floor(sec/60),s=Math.round(sec%60); if(s===60){m++;s=0} return m+':'+(s<10?'0':'')+s}
-var PROGRAMS={'2026-09-14':WEEK};
+var VBN={w:'Victor Boson',x:'Retorno ao CrossFit: use a percepção de esforço como base, não os percentuais. Trabalhe em RPE 6–7 (3–4 reps na reserva), sem séries até a falha e com prioridade total na técnica. Se aparecer uma carga calculada, trate como teto, nunca como meta.'};
+var DLN='Semana de deload: volume reduzido, intensidade mantida. Mesmas cargas, menos séries — cada rep com padrão impecável.';
+var WEEK2 = [
+ {id:'seg',short:'SEG',name:'Segunda',focus:'LPO + Força · deload',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 air bike',d:'3 tiros de 5" a cada minuto.'}]},
+     {g:'2 séries',items:[{t:'12/12 low to high superband woodchopper'},{t:'12/12 single leg hip thrust'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'10 good morning @ barra vazia'},
+       {t:'5 strict muscle snatch + 3 clean grip OHS devagar + 3 snatch grip Sots press + 5 snatch balance @ 45/35',d:'Sots press com base confortável de agachamento, mesmo que sacrifique ADM.'}
+     ]}
+   ]},
+   {l:'B2',n:'Aquecimento técnico',meta:'A cada 1:30, por 2 séries · 75/55 a 135/85',items:[
+     {t:'1 snatch high pull + 1 hang muscle snatch + 1 OHS + 1 snatch balance + 1 squat snatch @ 135–155 / 75–110',d:'Pare no chão em todas as reps que saem de lá.',
+      notes:[{w:'Victor',x:'1 snatch deadlift + 1 snatch pull + 1 snatch high pull + 1 hang snatch high pull @ 95–135.'}]}
+   ]},
+   {l:'C',n:'LPO e força',intro:DLN,items:[
+     {t:'Squat snatch — 3-2-2 @ 85-90-90%',d:'Do 1RM mais recente. Mesma intensidade da semana passada, metade do volume.',rest:'Pausa 1:30–2:00',
+      L:{b:'ss',sch:[[3,85],[2,90],[2,90]]},sets:[3,2,2],
+      notes:[{w:'Victor',x:'Pode fazer 3×3 de power snatch @ 95–125 lb.'},VBN]},
+     {t:'Overhead squat com pausa no bottom — 2 × 3',d:'Mesmo peso da semana passada.',rest:'Pausa 1:30',sets:[3,3]},
+     {t:'Snatch high pull — 2 × 3 @ 110–113%',d:'Do 1RM mais recente de snatch. Levante a barra o mais alto que der.',rest:'Pausa 1:30',L:{b:'ss',lo:110,hi:113},sets:[3,3]},
+     {t:'Back squat — 3 × 3 @ carga da semana passada',d:'Mesma carga dos 3×6 da semana passada, só metade das reps. Deve sair rápido (RPE ~6).',rest:'Pausa 2:00',sets:[3,3,3]},
+     {t:'Glute ham raise — 8-6',d:'Peso no peito ou menor elástico possível.',rest:'Pausa 1:30',sets:[8,6]}
+   ]},
+   {l:'T',n:'Teste — remo 3 min',meta:'Somente Victor Boson · depois da força',only:'Victor Boson',items:[
+     {t:'Aquecimento: 5:00 remo leve + 3 tiros de 10"'},
+     {t:'3:00 máximo de remo',d:'Anote a distância (m) e registre também na aba Testes → "3 min remo".'}
+   ],logs:['Distância em 3 min (m)']},
+   {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
+     {t:'30 min bike erg ou remo @ 130–140 bpm',
+      notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'}]}
+   ]}
+ ]},
+
+ {id:'ter',short:'TER',name:'Terça',focus:'Ginástica · deload',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_B},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 ski erg em ritmo moderado'}]},
+     {g:'2 séries',items:[{t:'10 scap pull up devagar'},{t:'10 banded victory'},{t:'10 medball overhead walking lunge @ 20/14 lb',d:'Braço esticado.'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'10 ring rows pegada neutra, rente ao corpo',d:'Não fique tão inclinado a ponto de falhar.'},
+       {t:'10 swings na argola bem conectados'},
+       {t:'0:10 dip hold embaixo + 0:10 em cima + 5 dips'}
+     ]}
+   ]},
+   {l:'C',n:'LPO + força',intro:DLN,items:[
+     {t:'Press into jerk — 3-2 @ 33–45%',rest:'Pausa 1:00',L:{b:'jk',lo:33,hi:45},sets:[3,2],notes:[VBN]},
+     {t:'Pause split jerk — 2-2 @ 65–80%',d:'Pausa de 2" no dip antes de lançar.',rest:'Pausa 1:30',L:{b:'jk',lo:65,hi:80},sets:[2,2]},
+     {t:'Split jerk — 1-1 @ 85%',d:'Sem buscar máximo nesta semana.',rest:'Pausa 1:30–2:00',L:{b:'jk',lo:85},sets:[1,1]},
+     {t:'Depois: 3 split jerks @ 75%, sem touch and go',L:{b:'jk',lo:75},sets:[1,1,1]}
+   ]},
+   {l:'D',n:'Força',meta:'2 séries',items:[
+     {t:'2 legless (1–2 RIR)'},
+     {t:'Pausa 1:00 ativa leve',d:'Bike erg, ou só as pernas na air bike.'},
+     {t:'5 bench press @ 90–100% do 5RM mais recente',rest:'Pausa 2:00',sets:[5,5]}
+   ]},
+   {l:'E',n:'Acumulação de ginástica',meta:'Ring muscle up e bar muscle up · metade do volume',skip:['Victor Boson'],items:[
+     {t:'15/12 ring muscle ups por tempo'},
+     {t:'3:00 girando leve na bike'},
+     {t:'18/13 bar muscle ups por tempo'}
+   ],logs:['Tempo — ring muscle ups','Tempo — bar muscle ups']},
+   {l:'T',n:'Teste — ring muscle up 5 min',meta:'Somente Victor Boson · no lugar do bloco E',only:'Victor Boson',items:[
+     {t:'Aquecimento: 2 × (3 kipping swings + 2 transições no banded/low ring + 1–2 RMU)'},
+     {t:'5:00 — máximo de ring muscle ups',d:'Registre também na aba Testes → "5 min ring muscle up".'}
+   ],logs:['Reps em 5 min']}
+ ]},
+
+ {id:'qua',short:'QUA',name:'Quarta',focus:'Potência + Limiar',blocks:[
+   {l:'A',n:'Warm up geral',intro:'Objetivo: melhorar a rigidez das pernas e o padrão de corrida com educativos que se repetem toda semana e, às vezes, evoluem para exercícios mais complexos.',groups:[
+     {g:'2 séries',items:[
+       {t:'20 pogo hops'},
+       {t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril. Comece devagar pra entender.'},
+       {t:'50 m A-skips'},
+       {t:'100 m corrida leve'},
+       {t:'Pausa 1:00'}
+     ]}
+   ]},
+   {l:'B',n:'Potência',intro:DLN,items:[
+     {t:'Clean high pull — 2 × 3 @ 100–110%',d:'Do 1RM mais recente de clean. Aqueça com 70–80% antes. Maior altura possível na barra.',rest:'Pausa 1:30',L:{b:'sc',lo:100,hi:110},sets:[3,3],notes:[VBN]},
+     {t:'Power clean — 2 séries de 5 touch and go @ 215–235 / 125–135',rest:'Pausa 2:00',sets:[5,5]},
+     {t:'Squat box jump — 2 × 5',d:'Pausa de 1" embaixo antes de saltar. Mesma altura da semana passada.',rest:'Pausa 1:00'}
+   ]},
+   {l:'C',n:'Limiar over/under',meta:'Ritmo calculado pelo seu teste de 5 km',skip:['Victor Boson'],
+    intro:'Treino de limiar mais leve pra favorecer a recuperação. "Under" fica um pouco abaixo do limiar (confortavelmente difícil, RPE 6); "over" fica um pouco acima (RPE 7–8), sem virar tiro. Os ritmos saem do seu teste de 5 km anotado no app.',groups:[
+     {items:[{t:'1 km @ trote livre'}]},
+     {g:'3 séries — 6:00 contínuos',items:[
+       {t:'2:00 under → 1:00 over → 2:00 under → 1:00 over',R:{thr:1,under:1.04,over:0.97}},
+       {t:'2:00 trote leve ou caminhada entre séries'}
+     ]},
+     {g:'Depois',items:[{t:'1 km @ trote livre'},{t:'3:00 caminhada de volta à calma'}]}
+   ]},
+   {l:'T',n:'Teste — 5 km corrida',meta:'Somente Victor Boson · no lugar do bloco C',only:'Victor Boson',items:[
+     {t:'1 km trote + 3 acelerações de 15"'},
+     {t:'5 km no melhor tempo possível',d:'Ritmo constante nos primeiros 3 km, acelere no final. Registre também na aba Testes → "5 km corrida" (tempo e pace).'}
+   ],logs:['Tempo nos 5 km']},
+   {l:'D',n:'Alongamentos',items:[
+     {t:'1:00 pigeon cada lado'},{t:'1:00 couch stretch cada lado'},{t:'1:00 posterior de coxa cada lado'},
+     {t:'1:00 panturrilha (leve) cada lado'},{t:'1:00 rotação torácica isométrica no solo, cada lado'}
+   ]}
+ ]},
+
+ {id:'qui',short:'QUI',name:'Quinta',focus:'Zona 2 ou full rest — o que precisar',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Remo — limiar',meta:'Optativo, pra quem não consegue ficar parado',skip:['Victor Boson'],groups:[
+     {g:'2 séries',items:[
+       {t:'8:00 @ 5–10% mais lento que o teste de 12 min'},
+       {t:'2:30 @ 20–30% mais lento que o teste de 12 min'}
+     ]},
+     {g:'Depois',items:[{t:'+20 min de endurance leve',d:'Bike erg, echo bike e/ou ski erg, em ritmo leve e livre.'}]}
+   ]},
+   {l:'T',n:'Base aeróbia — 3 × 15 min',meta:'Somente Victor Boson · no lugar do bloco B',only:'Victor Boson',
+    intro:'Ritmo constante e confortável (RPE 4–5, dá pra conversar). Não é teste máximo: é a sua linha de base aeróbia pra próximas semanas.',items:[
+     {t:'15:00 ski erg'},{t:'15:00 remo'},{t:'15:00 bike erg'}
+   ],logs:['Ski 15 min (m ou watts médio)','Remo 15 min (m ou watts médio)','Bike erg 15 min (m ou watts médio)']},
+   {l:'C',n:'Rolinho',meta:'1:30 em cada parte, cada lado',items:[
+     {t:'Adutores (devagar)'},{t:'Lateral do quadríceps'},{t:'Glúteos'},{t:'Posterior de coxa'},{t:'Panturrilhas'}
+   ]}
+ ]},
+
+ {id:'sex',short:'SEX',name:'Sexta',focus:'LPO + Força + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',meta:'2 séries',items:[
+     {t:'15/12 cal air bike'},
+     {t:'8/8 single leg deadlift',d:'Halter do lado da perna de apoio, peso livre pra aquecer sem entortar o corpo.',
+      notes:[{w:'Daniel',x:'Pode fazer 10 pontes de quadril unilaterais.'}]},
+     {t:'6 behind the neck shoulder press (barra vazia, pegada de jerk) + 6 close grip OHS'},
+     {t:'0:30/0:30 side plank rotation'}
+   ]},
+   {l:'C',n:'LPO e força',intro:DLN,items:[
+     {t:'1 série: 1 clean high pull + 1 muscle clean & press + 1 jerk balance + 1 tall squat clean + 1 split jerk @ 30–40%',d:'Do 1RM de clean & jerk. Jerk balance: desça a barra até a linha da testa, pare 2" e bata o jerk.',rest:'Pausa 1:00',L:{b:'cj',lo:30,hi:40},sets:[5],notes:[VBN]},
+     {t:'2 séries: 1 power clean + 1 thruster + 1 hang squat clean + 1 split jerk com pausa de 2" na recepção @ 55–70%',rest:'Pausa 1:30',L:{b:'cj',lo:55,hi:70},sets:[4,4]},
+     {t:'2 séries: 1 squat clean + 3 front squats + 1 jerk @ 75–85%',d:'Do 1RM de clean & jerk.',rest:'Pausa 2:00',L:{b:'cj',lo:75,hi:85},sets:[5,5],
+      notes:[{w:'Victor',x:'Pode fazer só o clean com front squat.'}]},
+     {t:'Single arm KB overhead squat — 6/6',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[12],repHint:'6/6'}
+   ]},
+   {l:'D',n:'WOD',meta:'Por tempo · cap 12:00 · 115/80 lb',groups:[
+     {g:'Parte 1',items:[{t:'10 shuttle runs (7,5 m ida / 7,5 m volta)'},{t:'20 overhead squats @ 115/80'},{t:'30 burpees over the bar'}]},
+     {g:'Descanso',items:[{t:'Rest 1:00'}]},
+     {g:'Parte 2',items:[{t:'30 burpees over the bar'},{t:'20 overhead squats @ 115/80'},{t:'10 shuttle runs (7,5 m ida / 7,5 m volta)'}]}
+   ],logs:['Tempo final (ou reps no cap)']}
+ ]},
+
+ {id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_B},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'800 m corrida'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'8 scap pull ups devagar + 8 ring rows close grip'},
+       {t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
+       {t:'5 inch worm to push up',d:'2 push ups por rep.'},
+       {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
+     ]}
+   ]},
+   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 6:00',skip:['Victor Boson'],items:[
+     {t:'Shoulder press + push press — 3 × (1+2)',d:'Mesma carga da semana passada. Metade do volume, sem buscar mpp.',sets:[3,3,3]}
+   ]},
+   {l:'T',n:'Teste — strict HSPU 3 min',meta:'Somente Victor Boson · no lugar do bloco C',only:'Victor Boson',items:[
+     {t:'Aquecimento: 2 × (5 pike push ups + 3 negativas de HSPU)'},
+     {t:'3:00 — máximo de strict handstand push ups',d:'Registre também na aba Testes → "3 min strict HSPU".'}
+   ],logs:['Reps em 3 min']},
+   {l:'D',n:'LPO',meta:'A cada 2:00, por 6:00',items:[
+     {t:'1 snatch high pull + 2 power snatch touch and go @ 80–90%',d:'Do 1RM de power snatch.',L:{b:'ps',lo:80,hi:90},sets:[3,3,3],notes:[VBN]}
+   ]},
+   {l:'E',n:'WOD',meta:'Por tempo · 3 rounds · 1:00 de pausa obrigatória após cada round',groups:[
+     {g:'Round 1',items:[{t:'5 dual DB devil press @ 50/35'},{t:'10 dual DB thrusters @ 50/35'},{t:'15 toes to bar'},{t:'5 bar muscle ups'},{t:'Pausa 1:00'}]},
+     {g:'Round 2',items:[{t:'10 dual DB devil press @ 50/35'},{t:'15 dual DB thrusters @ 50/35'},{t:'20 toes to bar'},{t:'10 bar muscle ups'},{t:'Pausa 1:00'}]},
+     {g:'Round 3',items:[{t:'15 dual DB devil press @ 50/35'},{t:'20 dual DB thrusters @ 50/35'},{t:'25 toes to bar'},{t:'15 bar muscle ups'}]}
+   ],logs:['Tempo final (com as pausas)']}
+ ]},
+
+ {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
+];
+var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2};
+function visibleBlock(b){ if(b.only && b.only!==S.athlete) return false; if(b.skip && b.skip.indexOf(S.athlete)>=0) return false; return true; }
 var DSHORT=['SEG','TER','QUA','QUI','SEX','SÁB','DOM'], DNAME=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
 var MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
 function pad(n){return (n<10?'0':'')+n}
@@ -707,6 +882,7 @@ if(!S.day || !/^\d{4}-/.test(S.day) || S.day<addDays(THIS_MON,-7) || S.day>addDa
 function allItems(day){
 var out=[];
 day.blocks.forEach(function(b,bi){
+if(!visibleBlock(b)) return;
 blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){ out.push(day.id+'.'+bi+'.'+gi+'.'+ii); }); });
 });
 return out;
@@ -734,7 +910,21 @@ h+='<div class="load"><b>'+r5(base.v*L.lo/100)+' lb</b><small>'+L.lo+'%</small><
 h+='<span class="loadbase">Base: '+base.n+' '+base.v+' lb · arredondado a 5 lb</span></div>';
 return h;
 }
+function secOf(str){ var x=String(str).replace(/[’´']/g,':').replace(/[”"]/g,''); var m=x.match(/(\d{1,2}):(\d{2})(?::(\d{2}))?/); if(!m) return null; return m[3]?(+m[1]*3600+ +m[2]*60+ +m[3]):(+m[1]*60+ +m[2]); }
+function fmtPace(sec){ var m=Math.floor(sec/60), s=Math.round(sec-m*60); if(s===60){m++;s=0} return m+':'+(s<10?'0':'')+s; }
+function thrBase(ath){
+var t5=findTest('5 km corrida'), v5=t5&&t5.v[ath], s5=v5?secOf(v5):null;
+if(s5) return s5>600?{p:s5/5*1.06,src:'5 km em '+fmtPace(s5)}:{p:s5*1.06,src:'5 km a '+fmtPace(s5)+'/km'};
+var t10=findTest('10 km corrida'), v10=t10&&t10.v[ath], s10=v10?secOf(v10):null;
+if(s10) return s10>1200?{p:s10/10*1.02,src:'10 km em '+fmtPace(s10)}:{p:s10*1.02,src:'10 km a '+fmtPace(s10)+'/km'};
+return null;
+}
 function runHTML(R){
+if(R.thr){
+var tb=thrBase(S.athlete);
+if(!tb) return '<div class="missing">Sem teste de 5 km anotado para '+esc(S.athlete)+'. Faça por percepção: under em RPE 6, over em RPE 7–8. <button type="button" data-goto="testes">Anotar teste</button></div>';
+return '<div class="loads num"><div class="load"><b>'+fmtPace(tb.p*R.under)+'/km</b><small>under</small></div><div class="load"><b>'+fmtPace(tb.p*R.over)+'/km</b><small>over</small></div><span class="loadbase">Limiar estimado '+fmtPace(tb.p)+'/km · base: teste de '+tb.src+'</span></div>';
+}
 var t=testForKey('run12');
 var val = t && t.v[S.athlete] ? parseFloat(String(t.v[S.athlete]).replace('.','')) : null;
 if(!val) return '<div class="missing">Sem teste de 12 min para '+esc(S.athlete)+' — ritmo pela percepção até o teste.</div>';
@@ -789,6 +979,7 @@ document.getElementById('view-treino').innerHTML=h; return;
 }
 h+='<div class="blocks">';
 day.blocks.forEach(function(b,bi){
+if(!visibleBlock(b)) return;
 var gs=blockGroups(b), ids=[], c=ck();
 gs.forEach(function(g,gi){ g.items.forEach(function(it,ii){ ids.push(day.id+'.'+bi+'.'+gi+'.'+ii); }); });
 var done=ids.filter(function(id){return c[id]}).length, complete=done===ids.length;
@@ -877,6 +1068,7 @@ function summary(day){
 var L=['*Treino '+day.name.toLowerCase()+' '+ddmm(day.id)+'*',''], c=ck(), pend=[];
 function flush(){ if(pend.length){ L.push(pend.map(function(b){return b.l}).join('+')+') '+pend.map(function(b){return b.n}).join(' + ')+' ✅'); L.push(''); pend=[]; } }
 day.blocks.forEach(function(b,bi){
+if(!visibleBlock(b)) return;
 var ids=[], data=[];
 blockGroups(b).forEach(function(g,gi){ g.items.forEach(function(it,ii){ var id=day.id+'.'+bi+'.'+gi+'.'+ii; ids.push(id);
 if(it.sets){ var f=fmtSets(it,id); if(f) data.push([shortName(it.t),f]); }
