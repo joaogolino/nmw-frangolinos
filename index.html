@@ -109,12 +109,21 @@ display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;
 .bfill button.undo{border-color:var(--line);color:var(--muted)}
 .toast.up{bottom:calc(230px + env(safe-area-inset-bottom,0px))}
 .tbar{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--card);border-top:1px solid var(--gold-dim);padding:10px 16px 12px}
-.tbar .in{max-width:600px;margin:0 auto}
-.tbar .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tbar .in{max-width:600px;margin:0 auto;text-align:center}
+.tbar .top{display:flex;align-items:baseline;justify-content:center;gap:10px}
 .tbar .lab{font-size:.74rem;color:var(--muted);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tbar .rnd{font-size:.74rem;color:var(--gold);font-weight:800;white-space:nowrap}
-.tbar .big{font-family:var(--serif);font-size:2.6rem;line-height:1.05;font-variant-numeric:tabular-nums;margin:2px 0 4px}
+.tbar .big{font-family:var(--serif);font-size:2.6rem;line-height:1.05;font-variant-numeric:tabular-nums;margin:2px 0 4px;cursor:pointer;user-select:none}
 .tbar .big.warn{color:var(--gold)}
+.tbar.full{top:0;bottom:0;z-index:70;background:var(--bg);border-top:0;display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.tbar.full .in{width:100%;display:flex;flex-direction:column;align-items:center}
+.tbar.full .top{flex-direction:column;align-items:center;gap:2px}
+.tbar.full .lab{font-size:1rem;white-space:normal;max-width:none;color:var(--text)}
+.tbar.full .rnd{font-size:1.25rem}
+.tbar.full .big{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;font-size:min(27vw,38vh);line-height:.98;margin:10px 0}
+.tbar.full .laps{font-size:.9rem}
+.tbar.full .btns{margin-top:22px;width:100%;justify-content:center}
+.tbar.full .btns button{padding:.8rem .4rem;font-size:.9rem}
 .tbar .laps{font-size:.72rem;color:var(--faint);min-height:1em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tbar .btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .tbar .btns button{flex:1;min-width:72px;background:var(--card-2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:.5rem .4rem;font-size:.8rem;font-weight:700}
@@ -321,7 +330,7 @@ backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
 <main id="view-testes" hidden></main>
 <main id="view-atleta" hidden></main>
 </div>
-<div class="tbar" id="tbar" hidden><div class="in"><div class="top"><span class="lab" id="tlab"></span><span class="rnd" id="trnd"></span></div><div class="big" id="tbig">0:00</div><div class="laps" id="tlaps"></div><div class="btns"><button type="button" class="go" id="tplay" data-tm="play">Pausar</button><button type="button" data-tm="lap">Volta</button><button type="button" data-tm="reset">Zerar</button><button type="button" data-tm="use">Anotar</button><button type="button" class="x" data-tm="stop">✕</button></div></div></div>
+<div class="tbar" id="tbar" hidden><div class="in"><div class="top"><span class="lab" id="tlab"></span><span class="rnd" id="trnd"></span></div><div class="big" id="tbig" data-tm="mini">0:00</div><div class="laps" id="tlaps"></div><div class="btns"><button type="button" class="go" id="tplay" data-tm="play">Pausar</button><button type="button" data-tm="lap">Volta</button><button type="button" data-tm="reset">Zerar</button><button type="button" data-tm="use">Anotar</button><button type="button" class="x" data-tm="stop">✕</button></div></div></div>
 <nav class="tabs" aria-label="Seções">
 <div class="in" role="tablist">
 <button role="tab" data-tab="treino" aria-selected="true">
@@ -958,6 +967,9 @@ h+='<label for="c-'+id+'"><span class="t">'+esc(it.t)+'</span>';
 if(it.d) h+='<span class="d">'+it.d+'</span>';
 if(it.rest) h+='<span class="rest">'+esc(it.rest)+'</span>';
 var itm=parseTimer(it.t), rtm=it.rest?parseTimer(it.rest):null;
+var bnm=(function(){ var q=id.split('.'), bb=dayFor(q[0]).blocks[+q[1]]; return bb?bb.n:''; })();
+if(itm) itm.big=bigT(itm,bnm,it.t);
+if(rtm) rtm.rest=1;
 h+='</label><div style="grid-column:2">';
 if(itm) h+='<button type="button" class="tbtn" data-timer="'+esc(JSON.stringify(itm))+'" data-tmlab="'+esc(it.t.slice(0,48))+'" data-tmkey="'+id.split('.').slice(0,2).join('.')+'">⏱ '+timerLabel(itm)+'</button>';
 if(rtm) h+='<button type="button" class="tbtn rest" data-timer="'+esc(JSON.stringify(rtm))+'" data-tmlab="'+esc(it.rest)+'">⏱ '+esc(it.rest)+'</button>';
@@ -1013,6 +1025,7 @@ h+='<section class="block'+(complete?' complete':'')+(closed?' closed':'')+'">';
 h+='<button class="bhead" type="button" data-toggle="'+bkey+'" aria-expanded="'+(!closed)+'"><span class="letter">'+b.l+'</span><span><h3>'+esc(b.n)+'</h3>'+(b.meta?'<span class="meta">'+esc(b.meta)+'</span>':'')+'</span><span class="bcount num">'+done+'/'+ids.length+'<span class="chev"></span></span></button>';
 h+='<div class="bbody">';
 var btm=blockTimer(b), bbtns='';
+if(btm) btm.big=bigT(btm,b.n);
 if(btm) bbtns+='<button type="button" class="tbtn" data-timer="'+esc(JSON.stringify(btm))+'" data-tmlab="'+esc(b.l+') '+b.n)+'" data-tmkey="'+day.id+'.'+bi+'">⏱ '+timerLabel(btm)+'</button>';
 if(FILLABLE.test(b.n)) bbtns+='<button type="button" class="'+(complete?'undo':'')+'" data-fillall="'+day.id+'.'+bi+'">'+(complete?'Desmarcar tudo':'✓ Preencher tudo')+'</button>';
 if(bbtns) h+='<div class="bfill">'+bbtns+'</div>';
@@ -1156,8 +1169,9 @@ if(m) return {mode:'down',total:+m[1]*60};
 if(/por\s*tempo/i.test(x)) return {mode:'up'};
 return null;
 }
+function bigT(sp,bn,tx){ if(!sp||sp.rest) return 0; if(/pausa|descanso|\brest\b/i.test(tx||'')) return 0; if(/flexib|aquecim|alongam|warm|mobilid|rolinho/i.test(bn||'')) return 0; return 1; }
 function blockTimer(b){ return parseTimer(b.meta) || parseTimer(b.intro) || (b.logs&&b.logs.length&&/por\s*tempo|tempo/i.test(b.logs[0])?{mode:'up'}:null); }
-var TM={on:0,mode:null,every:0,total:0,t0:0,pauseAt:0,lost:0,laps:[],key:null,label:'',lastInt:-1,wake:null,ac:null,tid:[],done:0,iv:null,htmlOK:0,endP:0,unl:0};
+var TM={on:0,mode:null,every:0,total:0,t0:0,pauseAt:0,lost:0,laps:[],key:null,label:'',lastInt:-1,wake:null,ac:null,tid:[],done:0,iv:null,htmlOK:0,endP:0,unl:0,prep:0,big:0,full:0};
 function fmtClock(s){ var n=Math.max(0,Math.floor(s)), m=Math.floor(n/60); return m+':'+(n%60<10?'0':'')+(n%60); }
 function wavURL(specs){
 var SR=11025, total=0;
@@ -1179,7 +1193,7 @@ v.setInt16(44+i*2, a*32767, true);
 try{ return URL.createObjectURL(new Blob([buf],{type:'audio/wav'})); }catch(e){ return null; }
 }
 var SND={}, POOL={};
-function sndInit(){ if(SND.cd) return; SND.cd=wavURL([[372,0.16]]); SND.go=wavURL([[1200,0.5]]); SND.end=wavURL([[1200,1.0]]); }
+function sndInit(){ if(SND.c3) return; SND.c3=wavURL([[372,0.14]]); SND.c2=wavURL([[372,0.2]]); SND.c1=wavURL([[372,0.28]]); SND.go=wavURL([[1200,0.55]]); SND.end=wavURL([[1200,1.1]]); }
 function poolFor(k){
 if(!POOL[k]){ if(!SND[k]) return null; var a=new Audio(); a.preload='auto'; a.setAttribute('playsinline',''); a.src=SND[k]; POOL[k]=a; }
 return POOL[k];
@@ -1187,7 +1201,7 @@ return POOL[k];
 function unlockAudio(){
 audioCtx();
 if(TM.unl) return; TM.unl=1; sndInit();
-['cd','go','end'].forEach(function(k){
+['c3','c2','c1','go','end'].forEach(function(k){
 var a=poolFor(k); if(!a) return;
 try{ var p=a.play(); a.pause(); a.currentTime=0; TM.htmlOK=1; if(p&&p.catch) p.catch(function(){}); }catch(e){}
 });
@@ -1207,9 +1221,11 @@ o.start(at); o.stop(at+d+0.04);
 }catch(e){}
 }
 function wfall(k){
-if(k==='cd') wbeep(372,0.16,0.5);
-else if(k==='go') wbeep(1200,0.5,0.5);
-else wbeep(1200,1,0.55);
+if(k==='c3') wbeep(372,0.14,0.5);
+else if(k==='c2') wbeep(372,0.2,0.5);
+else if(k==='c1') wbeep(372,0.28,0.5);
+else if(k==='go') wbeep(1200,0.55,0.5);
+else wbeep(1200,1.1,0.55);
 }
 function playSnd(k){
 if(TM.htmlOK){
@@ -1224,9 +1240,11 @@ function planBeeps(){
 clearBeeps(); if(!TM.on||TM.done||TM.pauseAt) return;
 var e=timerElapsed();
 function at(sec,fn){ var d=(sec-e)*1000; if(d>-60) TM.tid.push(setTimeout(fn,Math.max(0,d))); }
-function cd(sec){ at(sec-3,function(){playSnd('cd')}); at(sec-2,function(){playSnd('cd')}); at(sec-1,function(){playSnd('cd')}); }
-if(TM.mode==='down'){ cd(TM.total); at(TM.total,playEnd); }
-else if(TM.mode==='interval'){
+function cd(sec){ at(sec-3,function(){playSnd('c3')}); at(sec-2,function(){playSnd('c2')}); at(sec-1,function(){playSnd('c1')}); }
+if(TM.prep){ cd(0); at(0,function(){playSnd('go')}); }
+if(TM.mode==='up'){}
+else if(TM.mode==='down'){ cd(TM.total); at(TM.total,playEnd); }
+else {
 var tot=Math.max(1,Math.round(TM.total/TM.every));
 for(var r=1;r<=tot;r++){ var end=r*TM.every; cd(end); if(r<tot) at(end,function(){playSnd('go')}); }
 at(TM.total,playEnd);
@@ -1236,16 +1254,18 @@ function wakeOn(){ try{ if(navigator.wakeLock && !TM.wake) navigator.wakeLock.re
 function wakeOff(){ try{ if(TM.wake){ TM.wake.release(); TM.wake=null; } }catch(e){} }
 function timerStart(spec,label,key){
 unlockAudio();
-TM.on=1; TM.mode=spec.mode; TM.every=spec.every||0; TM.total=spec.total||0; TM.t0=Date.now(); TM.pauseAt=0; TM.lost=0; TM.laps=[]; TM.key=key||null; TM.label=label||''; TM.lastInt=-1; TM.done=0; TM.endP=0;
-document.getElementById('tbar').hidden=false; wakeOn(); planBeeps(); timerPaint();
+TM.big=spec.big?1:0; TM.full=TM.big; TM.prep=TM.big?10:0;
+TM.on=1; TM.mode=spec.mode; TM.every=spec.every||0; TM.total=spec.total||0; TM.t0=Date.now()+TM.prep*1000; TM.pauseAt=0; TM.lost=0; TM.laps=[]; TM.key=key||null; TM.label=label||''; TM.lastInt=-1; TM.done=0; TM.endP=0;
+var tb0=document.getElementById('tbar'); tb0.hidden=false; tb0.classList.toggle('full',!!TM.full); wakeOn(); planBeeps(); timerPaint();
 if(!TM.iv) TM.iv=setInterval(timerPaint,100);
 }
 function timerElapsed(){ var end=TM.pauseAt||Date.now(); return (end-TM.t0-TM.lost)/1000; }
 function timerEnd(){ if(TM.done) return; TM.done=1; if(!TM.pauseAt) TM.pauseAt=TM.t0+TM.lost+TM.total*1000; playEnd(); clearBeeps(); }
 function timerPaint(){
 if(!TM.on) return;
-var e=timerElapsed(), big=document.getElementById('tbig'), rnd=document.getElementById('trnd'), warn=false, show=0, lab='';
-if(TM.mode==='up'){ show=e; lab='Cronômetro'; }
+var e=timerElapsed(), big=document.getElementById('tbig'), rnd=document.getElementById('trnd'), warn=false, show=0, lab='', up=0;
+if(e<0){ show=-e; warn=show<=3.001; lab='Prepare'; }
+else if(TM.mode==='up'){ show=e; up=1; lab='Cronômetro'; }
 else if(TM.mode==='down'){ if(e>=TM.total) timerEnd(); show=Math.max(0,TM.total-timerElapsed()); warn=show<=10&&!TM.done; lab=TM.done?'Fim':'Regressivo'; }
 else {
 var tot=Math.max(1,Math.round(TM.total/TM.every));
@@ -1255,7 +1275,7 @@ show=TM.done?0:TM.every-(e2%TM.every); warn=show<=3&&!TM.done;
 lab=TM.done?'Fim':'Round '+r+'/'+tot;
 }
 rnd.textContent=lab;
-big.textContent=fmtClock(show); big.className='big'+(warn?' warn':'');
+big.textContent=fmtClock(up?show:Math.ceil(show-1e-6)); big.className='big'+(warn?' warn':'');
 document.getElementById('tlab').textContent=TM.label;
 document.getElementById('tlaps').textContent=TM.laps.length?TM.laps.map(function(l,i){return 'V'+(i+1)+' '+fmtClock(l)}).join(' · '):'';
 document.getElementById('tplay').textContent=TM.done?'Reiniciar':(TM.pauseAt?'Retomar':'Pausar');
@@ -1267,11 +1287,11 @@ if(TM.pauseAt){ TM.lost+=Date.now()-TM.pauseAt; TM.pauseAt=0; planBeeps(); }
 else { TM.pauseAt=Date.now(); clearBeeps(); }
 timerPaint();
 }
-function timerReset(){ unlockAudio(); TM.t0=Date.now(); TM.lost=0; TM.pauseAt=0; TM.laps=[]; TM.lastInt=-1; TM.done=0; TM.endP=0; planBeeps(); timerPaint(); }
-function timerStop(){ TM.on=0; TM.done=0; clearInterval(TM.iv); TM.iv=null; clearBeeps(); wakeOff(); document.getElementById('tbar').hidden=true; }
-function timerLap(){ if(!TM.on||TM.done) return; TM.laps.push(timerElapsed()); if(TM.laps.length>6) TM.laps.shift(); playSnd('cd'); timerPaint(); }
+function timerReset(){ unlockAudio(); TM.t0=Date.now()+TM.prep*1000; TM.lost=0; TM.pauseAt=0; TM.laps=[]; TM.lastInt=-1; TM.done=0; TM.endP=0; planBeeps(); timerPaint(); }
+function timerStop(){ TM.on=0; TM.done=0; clearInterval(TM.iv); TM.iv=null; clearBeeps(); wakeOff(); var tb1=document.getElementById('tbar'); tb1.hidden=true; tb1.classList.remove('full'); }
+function timerLap(){ if(!TM.on||TM.done) return; TM.laps.push(timerElapsed()); if(TM.laps.length>6) TM.laps.shift(); playSnd('c3'); timerPaint(); }
 function timerUse(){
-var el=timerElapsed(); if(TM.mode!=='up'&&TM.total) el=Math.min(el,TM.total);
+var el=Math.max(0,timerElapsed()); if(TM.mode!=='up'&&TM.total) el=Math.min(el,TM.total);
 var v=fmtClock(el);
 var sel=TM.key?document.querySelectorAll('[data-log^="'+TM.key+'."]'):[];
 for(var i=0;i<sel.length;i++){ if(!sel[i].value){ sel[i].value=v; lg()[sel[i].dataset.log]=v; save(); syncDay(S.day); toast('Tempo '+v+' anotado'); return; } }
@@ -1473,7 +1493,9 @@ return;
 }
 if((t=e.target.closest('[data-tm]'))){
 var act=t.dataset.tm;
-if(act==='play') timerPause(); else if(act==='lap') timerLap(); else if(act==='reset') timerReset(); else if(act==='use') timerUse(); else timerStop();
+if(act==='play') timerPause(); else if(act==='lap') timerLap(); else if(act==='reset') timerReset(); else if(act==='use') timerUse();
+else if(act==='mini'){ if(!TM.big) return; TM.full=TM.full?0:1; document.getElementById('tbar').classList.toggle('full',!!TM.full); }
+else timerStop();
 return;
 }
 if((t=e.target.closest('[data-fillall]'))){
@@ -1560,7 +1582,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-21b';
+var APP_VER='2026-09-21c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
