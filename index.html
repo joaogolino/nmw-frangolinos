@@ -1157,43 +1157,77 @@ if(/por\s*tempo/i.test(x)) return {mode:'up'};
 return null;
 }
 function blockTimer(b){ return parseTimer(b.meta) || parseTimer(b.intro) || (b.logs&&b.logs.length&&/por\s*tempo|tempo/i.test(b.logs[0])?{mode:'up'}:null); }
-var TM={on:0,mode:null,every:0,total:0,t0:0,pauseAt:0,lost:0,laps:[],key:null,label:'',lastInt:-1,wake:null,ac:null};
+var TM={on:0,mode:null,every:0,total:0,t0:0,pauseAt:0,lost:0,laps:[],key:null,label:'',lastInt:-1,wake:null,ac:null,sch:[],done:0,iv:null};
 function fmtClock(s){ var n=Math.max(0,Math.floor(s)), m=Math.floor(n/60); return m+':'+(n%60<10?'0':'')+(n%60); }
-function beep(f,d,v){ try{ if(!TM.ac) TM.ac=new (window.AudioContext||window.webkitAudioContext)(); var a=TM.ac,o=a.createOscillator(),g=a.createGain(); o.frequency.value=f; o.connect(g); g.connect(a.destination); g.gain.setValueAtTime(v||0.25,a.currentTime); o.start(); g.gain.exponentialRampToValueAtTime(0.001,a.currentTime+d); o.stop(a.currentTime+d+0.02); }catch(e){} }
+function audioCtx(){ if(!TM.ac){ try{ TM.ac=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(TM.ac&&TM.ac.state==='suspended'){ try{ TM.ac.resume(); }catch(e){} } return TM.ac; }
+function beepAt(t,f,d,v){
+var a=audioCtx(); if(!a) return;
+try{
+var at=a.currentTime+Math.max(0,t), o=a.createOscillator(), g=a.createGain();
+o.type='square'; o.frequency.setValueAtTime(f,at);
+o.connect(g); g.connect(a.destination);
+g.gain.setValueAtTime(0.0001,at);
+g.gain.exponentialRampToValueAtTime(v,at+0.012);
+g.gain.setValueAtTime(v,at+d*0.75);
+g.gain.exponentialRampToValueAtTime(0.0001,at+d);
+o.start(at); o.stop(at+d+0.04); TM.sch.push(o);
+}catch(e){}
+}
+function beep(f,d,v){ beepAt(0,f,d,v); }
+function clearBeeps(){ for(var i=0;i<TM.sch.length;i++){ try{ TM.sch[i].stop(); TM.sch[i].disconnect(); }catch(e){} } TM.sch=[]; }
+function planBeeps(){
+clearBeeps(); if(!TM.on||TM.done||TM.pauseAt) return;
+var e=timerElapsed();
+function at(sec,f,d,v){ if(sec-e>-0.05) beepAt(sec-e,f,d,v); }
+function cd(sec){ at(sec-3,880,0.18,0.42); at(sec-2,880,0.18,0.42); at(sec-1,880,0.18,0.42); }
+function finale(sec){ at(sec,784,0.2,0.5); at(sec+0.22,988,0.2,0.5); at(sec+0.44,1319,0.9,0.55); }
+if(TM.mode==='down'){ cd(TM.total); finale(TM.total); }
+else if(TM.mode==='interval'){
+var tot=Math.max(1,Math.round(TM.total/TM.every));
+for(var r=1;r<=tot;r++){ var end=r*TM.every; cd(end); if(r<tot) at(end,1175,0.3,0.5); }
+finale(TM.total);
+}
+}
 function wakeOn(){ try{ if(navigator.wakeLock && !TM.wake) navigator.wakeLock.request('screen').then(function(w){ TM.wake=w; },function(){}); }catch(e){} }
 function wakeOff(){ try{ if(TM.wake){ TM.wake.release(); TM.wake=null; } }catch(e){} }
 function timerStart(spec,label,key){
-TM.on=1; TM.mode=spec.mode; TM.every=spec.every||0; TM.total=spec.total||0; TM.t0=Date.now(); TM.pauseAt=0; TM.lost=0; TM.laps=[]; TM.key=key||null; TM.label=label||''; TM.lastInt=-1;
-document.getElementById('tbar').hidden=false; wakeOn(); beep(880,0.12); timerPaint();
+TM.on=1; TM.mode=spec.mode; TM.every=spec.every||0; TM.total=spec.total||0; TM.t0=Date.now(); TM.pauseAt=0; TM.lost=0; TM.laps=[]; TM.key=key||null; TM.label=label||''; TM.lastInt=-1; TM.done=0;
+document.getElementById('tbar').hidden=false; wakeOn(); beep(1175,0.14,0.4); planBeeps(); timerPaint();
 if(!TM.iv) TM.iv=setInterval(timerPaint,100);
 }
 function timerElapsed(){ var end=TM.pauseAt||Date.now(); return (end-TM.t0-TM.lost)/1000; }
+function timerEnd(){ if(TM.done) return; TM.done=1; if(!TM.pauseAt) TM.pauseAt=TM.t0+TM.lost+TM.total*1000; clearBeeps(); }
 function timerPaint(){
 if(!TM.on) return;
-var e=timerElapsed(), big=document.getElementById('tbig'), rnd=document.getElementById('trnd'), warn=false, show=0;
-if(TM.mode==='up'){ show=e; }
-else if(TM.mode==='down'){ show=Math.max(0,TM.total-e); warn=show<=10; if(TM.total-e<=0){ finishBeep(); timerPause(); show=0; } }
-else { var into=e%TM.every, r=Math.floor(e/TM.every)+1, tot=Math.round(TM.total/TM.every);
- show=TM.every-into; warn=show<=3;
- rnd.textContent='Round '+Math.min(r,tot)+'/'+tot;
- if(e>=TM.total){ finishBeep(); timerPause(); show=0; }
- else if(r-1!==TM.lastInt && e>0.2){ TM.lastInt=r-1; if(r>1) beep(880,0.15); }
+var e=timerElapsed(), big=document.getElementById('tbig'), rnd=document.getElementById('trnd'), warn=false, show=0, lab='';
+if(TM.mode==='up'){ show=e; lab='Cronômetro'; }
+else if(TM.mode==='down'){ if(e>=TM.total) timerEnd(); show=Math.max(0,TM.total-timerElapsed()); warn=show<=10&&!TM.done; lab=TM.done?'Fim':'Regressivo'; }
+else {
+var tot=Math.max(1,Math.round(TM.total/TM.every));
+if(e>=TM.total) timerEnd();
+var e2=timerElapsed(), r=Math.min(tot,Math.floor(e2/TM.every)+1);
+show=TM.done?0:TM.every-(e2%TM.every); warn=show<=3&&!TM.done;
+lab=TM.done?'Fim':'Round '+r+'/'+tot;
 }
-if(TM.mode!=='interval') rnd.textContent = TM.mode==='down'? 'Regressivo' : 'Cronômetro';
-var k=Math.ceil(show);
-if(warn && k>0 && k<=3 && TM.pauseAt===0 && k!==TM.lastBeep){ TM.lastBeep=k; beep(660,0.08,0.18); }
+rnd.textContent=lab;
 big.textContent=fmtClock(show); big.className='big'+(warn?' warn':'');
 document.getElementById('tlab').textContent=TM.label;
 document.getElementById('tlaps').textContent=TM.laps.length?TM.laps.map(function(l,i){return 'V'+(i+1)+' '+fmtClock(l)}).join(' · '):'';
-document.getElementById('tplay').textContent=TM.pauseAt?'Retomar':'Pausar';
+document.getElementById('tplay').textContent=TM.done?'Reiniciar':(TM.pauseAt?'Retomar':'Pausar');
 }
-function finishBeep(){ beep(523,0.25); setTimeout(function(){beep(659,0.25)},260); setTimeout(function(){beep(784,0.4)},520); }
-function timerPause(){ if(!TM.on) return; if(TM.pauseAt){ TM.lost+=Date.now()-TM.pauseAt; TM.pauseAt=0; } else { TM.pauseAt=Date.now(); } timerPaint(); }
-function timerReset(){ TM.t0=Date.now(); TM.lost=0; TM.pauseAt=0; TM.laps=[]; TM.lastInt=-1; timerPaint(); }
-function timerStop(){ TM.on=0; clearInterval(TM.iv); TM.iv=null; wakeOff(); document.getElementById('tbar').hidden=true; }
-function timerLap(){ if(!TM.on) return; TM.laps.push(timerElapsed()); if(TM.laps.length>6) TM.laps.shift(); beep(740,0.07,0.15); timerPaint(); }
+function timerPause(){
+if(!TM.on) return;
+if(TM.done){ timerReset(); return; }
+if(TM.pauseAt){ TM.lost+=Date.now()-TM.pauseAt; TM.pauseAt=0; planBeeps(); }
+else { TM.pauseAt=Date.now(); clearBeeps(); }
+timerPaint();
+}
+function timerReset(){ TM.t0=Date.now(); TM.lost=0; TM.pauseAt=0; TM.laps=[]; TM.lastInt=-1; TM.done=0; beep(1175,0.14,0.4); planBeeps(); timerPaint(); }
+function timerStop(){ TM.on=0; TM.done=0; clearInterval(TM.iv); TM.iv=null; clearBeeps(); wakeOff(); document.getElementById('tbar').hidden=true; }
+function timerLap(){ if(!TM.on||TM.done) return; TM.laps.push(timerElapsed()); if(TM.laps.length>6) TM.laps.shift(); beep(740,0.08,0.3); timerPaint(); }
 function timerUse(){
-var v=fmtClock(TM.mode==='down'?TM.total-timerElapsed():timerElapsed());
+var el=timerElapsed(); if(TM.mode!=='up'&&TM.total) el=Math.min(el,TM.total);
+var v=fmtClock(el);
 var sel=TM.key?document.querySelectorAll('[data-log^="'+TM.key+'."]'):[];
 for(var i=0;i<sel.length;i++){ if(!sel[i].value){ sel[i].value=v; lg()[sel[i].dataset.log]=v; save(); syncDay(S.day); toast('Tempo '+v+' anotado'); return; } }
 copyText(v).then(function(){ toast('Tempo '+v+' copiado'); });
@@ -1481,7 +1515,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-20d';
+var APP_VER='2026-09-20e';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
