@@ -1193,7 +1193,7 @@ v.setInt16(44+i*2, a*32767, true);
 try{ return URL.createObjectURL(new Blob([buf],{type:'audio/wav'})); }catch(e){ return null; }
 }
 var SND={}, POOL={};
-function sndInit(){ if(SND.c3) return; SND.c3=wavURL([[372,0.14]]); SND.c2=wavURL([[372,0.2]]); SND.c1=wavURL([[372,0.28]]); SND.go=wavURL([[1200,0.55]]); SND.end=wavURL([[1200,1.1]]); }
+function sndInit(){ if(SND.c3) return; SND.c3=wavURL([[440,0.22]]); SND.c2=wavURL([[440,0.3]]); SND.c1=wavURL([[440,0.4]]); SND.go=wavURL([[1200,0.6]]); SND.end=wavURL([[1200,1.2]]); }
 function poolFor(k){
 if(!POOL[k]){ if(!SND[k]) return null; var a=new Audio(); a.preload='auto'; a.setAttribute('playsinline',''); a.src=SND[k]; POOL[k]=a; }
 return POOL[k];
@@ -1221,11 +1221,11 @@ o.start(at); o.stop(at+d+0.04);
 }catch(e){}
 }
 function wfall(k){
-if(k==='c3') wbeep(372,0.14,0.5);
-else if(k==='c2') wbeep(372,0.2,0.5);
-else if(k==='c1') wbeep(372,0.28,0.5);
-else if(k==='go') wbeep(1200,0.55,0.5);
-else wbeep(1200,1.1,0.55);
+if(k==='c3') wbeep(440,0.22,0.5);
+else if(k==='c2') wbeep(440,0.3,0.5);
+else if(k==='c1') wbeep(440,0.4,0.5);
+else if(k==='go') wbeep(1200,0.6,0.5);
+else wbeep(1200,1.2,0.55);
 }
 function playSnd(k){
 if(TM.htmlOK){
@@ -1582,7 +1582,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-21d';
+var APP_VER='2026-09-21e';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
