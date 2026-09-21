@@ -1239,7 +1239,7 @@ function clearBeeps(){ for(var i=0;i<TM.tid.length;i++) clearTimeout(TM.tid[i]);
 function planBeeps(){
 clearBeeps(); if(!TM.on||TM.done||TM.pauseAt) return;
 var e=timerElapsed();
-function at(sec,fn){ var d=(sec-e)*1000; if(d>-60) TM.tid.push(setTimeout(fn,Math.max(0,d))); }
+function at(sec,fn){ var d=(sec-e)*1000; if(d>-60) TM.tid.push(setTimeout(function(){ fn(); timerPaint(); },Math.max(0,d))); }
 function cd(sec){ at(sec-3,function(){playSnd('c3')}); at(sec-2,function(){playSnd('c2')}); at(sec-1,function(){playSnd('c1')}); }
 if(TM.prep){ cd(0); at(0,function(){playSnd('go')}); }
 if(TM.mode==='up'){}
@@ -1582,7 +1582,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-21c';
+var APP_VER='2026-09-21d';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
