@@ -884,7 +884,200 @@ var WEEK2 = [
 
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
 ];
-var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2};
+var W3N='Semana de carga: o deload passou. Volume e intensidade sobem juntos, mas sem degrau — a subida é de 10 a 15% sobre a semana 1, não sobre a semana 2, que era deload.';
+var JGN={w:'João',x:'Sua semana tem quatro inserções marcadas com ☆. Elas existem por um motivo só: seu back squat está 27% atrás do Matheus enquanto seu jerk está na frente dele. Thruster, squat clean e "a barra não sobe pós-agachamento" são o mesmo problema, e ele mora na perna. Nada de single máximo de squat clean esta semana, por causa do joelho de sexta.'};
+var WEEK3 = [
+ {id:'seg',short:'SEG',name:'Segunda',focus:'LPO + Força',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 air bike',d:'3 tiros de 5" a cada minuto.'}]},
+     {g:'2 séries',items:[{t:'12/12 low to high superband woodchopper'},{t:'12/12 single leg hip thrust'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'10 good morning @ barra vazia'},
+       {t:'5 strict muscle snatch + 3 clean grip OHS devagar + 3 snatch grip Sots press + 5 snatch balance @ 45/35',d:'Sots press com base confortável de agachamento, mesmo que sacrifique ADM.'}
+     ]}
+   ]},
+   {l:'B2',n:'Aquecimento técnico',meta:'A cada 1:30, por 3 séries · 75/55 a 135/85',items:[
+     {t:'1 snatch high pull + 1 hang muscle snatch + 1 OHS + 1 snatch balance + 1 squat snatch @ 135–155 / 75–110',d:'Pare no chão em todas as reps que saem de lá.',
+      notes:[{w:'Victor',x:'1 snatch deadlift + 1 snatch pull + 1 snatch high pull + 1 hang snatch high pull @ 95–135.'}]}
+   ]},
+   {l:'C',n:'LPO e força',intro:W3N,items:[
+     {t:'Squat snatch — 3-3-2-2-1 @ 80-83-87-90-93%',d:'Do 1RM mais recente. Sobe a cada série, para na que sair com a barra ainda rápida — se travar, fica na anterior.',rest:'Pausa 2:00',
+      L:{b:'ss',sch:[[3,80],[3,83],[2,87],[2,90],[1,93]]},sets:[3,3,2,2,1],
+      notes:[{w:'Victor',x:'Pode fazer 4×3 de power snatch @ 105–135 lb.'},VBN]},
+     {t:'Overhead squat com pausa no bottom — 3 × 3',d:'Pausa de 2" no fundo. Suba 5 lb em relação à semana passada.',rest:'Pausa 1:30',sets:[3,3,3]},
+     {t:'Snatch high pull — 3 × 3 @ 110–115%',d:'Do 1RM mais recente de snatch. Levante a barra o mais alto que der.',rest:'Pausa 1:30',L:{b:'ss',lo:110,hi:115},sets:[3,3,3]},
+     {t:'Back squat — 4 × 5 @ 75–80%',d:'Do 1RM mais recente. Semana de carga: a última série tem que sair dura, mas com a barra subindo.',rest:'Pausa 2:30',L:{b:'bs',lo:75,hi:80},sets:[5,5,5,5],
+      notes:[{w:'João',x:'☆ NÃO faça este. Faça o bloco C2, logo abaixo — é o mesmo padrão em cluster, que é o que você precisa.'}]},
+     {t:'Glute ham raise — 3 × 8',d:'Peso no peito ou menor elástico possível.',rest:'Pausa 1:30',sets:[8,8,8],
+      notes:[{w:'Matheus',x:'Este aqui você pulou na semana passada. É o freio da tua posterior — não pule de novo.'}]}
+   ]},
+   {l:'C2',n:'☆ Back squat em cluster',meta:'Somente João · no lugar do back squat do bloco C',only:'João',
+    intro:'Cluster: você quebra a série em mini-séries de 2 reps com 20" de pausa entre elas, sem largar a barra do rack. Serve pra manter a VELOCIDADE de saída do fundo, que é exatamente o que está faltando no teu thruster e no teu squat clean. E cobra menos do joelho do que single pesado.',items:[
+     {t:'☆ Back squat — 5 × (3 × 2) @ 80–85%',d:'Cada série é 2 reps + 20" de pausa + 2 reps + 20" de pausa + 2 reps = 6 reps na série. Se a velocidade cair no último cluster, para a série ali.',rest:'Pausa 3:00 entre séries',L:{b:'bs',lo:80,hi:85},sets:[6,6,6,6,6],notes:[JGN]}
+   ]},
+   {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
+     {t:'35 min bike erg ou remo @ 130–140 bpm',
+      notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'}]}
+   ]}
+ ]},
+
+ {id:'ter',short:'TER',name:'Terça',focus:'Ginástica + Força MMSS',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_B},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 ski erg em ritmo moderado'}]},
+     {g:'2 séries',items:[{t:'10 scap pull up devagar'},{t:'10 banded victory'},{t:'10 medball overhead walking lunge @ 20/14 lb',d:'Braço esticado.'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'10 ring rows pegada neutra, rente ao corpo',d:'Não fique tão inclinado a ponto de falhar.'},
+       {t:'10 swings na argola bem conectados'},
+       {t:'0:10 dip hold embaixo + 0:10 em cima + 5 dips'}
+     ]}
+   ]},
+   {l:'C',n:'LPO + força',intro:W3N,items:[
+     {t:'Press into jerk — 3-3 @ 40–50%',rest:'Pausa 1:00',L:{b:'jk',lo:40,hi:50},sets:[3,3],notes:[VBN]},
+     {t:'Pause split jerk — 2-2-2 @ 70–85%',d:'Pausa de 2" no dip antes de lançar.',rest:'Pausa 1:30',L:{b:'jk',lo:70,hi:85},sets:[2,2,2]},
+     {t:'Split jerk — 1-1-1 @ 90–95%',d:'Semana de carga: aqui pode buscar peso. Para quando a recepção ficar instável.',rest:'Pausa 2:00',L:{b:'jk',lo:90,hi:95},sets:[1,1,1]}
+   ]},
+   {l:'D',n:'Força',meta:'3 séries',items:[
+     {t:'3 legless (1–2 RIR)'},
+     {t:'Pausa 1:00 ativa leve',d:'Bike erg, ou só as pernas na air bike.'},
+     {t:'5 bench press — ao mpp do dia',d:'Sobe a carga a cada série. A última tem que ser a mais pesada que você faz 5 com técnica boa hoje.',rest:'Pausa 2:00',sets:[5,5,5],
+      notes:[{w:'João',x:'Teu bench está em 200×5 contra 235 do Matheus. Não é prioridade da semana, mas não deixa parado: busca 205–210 hoje.'}]}
+   ]},
+   {l:'E',n:'Ginástica em potência',meta:'Qualidade e velocidade de execução, não volume',skip:['Victor Boson'],groups:[
+     {g:'4 séries',items:[{t:'40 double unders'},{t:'6 burpees rápidos'},{t:'6/4 ring muscle ups em alta potência'},{t:'1:00 bike leve'}]},
+     {g:'Pausa',items:[{t:'3:00 de pausa'}]},
+     {g:'Depois — 3 séries',items:[{t:'9/6 cal air bike bem forte'},{t:'12 m handstand walk rápido'},{t:'1:00 air bike leve'}]}
+   ]},
+   {l:'E2',n:'Ginástica — volume base',meta:'Somente Victor Boson · no lugar do bloco E',only:'Victor Boson',
+    intro:'Você fechou a bateria de testes. Agora entra volume, não teste. Ritmo controlado, sem buscar máximo.',items:[
+     {t:'4 séries: 30 single unders + 5 burpees + 3 transições na argola + 1:00 bike leve'},
+     {t:'3 séries: 7 cal air bike forte + 10 m urso/handstand hold + 1:00 air bike leve'}
+   ]}
+ ]},
+
+ {id:'qua',short:'QUA',name:'Quarta',focus:'Potência + Limiar',blocks:[
+   {l:'A',n:'Warm up geral',intro:'Objetivo: melhorar a rigidez das pernas e o padrão de corrida com educativos que se repetem toda semana e, às vezes, evoluem para exercícios mais complexos.',groups:[
+     {g:'2 séries',items:[
+       {t:'20 pogo hops'},
+       {t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril. Comece devagar pra entender.'},
+       {t:'50 m A-skips'},
+       {t:'50 m B-skips',d:'Novo esta semana. O A-skip só eleva o joelho; no B-skip você estende a perna à frente e "puxa" o solo pra trás. É o educativo que treina a fase de garra da passada.'},
+       {t:'100 m corrida leve'},
+       {t:'Pausa 1:00'}
+     ]}
+   ]},
+   {l:'B',n:'Potência',intro:W3N,items:[
+     {t:'Clean high pull — 3 × 3 @ 105–115%',d:'Do 1RM mais recente de clean. Aqueça com 70–80% antes. Maior altura possível na barra.',rest:'Pausa 1:30',L:{b:'sc',lo:105,hi:115},sets:[3,3,3],notes:[VBN]},
+     {t:'Power clean — 3 séries de 5 touch and go @ 225–245 / 130–145',d:'Cinco touch and go de verdade, sem largar a barra. Se não sair 5, baixa o peso.',rest:'Pausa 2:00',sets:[5,5,5],
+      notes:[{w:'João',x:'Semana passada você trocou 5 touch and go por 3 reps mais pesadas, por conta. O ponto do exercício é o ciclo touch and go, não a carga — se precisar, começa em 215.'}]},
+     {t:'Squat box jump — 3 × 5',d:'Pausa de 1" embaixo antes de saltar. Sobe 5 cm em relação à semana passada.',rest:'Pausa 1:00'}
+   ]},
+   {l:'C',n:'Limiar over/under',meta:'Ritmo calculado pelo seu teste de 5 km',skip:['Victor Boson'],
+    intro:'"Under" fica um pouco abaixo do limiar (confortavelmente difícil, RPE 6); "over" fica um pouco acima (RPE 7–8), sem virar tiro. Semana de carga: são 4 séries, não 3, e o over subiu de 1:00 para 1:15.',groups:[
+     {items:[{t:'1 km @ trote livre'}]},
+     {g:'4 séries — 6:30 contínuos',items:[
+       {t:'2:00 under → 1:15 over → 2:00 under → 1:15 over',R:{thr:1,under:1.04,over:0.97}},
+       {t:'2:00 trote leve ou caminhada entre séries'}
+     ]},
+     {g:'Depois',items:[{t:'1 km @ trote livre'},{t:'3:00 caminhada de volta à calma'}]}
+   ]},
+   {l:'C2',n:'☆ Burpee — cadência',meta:'Somente João · depois do limiar',only:'João',
+    intro:'Isto não é condicionamento, é economia de movimento. O Matheus fez 50 bar facing burpees em 2:20 — 2,8 s por rep. O teu gap no WOD de sexta passada veio em boa parte daqui. O objetivo NÃO é fazer o máximo: é fazer 8 reps por minuto com a MESMA cadência do minuto 1 ao minuto 10. Se o minuto 10 ficou mais lento que o minuto 1, começou rápido demais.',items:[
+     {t:'☆ EMOM 10 — 8 burpees over the bar',d:'Barra vazia no chão. Conte os segundos que você leva pra fazer os 8 no minuto 1 e no minuto 10 e anote os dois.',sets:[8,8,8,8,8,8,8,8,8,8]}
+   ],logs:['Segundos dos 8 burpees no minuto 1','Segundos dos 8 burpees no minuto 10']},
+   {l:'D',n:'Alongamentos',items:[
+     {t:'1:00 pigeon cada lado'},{t:'1:00 couch stretch cada lado'},{t:'1:00 posterior de coxa cada lado'},
+     {t:'1:00 panturrilha (leve) cada lado'},{t:'1:00 rotação torácica isométrica no solo, cada lado'}
+   ]}
+ ]},
+
+ {id:'qui',short:'QUI',name:'Quinta',focus:'Zona 2 ou full rest — o que precisar',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Remo — limiar',meta:'Optativo, pra quem não consegue ficar parado',groups:[
+     {g:'3 séries',items:[
+       {t:'8:00 @ 5–10% mais lento que o teste de 12 min'},
+       {t:'2:30 @ 20–30% mais lento que o teste de 12 min'}
+     ]},
+     {g:'Depois',items:[{t:'+20 min de endurance leve',d:'Bike erg, echo bike e/ou ski erg, em ritmo leve e livre.'}]}
+   ]},
+   {l:'C',n:'Rolinho',meta:'1:30 em cada parte, cada lado',items:[
+     {t:'Adutores (devagar)'},{t:'Lateral do quadríceps'},{t:'Glúteos'},{t:'Posterior de coxa'},{t:'Panturrilhas'}
+   ]}
+ ]},
+
+ {id:'sex',short:'SEX',name:'Sexta',focus:'LPO + Front squat + WOD intervalado',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',meta:'2 séries',items:[
+     {t:'15/12 cal air bike'},
+     {t:'8/8 single leg deadlift',d:'Halter do lado da perna de apoio, peso livre pra aquecer sem entortar o corpo.',
+      notes:[{w:'Daniel',x:'Pode fazer 10 pontes de quadril unilaterais.'}]},
+     {t:'6 behind the neck shoulder press (barra vazia, pegada de jerk) + 6 close grip OHS'},
+     {t:'0:30/0:30 side plank rotation'}
+   ]},
+   {l:'C',n:'LPO e força',intro:W3N,items:[
+     {t:'1 série: 1 clean high pull + 1 muscle clean & press + 1 jerk balance + 1 tall squat clean + 1 split jerk @ 35–45%',d:'Do 1RM de clean & jerk. Jerk balance: desça a barra até a linha da testa, pare 2" e bata o jerk.',rest:'Pausa 1:00',L:{b:'cj',lo:35,hi:45},sets:[5],notes:[VBN]},
+     {t:'2 séries: 1 power clean + 1 thruster + 1 hang squat clean + 1 split jerk com pausa de 2" na recepção @ 60–75%',rest:'Pausa 1:30',L:{b:'cj',lo:60,hi:75},sets:[4,4]},
+     {t:'3 séries: 1 squat clean + 3 front squats + 1 jerk @ 78–88%',d:'Do 1RM de clean & jerk.',rest:'Pausa 2:00',L:{b:'cj',lo:78,hi:88},sets:[5,5,5],
+      notes:[{w:'Victor',x:'Pode fazer só o clean com front squat.'},
+             {w:'João',x:'☆ NÃO faça este. Faça o bloco C2 — front squat medido e squat clean em volume submáximo. Sem single máximo, por causa do joelho.'}]},
+     {t:'Front squat — 3 × 5 @ 70–75%',d:'Novo na grade. Do 1RM de front squat; se você não tem esse número, faça as 3 séries subindo até a mais pesada que sai com 5 reps e tronco ereto, e anote.',rest:'Pausa 2:30',L:{b:'fs',lo:70,hi:75},sets:[5,5,5],
+      notes:[{w:'João',x:'☆ Este é o teu, mas no bloco C2 — com teste antes.'}]},
+     {t:'Single arm KB overhead squat — 3 × 6/6',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[12,12,12],repHint:'6/6'}
+   ]},
+   {l:'C2',n:'☆ Front squat e squat clean',meta:'Somente João · no lugar dos dois itens marcados no bloco C',only:'João',
+    intro:'Você não tem NENHUM front squat registrado em lugar nenhum — e ele é o limitante do thruster e do squat clean. Hoje sai o número. Depois vem volume de squat clean numa carga que você levanta do fundo sempre, que é o que constrói a saída. Nada de single máximo: você sentiu o joelho neste padrão semana passada.',items:[
+     {t:'☆ Front squat — teste de 3 reps',d:'Aqueça com 50%, 65%, 75% do teu back squat. Depois suba de 10 em 10 lb até a série de 3 mais pesada com tronco ereto e cotovelos altos. Para na primeira série em que o cotovelo cair. ANOTE — vai virar a referência do bloco.',rest:'Pausa 3:00',sets:[3,3,3,3],notes:[JGN]},
+     {t:'☆ EMOM 10 — 2 squat cleans @ 175–190 lb',d:'65–70% do teu power clean. Carga que você levanta do fundo TODAS as vezes, sem dúvida. Não é pra ser difícil de puxar; é pra ser fácil de levantar. Se o joelho falar, para.',sets:[2,2,2,2,2,2,2,2,2,2]},
+     {t:'Single arm KB overhead squat — 3 × 6/6',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[12,12,12],repHint:'6/6'}
+   ],logs:['Front squat — melhor série de 3 (lb)']},
+   {l:'D',n:'WOD — interval VO₂max',
+    intro:'O objetivo não é bater recorde de 50 reps por tempo, e sim treinar na zona de VO₂max com exercícios da modalidade. Não é esforço de 100%: tem que sobrar energia em TODAS as séries, inclusive na última de bike. ANOTE OS TRÊS PARCIAIS separados, não só o total — é o parcial que diz onde está o teu gargalo.',groups:[
+     {g:'Parte 1',items:[{t:'50 thrusters @ 95/65'}]},
+     {g:'Pausa',items:[{t:'Pausa 3:00'}]},
+     {g:'Parte 2',items:[{t:'50 bar facing burpees'}]},
+     {g:'Pausa',items:[{t:'Pausa 3:00'}]},
+     {g:'Parte 3',items:[{t:'50 cal air bike'}]}
+   ],logs:['Tempo — thrusters','Tempo — burpees','Tempo — air bike','Tempo total (com pausas)'],
+    notes:[{w:'João',x:'☆ Esta é a sessão que você NÃO registrou em 18/09, e é justamente a que testa a tua hipótese de que você vai bem em intervalado. Registre os três parciais. Referência do Matheus em 18/09: thrusters 1:32 · burpees 2:20 · bike 2:30 · total 12:22.'}]}
+ ]},
+
+ {id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_B},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'800 m corrida'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'8 scap pull ups devagar + 8 ring rows close grip'},
+       {t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
+       {t:'5 inch worm to push up',d:'2 push ups por rep.'},
+       {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
+     ]}
+   ]},
+   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 10:00',items:[
+     {t:'Shoulder press + push press — 5 × (1+2)',d:'Semana de carga: sobe até o mpp do dia. A última série tem que ser a mais pesada.',sets:[3,3,3,3,3]}
+   ]},
+   {l:'C2',n:'☆ Thruster do rack',meta:'Somente João · depois do bloco C',only:'João',
+    intro:'O thruster não é um movimento de WOD pra você agora — é um lift. A barra não sobe alta depois do agachamento porque a perna não está entregando velocidade suficiente, e o teu jerk (280) já está à frente do Matheus (275). Então o que treina não é o empurrar, é a saída do fundo com a barra no rack frontal.',items:[
+     {t:'☆ Thruster — 6 × 3, a cada 2:00',d:'Do rack, não do chão. Pausa de 2" no FUNDO do front squat em cada rep, depois explode. Carga: 55–65% do front squat que você mediu na sexta. Se a barra parar de subir alto, baixa 10 lb.',sets:[3,3,3,3,3,3],notes:[JGN]}
+   ]},
+   {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
+     {t:'1 snatch high pull + 2 power snatch touch and go @ 82–92%',d:'Do 1RM de power snatch.',L:{b:'ps',lo:82,hi:92},sets:[3,3,3,3,3],notes:[VBN]}
+   ]},
+   {l:'E',n:'WOD',meta:'Por tempo · 3 rodadas · cap 16:00',
+    intro:'Contínuo, sem pausa programada. Formato e movimentos diferentes do de sexta de propósito — sexta foi intervalado com thruster e burpee, aqui é contínuo com puxada e passada.',groups:[
+     {g:'3 rodadas',items:[
+       {t:'15/12 cal ski erg'},
+       {t:'12 chest to bar'},
+       {t:'9 dual DB hang clean & jerk @ 50/35'},
+       {t:'200 m corrida'}
+     ]}
+   ],logs:['Tempo final (ou reps no cap)'],
+    notes:[{w:'Victor Boson',x:'Faça 2 rodadas em vez de 3, e troque chest to bar por pull ups. Retorno é volume progressivo, não teste.'}]}
+ ]},
+
+ {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
+];
+var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2,'2026-09-28':WEEK3};
 function visibleBlock(b){ if(b.only && b.only!==S.athlete) return false; if(b.skip && b.skip.indexOf(S.athlete)>=0) return false; return true; }
 var DSHORT=['SEG','TER','QUA','QUI','SEX','SÁB','DOM'], DNAME=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
 var MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
@@ -1582,7 +1775,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-21e';
+var APP_VER='2026-09-25a';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
