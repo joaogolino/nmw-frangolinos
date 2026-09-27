@@ -915,11 +915,14 @@ var WEEK3 = [
     intro:'Cluster: você quebra a série em mini-séries de 2 reps com 20" de pausa entre elas, sem largar a barra do rack. Serve pra manter a VELOCIDADE de saída do fundo, que é exatamente o que está faltando no teu thruster e no teu squat clean. E cobra menos do joelho do que single pesado.',items:[
      {t:'☆ Back squat — 5 × (3 × 2) @ 80–85%',d:'Cada série é 2 reps + 20" de pausa + 2 reps + 20" de pausa + 2 reps = 6 reps na série. Se a velocidade cair no último cluster, para a série ali.',rest:'Pausa 3:00 entre séries',L:{b:'bs',lo:80,hi:85},sets:[6,6,6,6,6],notes:[JGN]}
    ]},
-   {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
+   {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',skip:['João'],items:[
      {t:'35 min bike erg ou remo @ 130–140 bpm',
-      notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'},
-             {w:'João',x:'☆ Faça correndo, não na bike nem no remo. 35 min contínuos em ritmo de conversa — você tem que conseguir falar frases inteiras o treino todo. Anote a FC média.'}]}
-   ]}
+      notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'}]}
+   ]},
+   {l:'D2',n:'☆ Zona 2 — corrida',meta:'Somente João · pode ser feito em outro horário',only:'João',
+    intro:'Correndo, não na bike nem no remo. 35 min contínuos em ritmo de conversa: você tem que conseguir falar frases inteiras do começo ao fim. Anote a FC média e a distância.',items:[
+     {t:'35 min de corrida contínua',d:'Piso plano e ritmo constante, sem tiros e sem subida longa.',notes:[JGN]}
+   ],logs:['FC média','Distância (km)']}
  ]},
 
  {id:'ter',short:'TER',name:'Terça',focus:'Ginástica + Força MMSS',blocks:[
@@ -1859,7 +1862,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-27d';
+var APP_VER='2026-09-27e';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
