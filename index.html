@@ -1038,16 +1038,16 @@ var WEEK3 = [
      {t:'☆ EMOM 10 — 2 squat cleans @ 175–190 lb',d:'65–70% do teu power clean. Carga que você levanta do fundo TODAS as vezes, sem dúvida. Não é pra ser difícil de puxar; é pra ser fácil de levantar. Se o joelho falar, para.',sets:[2,2,2,2,2,2,2,2,2,2],notes:[JGN]}
    ]},
    {l:'D',n:'WOD — thruster em intervalado',meta:'A cada 5:00, por 15:00 · 3 rodadas',
-    intro:'São 54 thrusters no total, mas em blocos que cabem sem quebrar — que é a forma como o thruster aparece no Open e nas quartas de final: 15 a 21 reps no meio de outra coisa, não 50 de uma vez. A rodada tem que fechar entre 2:15 e 3:15. Se passar de 3:15, baixe a carga na rodada seguinte; se sair abaixo de 2:15, você foi conservador demais. ANOTE O TEMPO DE CADA RODADA — o que interessa aqui é se a terceira é igual à primeira.',groups:[
+    intro:'Tente fechar cada round entre 2:15 e 3:15. Se passar de 3:15, reduza o peso.',groups:[
      {g:'A cada 5:00, por 15:00',items:[
-       {t:'18 thrusters @ 95/65',d:'Do chão na primeira rep, depois do rack frontal. Meta: 18 sem largar a barra na rodada 1 e no máximo duas quebras na rodada 3.'},
+       {t:'18 thrusters @ 95/65',d:'Do chão na primeira rep, depois do rack frontal.'},
        {t:'12 bar facing burpees'},
        {t:'12/9 cal air bike'}
      ]}
    ],logs:['Tempo da rodada 1','Tempo da rodada 2','Tempo da rodada 3'],
     notes:[{w:'Matheus',x:'18 sem largar nas três rodadas. Se as três saírem abaixo de 2:30, sobe pra 115 lb na semana que vem — não hoje.'},
            {w:'João',x:'☆ Carga cheia, 95 lb. O teu gargalo no thruster é velocidade de saída do fundo, e isso está sendo tratado no front squat de hoje e no thruster do rack de sábado. Aqui o alvo é outro: ritmo. As 18 reps da rodada 1 sem largar a barra, e a rodada 3 no mesmo tempo da 1.'},
-           {w:'Victor Boson',x:'12 thrusters @ 65/45, 8 burpees e 10/8 cal, mantendo as 3 rodadas. A rodada tem que fechar em 2:00 com fôlego sobrando — retorno é volume progressivo, não teste.'}]}
+           {w:'Victor Boson',x:'Faça 15 thrusters @ 95, 12 bar facing burpees e 12 cal de air bike, mantendo as 3 rodadas.'}]}
  ]},
 
  {id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + WOD',blocks:[
@@ -1072,7 +1072,7 @@ var WEEK3 = [
      {t:'1 snatch high pull + 2 power snatch touch and go @ 82–92%',d:'Do 1RM de power snatch.',L:{b:'ps',lo:82,hi:92},sets:[3,3,3,3,3],notes:[VBN]}
    ]},
    {l:'E',n:'WOD',meta:'AMRAP 15:00',
-    intro:'Contínuo. Formato e movimentos diferentes do de sexta de propósito — sexta foi thruster em intervalado, aqui é volume contínuo com puxada, empurrada e passada. Ritmo de AMRAP: escolha um passo que você repita na rodada 5 igual à rodada 1.',groups:[
+    intro:'Tente fazer splits negativos a cada série, ao invés de sair muito forte e afogar.',groups:[
      {g:'AMRAP 15:00',items:[
        {t:'15/12 cal ski erg',notes:[{w:'Daniel',x:'Pode fazer remo no lugar do ski erg.'}]},
        {t:'15 chest to bar'},
@@ -1080,7 +1080,7 @@ var WEEK3 = [
        {t:'200 m corrida'}
      ]}
    ],logs:['Rodadas + reps'],
-    notes:[{w:'Victor Boson',x:'Troque chest to bar por pull ups e use 2×35 nos halteres. Mantenha os 15:00 — retorno é volume progressivo, não teste.'}]}
+    notes:[{w:'Victor Boson',x:'Faça 12 chest to bar e 6 dual DB devil press por rodada. Mantenha os 15:00.'}]}
  ]},
 
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
@@ -1855,7 +1855,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-27a';
+var APP_VER='2026-09-27b';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
