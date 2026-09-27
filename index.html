@@ -917,7 +917,8 @@ var WEEK3 = [
    ]},
    {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
      {t:'35 min bike erg ou remo @ 130–140 bpm',
-      notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'}]}
+      notes:[{w:'Matheus',x:'Pra você que quer competir, isso aqui é importante agora. Se der, faça pela manhã cedinho ou à noite antes de dormir.'},
+             {w:'João',x:'☆ Faça correndo, não na bike nem no remo. 35 min contínuos em ritmo de conversa — você tem que conseguir falar frases inteiras o treino todo. Anote a FC média.'}]}
    ]}
  ]},
 
@@ -1070,7 +1071,7 @@ var WEEK3 = [
    {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
      {t:'1 snatch high pull + 2 power snatch touch and go @ 82–92%',L:{b:'ps',lo:82,hi:92},sets:[3,3,3,3,3],notes:[VBN]}
    ]},
-   {l:'E',n:'WOD',meta:'AMRAP 15:00',
+   {l:'E',n:'WOD',meta:'AMRAP 15:00',skip:['João'],
     intro:'Tente fazer splits negativos a cada série, ao invés de sair muito forte e afogar.',groups:[
      {g:'AMRAP 15:00',items:[
        {t:'15/12 cal ski erg',notes:[{w:'Daniel',x:'Pode fazer remo no lugar do ski erg.'}]},
@@ -1079,7 +1080,11 @@ var WEEK3 = [
        {t:'200 m corrida'}
      ]}
    ],logs:['Rodadas + reps'],
-    notes:[{w:'Victor Boson',x:'Faça 12 chest to bar e 6 dual DB devil press por rodada. Mantenha os 15:00.'}]}
+    notes:[{w:'Victor Boson',x:'Faça 12 chest to bar e 6 dual DB devil press por rodada. Mantenha os 15:00.'}]},
+   {l:'E2',n:'☆ Teste de durabilidade — corrida',meta:'Somente João · no lugar do WOD',only:'João',
+    intro:'5 × 1 km a 4:45/km, com 1:00 de pausa entre eles. Ritmo fixo do primeiro ao último quilômetro: se sobrar no km 1, não acelere. Anote a FC média de cada km — é a diferença entre o km 5 e o km 1 que interessa. Este mesmo teste se repete na semana de 26/10.',items:[
+     {t:'5 × 1 km @ 4:45/km',d:'Pausa 1:00 entre os quilômetros, parado ou caminhando. Faça em piso plano e no mesmo percurso das duas vezes.',rest:'Pausa 1:00',notes:[JGN]}
+   ],logs:['FC média — km 1','FC média — km 2','FC média — km 3','FC média — km 4','FC média — km 5','Ritmo real médio']}
  ]},
 
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
@@ -1854,7 +1859,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-09-27c';
+var APP_VER='2026-09-27d';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
