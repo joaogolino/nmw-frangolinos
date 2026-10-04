@@ -1145,7 +1145,7 @@ var WEEK4 = [
       notes:[{w:'Victor',x:'Só até onde o punho aceitar a recepção. Se incomodar, fica no push press pesado.'}]}
    ]},
    {l:'C2',n:'☆ Empurrada com perna',meta:'Somente João · no lugar do bloco C',only:'João',items:[
-     {t:'Push press — 5 × 3 @ 70–80%',d:'Do rack. Sem recepção em split e sem single máximo esta semana.',rest:'Pausa 2:00',L:{b:'jk',lo:70,hi:80},sets:[3,3,3,3,3]}
+     {t:'Push jerk — 5 × 3 @ 70–80%',d:'Do rack. Sem single máximo esta semana.',rest:'Pausa 2:00',L:{b:'jk',lo:70,hi:80},sets:[3,3,3,3,3]}
    ]},
    {l:'D',n:'Força',meta:'3 séries',items:[
      {t:'3 legless, sendo 1–2 em L sit',d:'Sem falhar: se a rep em L sit sair arrastada, faça as outras em legless comum.',notes:[{w:'Victor',x:'Troque por 8 strict pull ups com pegada neutra enquanto a corda não liberar.'},{w:'João',x:'☆ Troque por 10 ring rows com pés elevados. Sem pendurar esta semana.'}]},
@@ -1236,9 +1236,9 @@ var WEEK4 = [
    {l:'C',n:'LPO e força',items:[
      {t:'1 série: 1 clean high pull + 1 muscle clean & press + 1 jerk balance + 1 tall squat clean + 1 split jerk @ 40–50%',d:'Jerk balance: desça a barra até a linha da testa, pare 2" e bata o jerk.',rest:'Pausa 1:00',L:{b:'cj',lo:40,hi:50},sets:[5],notes:[VBN]},
      {t:'2 séries: 1 power clean + 1 thruster + 1 hang squat clean + 1 split jerk com pausa de 2" na recepção @ 65–78%',rest:'Pausa 1:30',L:{b:'cj',lo:65,hi:78},sets:[4,4],
-      notes:[{w:'João',x:'☆ Troque o thruster por front squat e o split jerk por push press, na mesma carga.'}]},
+      notes:[{w:'João',x:'☆ Troque só o thruster por front squat. O split jerk fica igual.'}]},
      {t:'3 séries: 1 squat clean + 3 front squats + 1 jerk @ 80–90%',rest:'Pausa 2:00',L:{b:'cj',lo:80,hi:90},sets:[5,5,5],
-      notes:[{w:'Victor',x:'Pode fazer só o clean com front squat, sem o jerk, enquanto o punho não aceitar a recepção.'},{w:'João',x:'☆ Faça só o squat clean + 3 front squats, sem o jerk.'}]},
+      notes:[{w:'Victor',x:'Pode fazer só o clean com front squat, sem o jerk, enquanto o punho não aceitar a recepção.'}]},
      {t:'Front squat — 4 × 4 @ 75–80%',d:'Tronco ereto e cotovelo alto até a última rep.',rest:'Pausa 2:30',L:{b:'fs',lo:75,hi:80},sets:[4,4,4,4]},
      {t:'Single arm KB overhead squat — 3 × 8/8',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[16,16,16],repHint:'8/8',
       notes:[{w:'João',x:'☆ Troque por front rack KB squat — 3 × 8/8.'}]}
@@ -1277,7 +1277,7 @@ var WEEK4 = [
    ]},
    {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 12:00',items:[
      {t:'Shoulder press + push press — 6 × (1+2)',sets:[3,3,3,3,3,3],
-      notes:[{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 6 × (2+4) com o peso que o punho aceita.'},{w:'João',x:'☆ Faça só push press, 6 × 3 @ 70–80% do split jerk. Sem shoulder press estrito esta semana.'}]}
+      notes:[{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 6 × (2+4) com o peso que o punho aceita.'},{w:'João',x:'☆ Troque por push jerk, 6 × 3 @ 70–80% do split jerk. Sem shoulder press e sem push press esta semana.'}]}
    ]},
    {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
      {t:'1 snatch high pull + 2 power snatch touch and go @ 85–95%',L:{b:'ps',lo:85,hi:95},sets:[3,3,3,3,3],notes:[VBN,{w:'João',x:'☆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Sem recepção overhead.'}]}
@@ -1287,7 +1287,7 @@ var WEEK4 = [
      {g:'3 rodadas',items:[
        {t:'400 m corrida'},
        {t:'15 toes to bar',notes:[{w:'João',x:'☆ Troque por 15 sit ups com halter. Sem pendurar esta semana.'}]},
-       {t:'12 dual DB hang clean @ 50/35'},
+       {t:'12 dual DB hang squat clean @ 50/35',d:'Receba agachando. Sem muscle clean.'},
        {t:'20/15 cal remo'}
      ]}
    ],logs:['Tempo final (ou reps no cap)'],
@@ -2068,7 +2068,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-04b';
+var APP_VER='2026-10-04c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
