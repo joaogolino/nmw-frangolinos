@@ -1299,6 +1299,7 @@ var WEEK4 = [
 ];
 
 var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2,'2026-09-28':WEEK3,'2026-10-05':WEEK4};
+var ORDER={'2026-10-05':{'Matheus':[0,1,6,4,3,5,2]}};
 function visibleBlock(b){ if(b.only && b.only!==S.athlete) return false; if(b.skip && b.skip.indexOf(S.athlete)>=0) return false; return true; }
 var DSHORT=['SEG','TER','QUA','QUI','SEX','SÁB','DOM'], DNAME=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
 var MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
@@ -1310,9 +1311,10 @@ function wdOf(iso){return (dOf(iso).getDay()+6)%7}
 function mondayOf(iso){return addDays(iso,-wdOf(iso))}
 function ddmm(iso){var d=dOf(iso);return pad(d.getDate())+'/'+pad(d.getMonth()+1)}
 var TODAY=isoOf(new Date()), THIS_MON=mondayOf(TODAY);
+function srcFor(iso,ath){ var wd=wdOf(iso), o=ORDER[mondayOf(iso)]; o=o&&o[ath]; var n=o?o[wd]:wd; return (n==null)?wd:n; }
 function dayFor(iso){
-var wd=wdOf(iso), prog=PROGRAMS[mondayOf(iso)], t=prog?prog[wd]:null;
-return {id:iso, wd:wd, short:DSHORT[wd], name:DNAME[wd], focus:t?t.focus:'', blocks:t?t.blocks:[], rest:t?!!t.rest:false, empty:!t};
+var wd=wdOf(iso), src=srcFor(iso,S.athlete), prog=PROGRAMS[mondayOf(iso)], t=prog?prog[src]:null;
+return {id:iso, wd:wd, src:src, moved:src!==wd, short:DSHORT[wd], name:DNAME[wd], focus:t?t.focus:'', blocks:t?t.blocks:[], rest:t?!!t.rest:false, empty:!t};
 }
 function weekDays(mon){var a=[];for(var i=0;i<7;i++)a.push(dayFor(addDays(mon,i)));return a}
 (function migrate(){
@@ -1827,7 +1829,7 @@ var n=parseFloat(x.replace(',','.')); if(!isNaN(n)) return {t:1,n:n};
 return {t:2,n:0};
 }
 function boardEntries(date,key){
-var me=S.auth&&S.auth.athlete, list=(RES[date]||[]).filter(function(r){return r.k===key && r.v!=='' && r.a!==me});
+var me=S.auth&&S.auth.athlete, src=srcFor(date,S.athlete), list=(RES[date]||[]).filter(function(r){return r.k===key && r.v!=='' && r.a!==me && srcFor(date,r.a)===src;});
 if(me && me===S.athlete){ var mine=dayValues(dayFor(date))[key]; if(mine) list.push({a:me,k:key,v:mine}); }
 else if(me){ var m2=(RES[date]||[]).filter(function(r){return r.k===key && r.a===me && r.v!==''})[0]; if(m2) list.push(m2); }
 return list;
@@ -2068,7 +2070,7 @@ st()[sid]=arr; save(); refreshVol(sid); syncDay(sid.split('.')[0]);
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-04c';
+var APP_VER='2026-10-04d';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
