@@ -1128,12 +1128,12 @@ var WEEK4 = [
    {l:'C',n:'LPO e força',items:[
      {t:'Squat snatch — 3-2-2-1-1 @ 82-87-90-93-95%',rest:'Pausa 2:00',
       L:{b:'ss',sch:[[3,82],[2,87],[2,90],[1,93],[1,95]]},sets:[3,2,2,1,1],
-      notes:[{w:'Victor',x:'Troque por 4 × 3 de power snatch @ 115–145, sem recepção profunda enquanto o punho não fechar.'},{w:'João',x:'☆ Troque por snatch pull — 4 × 3 @ 100–110% do squat snatch. Sem recepção overhead esta semana.'},{w:'Daniel',x:'◆ Troque por snatch pull do chão — 5 × 3 @ 95–105% do squat snatch. Sem recepção overhead e sem barra atrás do pescoço.'},VBN]},
+      notes:[{w:'Victor',x:'Troque por 4 × 3 de power snatch @ 115–145, sem recepção profunda enquanto o punho não fechar.'},{w:'João',x:'☆ Troque por snatch pull — 4 × 3 @ 100–110% do squat snatch. Sem recepção overhead esta semana.'},{w:'Daniel',x:'◆ Troque por snatch pull do chão — 5 × 3 @ 95–105% do squat snatch. Se o pescoço estiver limpo no dia, pode fazer 4 × 2 de power snatch @ 70–75% em vez do pull.'},VBN]},
      {t:'Overhead squat com pausa no bottom — 3 × 3',d:'Pausa de 2" no fundo.',rest:'Pausa 1:30',L:{src:'last',inc:[5,5]},sets:[3,3,3],
       notes:[{w:'João',x:'☆ Troque por RDL com barra — 3 × 6 ao mpp.'},{w:'Daniel',x:'◆ Troque por isometria de extensão de joelho — 5 × 0:45, pausa 2:00, joelho a 60°, a ~70% do esforço máximo. Dor até 3/10 durante. Pode repetir em qualquer outro dia.'}]},
      {t:'Snatch high pull — 3 × 3 @ 95–105%',rest:'Pausa 1:30',L:{b:'ss',lo:95,hi:105},sets:[3,3,3]},
      {t:'Back squat — 5 × 4 @ 80–85%',rest:'Pausa 2:30',L:{b:'bs',lo:80,hi:85},sets:[4,4,4,4,4],
-      notes:[{w:'Daniel',x:'◆ Troque por bulgarian split squat com halteres — 5 × 6/6 ao mpp (2 RIR). Sem barra atrás do pescoço. Você fez hoje sem dor, então essa é a referência.'}]},
+      notes:[{w:'Daniel',x:'◆ Primeira opção: bulgarian split squat com halteres — 5 × 6/6 ao mpp (2 RIR), que você fez sem dor. Se quiser testar o back squat, abra em 70% e pare no paralelo — se passar sem dor, sobe na semana que vem.'}]},
      {t:'Glute ham raise — 3 × 10 a 12',d:'Peso no peito ou menor elástico possível. Mesma carga da semana passada, somando reps.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[10,12],L:{src:'last',same:1}}
    ]},
    {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
@@ -1152,35 +1152,29 @@ var WEEK4 = [
        {t:'0:10 dip hold embaixo + 0:10 em cima + 5 dips'}
      ]}
    ]},
-   {l:'C',n:'LPO + força',skip:['João','Daniel'],items:[
+   {l:'C',n:'LPO + força',skip:['João'],items:[
      {t:'Press into jerk — 3-3 @ 45–55%',rest:'Pausa 1:00',L:{b:'jk',lo:45,hi:55},sets:[3,3],notes:[VBN]},
      {t:'Pause split jerk — 2-2-2 @ 75–88%',d:'Pausa de 2" no dip antes de lançar.',rest:'Pausa 1:30',L:{b:'jk',lo:75,hi:88},sets:[2,2,2]},
-     {t:'Split jerk — 1-1-1 @ 92–97%',rest:'Pausa 2:00',L:{b:'jk',lo:92,hi:97},sets:[1,1,1],
+     {t:'Split jerk — 1-1-1 @ 92–97%',notes:[{w:'Daniel',x:'◆ Pule os singles de 92–97% esta semana. Pare no pause split jerk. Se o pescoço reclamar em qualquer ponto, encerra o bloco.'}],rest:'Pausa 2:00',L:{b:'jk',lo:92,hi:97},sets:[1,1,1],
       notes:[{w:'Victor',x:'Só até onde o punho aceitar a recepção. Se incomodar, fica no push press pesado.'}]}
    ]},
-   {l:'C3',n:'◆ Puxada horizontal + pescoço',meta:'Somente Daniel · no lugar do bloco C',only:'Daniel',items:[
-     {t:'Remada curvada com apoio no peito — 4 × 8 a 10',d:'Peito apoiado no banco inclinado. Pescoço neutro o tempo todo.',rest:'Pausa 2:00',sets:[10,10,10,10],repRange:[8,10]},
-     {t:'Face pull — 3 × 15',d:'Cotovelo na altura do ombro, sem jogar a cabeça pra frente.',rest:'Pausa 1:00',sets:[15,15,15]},
-     {t:'Isometria cervical — 3 × 0:20 em cada direção',d:'Mão na testa, na nuca e em cada lado da cabeça. Empurre contra a mão sem deixar a cabeça mover. Esforço leve a moderado, sem dor.'}
+   {l:'C3',n:'◆ Pescoço',meta:'Somente Daniel · antes do bloco C',only:'Daniel',items:[
+     {t:'Isometria cervical — 3 × 0:20 em cada direção',d:'Mão na testa, na nuca e em cada lado da cabeça. Empurre contra a mão sem deixar a cabeça mover. Esforço leve a moderado, sem dor. Pode repetir em qualquer outro dia.'},
+     {t:'Face pull — 3 × 15',d:'Cotovelo na altura do ombro, sem jogar a cabeça pra frente.',rest:'Pausa 1:00',sets:[15,15,15]}
    ]},
    {l:'C2',n:'☆ Empurrada com perna',meta:'Somente João · no lugar do bloco C',only:'João',items:[
      {t:'Push jerk — 5 × 3 @ 70–80%',d:'Do rack. Sem single máximo esta semana.',rest:'Pausa 2:00',L:{b:'jk',lo:70,hi:80},sets:[3,3,3,3,3]}
    ]},
    {l:'D',n:'Força',meta:'3 séries',items:[
-     {t:'3 legless, sendo 1–2 em L sit',d:'Sem falhar: se a rep em L sit sair arrastada, faça as outras em legless comum.',notes:[{w:'Victor',x:'Troque por 8 strict pull ups com pegada neutra enquanto a corda não liberar.'},{w:'João',x:'☆ Troque por 10 ring rows com pés elevados. Sem pendurar esta semana.'},{w:'Daniel',x:'◆ Troque por 10 ring rows com pés elevados. Sem pendurar enquanto o pescoço não liberar.'}]},
+     {t:'3 legless, sendo 1–2 em L sit',d:'Sem falhar: se a rep em L sit sair arrastada, faça as outras em legless comum.',notes:[{w:'Victor',x:'Troque por 8 strict pull ups com pegada neutra enquanto a corda não liberar.'},{w:'João',x:'☆ Troque por 10 ring rows com pés elevados. Sem pendurar esta semana.'}]},
      {t:'Pausa 1:00 ativa leve',d:'Bike erg, ou só as pernas na air bike.'},
      {t:'Bench press — 5-3-3, subindo a cada série',d:'Abre nos 5 e sobe nas duas séries de 3. Última a 1–2 RIR.',rest:'Pausa 2:00',L:{src:'last',lo:90,hi:105},sets:[5,3,3],
       notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'}]}
    ]},
-   {l:'E',n:'Ginástica em potência',meta:'Qualidade e velocidade de execução, não volume',skip:['Victor Boson','João','Daniel'],groups:[
+   {l:'E',n:'Ginástica em potência',meta:'Qualidade e velocidade de execução, não volume',skip:['Victor Boson','João'],groups:[
      {g:'4 séries',items:[{t:'45 double unders'},{t:'7 burpees rápidos'},{t:'7/5 ring muscle ups em alta potência'},{t:'1:00 bike leve'}]},
      {g:'Pausa',items:[{t:'3:00 de pausa'}]},
-     {g:'Depois — 3 séries',items:[{t:'10/7 cal air bike bem forte'},{t:'15 m handstand walk rápido'},{t:'1:00 air bike leve'}]}
-   ]},
-   {l:'E4',n:'◆ Potência sem pendurar e sem salto',meta:'Somente Daniel · no lugar do bloco E',only:'Daniel',groups:[
-     {g:'4 séries',items:[{t:'1:00 air bike forte'},{t:'7 burpees sem salto',d:'Suba e fique em pé, sem o salto no fim.'},{t:'10 ring rows com pés elevados'},{t:'1:00 bike leve'}]},
-     {g:'Pausa',items:[{t:'3:00 de pausa'}]},
-     {g:'Depois — 3 séries',items:[{t:'10 cal remo bem forte'},{t:'20 m farmers walk pesado'},{t:'1:00 air bike leve'}]}
+     {g:'Depois — 3 séries',items:[{t:'10/7 cal air bike bem forte'},{t:'15 m handstand walk rápido',notes:[{w:'Daniel',x:'◆ Se o pescoço reclamar no apoio invertido, troque por 15 m de bear crawl com halteres.'}]},{t:'1:00 air bike leve'}]}
    ]},
    {l:'E3',n:'☆ Potência sem pendurar',meta:'Somente João · no lugar do bloco E',only:'João',groups:[
      {g:'4 séries',items:[{t:'45 double unders'},{t:'7 burpees rápidos'},{t:'1:00 bike leve'}]},
@@ -1209,7 +1203,7 @@ var WEEK4 = [
      {t:'Power clean — 3 séries de 5 touch and go @ 235–255 / 135–150',d:'Cinco touch and go de verdade, sem largar a barra. Se não sair 5, baixa o peso.',rest:'Pausa 2:00',sets:[5,5,5],
       notes:[{w:'Victor',x:'Mantenha em 3 séries de 8 com carga que o punho aceite no rack frontal.'}]},
      {t:'Squat box jump — 3 × 5',d:'Pausa de 1" embaixo antes de saltar. Sobe 5 cm em relação à semana passada.',rest:'Pausa 1:00',
-      notes:[{w:'Daniel',x:'◆ Troque por step up na caixa com halteres — 3 × 8/8, subindo sem impulso da perna de trás. Sem salto enquanto o tendão não liberar.'}]}
+      notes:[{w:'Daniel',x:'◆ Como o burpee passa sem dor, teste 3 × 3 de box jump com step down, caixa mais baixa que a do grupo. Se o tendão falar na aterrissagem, troque por step up na caixa com halteres — 3 × 8/8, sem impulso da perna de trás.'}]}
    ]},
    {l:'C',n:'Limiar over/under',meta:'4 séries · 44:00 com o desaquecimento',skip:['Victor Boson'],
     notes:[{w:'Daniel',x:'◆ Se o tendão doer na corrida, faça o mesmo protocolo na bike ou no remo, mantendo os tempos e a mesma sensação de esforço em cada trecho.'}],
@@ -1287,18 +1281,10 @@ var WEEK4 = [
     notes:[{w:'Matheus',x:'115 lb nas três rodadas. Semana passada as três saíram abaixo de 2:30 a 95.'},
            {w:'Victor',x:'Se o punho não aceitar o rack frontal com barra, faça thruster com halteres no mesmo número de reps.'},
            {w:'Victor Boson',x:'15 thrusters @ 95, 12 bar facing burpees e 12 cal de air bike, mantendo as 3 rodadas.'}]},
-   {l:'D3',n:'◆ WOD sem overhead e sem salto',meta:'Somente Daniel · A cada 4:30, por 13:30 · 3 rodadas',only:'Daniel',
+   {l:'D2',n:'☆ WOD sem overhead',meta:'João e Daniel · A cada 4:30, por 13:30 · 3 rodadas',only:['João','Daniel'],
     intro:'Tente fechar cada round entre 2:15 e 3:15. Se passar de 3:15, reduza o peso.',groups:[
      {g:'A cada 4:30, por 13:30',items:[
-       {t:'18 step ups na caixa com halteres (9/9) @ 50/35',d:'Caixa de 50/45 cm. Sobe sem impulso da perna de trás e desce controlado.'},
-       {t:'12 burpees sem salto',d:'Suba e fique em pé, sem o salto no fim.'},
-       {t:'12/9 cal air bike'}
-     ]}
-   ],logs:['Tempo da rodada 1','Tempo da rodada 2','Tempo da rodada 3']},
-   {l:'D2',n:'☆ WOD sem overhead',meta:'Somente João · A cada 4:30, por 13:30 · 3 rodadas',only:'João',
-    intro:'Tente fechar cada round entre 2:15 e 3:15. Se passar de 3:15, reduza o peso.',groups:[
-     {g:'A cada 4:30, por 13:30',items:[
-       {t:'18 front squats @ 135',d:'Do rack, não do chão.'},
+       {t:'18 front squats @ 135',d:'Do rack, não do chão.',notes:[{w:'Daniel',x:'◆ Pare no paralelo se o tendão falar. Os 135 são leves pra você de propósito — o limitador aqui é o motor.'}]},
        {t:'12 bar facing burpees'},
        {t:'12 cal air bike'}
      ]}
@@ -1313,25 +1299,24 @@ var WEEK4 = [
        {t:'8 scap pull ups devagar + 8 ring rows close grip'},
        {t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
        {t:'5 inch worm to push up',d:'2 push ups por rep.'},
-       {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.',
-      notes:[{w:'Daniel',x:'◆ Troque por 10 hollow rocks. Sem pendurar enquanto o pescoço não liberar.'}]}
+       {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
      ]}
    ]},
    {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 12:00',items:[
      {t:'Shoulder press + push press — 6 × (1+2)',d:'Últimas duas séries a 1–2 RIR.',L:{src:'last',lo:90,hi:105},sets:[3,3,3,3,3,3],
-      notes:[{w:'Daniel',x:'◆ Troque por supino inclinado com halteres — 6 × 5 ao mpp (2 RIR). Nada acima da cabeça enquanto o pescoço não liberar.'},{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 6 × (2+4) com o peso que o punho aceita.'},{w:'João',x:'☆ Troque por push jerk, 6 × 3 @ 70–80% do split jerk. Sem shoulder press e sem push press esta semana.'}]}
+      notes:[{w:'Daniel',x:'◆ Faça só push press, 6 × 3 @ 70–80% do split jerk — sem shoulder press estrito, que exige mais do pescoço. Se incomodar, supino inclinado com halteres 6 × 5 ao mpp (2 RIR).'},{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 6 × (2+4) com o peso que o punho aceita.'},{w:'João',x:'☆ Troque por push jerk, 6 × 3 @ 70–80% do split jerk. Sem shoulder press e sem push press esta semana.'}]}
    ]},
    {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
-     {t:'1 snatch high pull + 2 power snatch touch and go @ 85–95%',L:{b:'ps',lo:85,hi:95},sets:[3,3,3,3,3],notes:[VBN,{w:'João',x:'☆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Sem recepção overhead.'},{w:'Daniel',x:'◆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Sem recepção overhead.'}]}
+     {t:'1 snatch high pull + 2 power snatch touch and go @ 85–95%',L:{b:'ps',lo:85,hi:95},sets:[3,3,3,3,3],notes:[VBN,{w:'João',x:'☆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Sem recepção overhead.'},{w:'Daniel',x:'◆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Se o pescoço estiver limpo, pode fazer o complexo como está, mas a 70–75% em vez de 85–95%.'}]}
    ]},
    {l:'E',n:'WOD',meta:'Por tempo · 3 rodadas · cap 15:00',
     notes:[{w:'Daniel',x:'◆ Se o tendão doer, troque os 400 m de corrida por 500 m de remo em cada rodada.'}],
     intro:'Puxada e passada, diferente da sexta de propósito. Tente fazer splits negativos a cada rodada, ao invés de sair muito forte e afogar.',groups:[
      {g:'3 rodadas',items:[
        {t:'400 m corrida'},
-       {t:'15 toes to bar',notes:[{w:'João',x:'☆ Troque por 15 sit ups com halter. Sem pendurar esta semana.'},{w:'Daniel',x:'◆ Troque por 15 sit ups com halter. Sem pendurar.'}]},
+       {t:'15 toes to bar',notes:[{w:'João',x:'☆ Troque por 15 sit ups com halter. Sem pendurar esta semana.'}]},
        {t:'12 dual DB hang squat clean @ 50/35',d:'Receba agachando. Sem muscle clean.',
-      notes:[{w:'Daniel',x:'◆ Receba em quarter squat em vez de agachar completo, mesma carga.'}]},
+      notes:[{w:'Daniel',x:'◆ Se o tendão falar na recepção, receba em quarter squat em vez de agachar completo, mesma carga.'}]},
        {t:'20/15 cal remo'}
      ]}
    ],logs:['Tempo final (ou reps no cap)'],
@@ -2269,7 +2254,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-05b';
+var APP_VER='2026-10-05c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
