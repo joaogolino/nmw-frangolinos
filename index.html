@@ -724,7 +724,7 @@ var v=getMax(ath,b); return v?{v:v,n:BASES[b].n}:null;
 function r5(x){return Math.round(x/5)*5}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function fmtTime(sec){var m=Math.floor(sec/60),s=Math.round(sec%60); if(s===60){m++;s=0} return m+':'+(s<10?'0':'')+s}
-var VBN={w:'Victor Boson',x:'Retorno ao CrossFit: use a percepção de esforço como base, não os percentuais. Trabalhe em RPE 6–7 (3–4 reps na reserva), sem séries até a falha e com prioridade total na técnica. Se aparecer uma carga calculada, trate como teto, nunca como meta.'};
+var VBN={w:'Victor Boson',x:'Sem 1 RM cadastrado: suba até o peso mais pesado em que as reps da série saem com a técnica inteira e registre. A partir da semana que vem o app calcula os percentuais em cima do que você registrar.'};
 var DLN='Semana de deload: volume reduzido, intensidade mantida. Mesmas cargas, menos séries — cada rep com padrão impecável.';
 var WEEK2 = [
  {id:'seg',short:'SEG',name:'Segunda',focus:'LPO + Força · deload',blocks:[
@@ -1152,7 +1152,7 @@ var WEEK4 = [
        {t:'0:10 dip hold embaixo + 0:10 em cima + 5 dips'}
      ]}
    ]},
-   {l:'C',n:'LPO + força',skip:['João','Daniel','Victor Boson'],items:[
+   {l:'C',n:'LPO + força',skip:['João','Daniel'],items:[
      {t:'Press into jerk — 3-3 @ 45–55%',rest:'Pausa 1:00',L:{b:'jk',lo:45,hi:55},sets:[3,3],notes:[VBN]},
      {t:'Pause split jerk — 2-2-2 @ 75–88%',d:'Pausa de 2" no dip antes de lançar.',rest:'Pausa 1:30',L:{b:'jk',lo:75,hi:88},sets:[2,2,2]},
      {t:'Split jerk — 1-1-1 @ 92–97%',rest:'Pausa 2:00',L:{b:'jk',lo:92,hi:97},sets:[1,1,1],
@@ -1166,13 +1166,13 @@ var WEEK4 = [
    {l:'C2',n:'☆ Empurrada com perna',meta:'Somente João · no lugar do bloco C',only:'João',items:[
      {t:'Push jerk — 5 × 3 @ 70–80%',d:'Do rack. Sem single máximo esta semana.',rest:'Pausa 2:00',L:{b:'jk',lo:70,hi:80},sets:[3,3,3,3,3]}
    ]},
-   {l:'D',n:'Força',meta:'3 séries',skip:['Victor Boson'],items:[
+   {l:'D',n:'Força',meta:'3 séries',items:[
      {t:'3 legless, sendo 1–2 em L sit',d:'Sem falhar: se a rep em L sit sair arrastada, faça as outras em legless comum.',notes:[{w:'Victor',x:'Troque por 8 strict pull ups com pegada neutra enquanto a corda não liberar.'},{w:'João',x:'☆ Troque por 10 ring rows com pés elevados. Sem pendurar esta semana.'},{w:'Daniel',x:'◆ Troque por 5 strict pull ups com peso, ao mpp (2 RIR).'}]},
      {t:'Pausa 1:00 ativa leve',d:'Bike erg, ou só as pernas na air bike.'},
      {t:'Bench press — 5-3-3, subindo a cada série',d:'Abre nos 5 e sobe nas duas séries de 3. Última a 1–2 RIR.',rest:'Pausa 2:00',L:{src:'last',lo:90,hi:105},sets:[5,3,3],
       notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'}]}
    ]},
-   {l:'E',n:'Ginástica em potência',meta:'Qualidade e velocidade de execução, não volume',skip:['Victor Boson','João'],groups:[
+   {l:'E',n:'Ginástica em potência',meta:'Qualidade e velocidade de execução, não volume',skip:['João'],groups:[
      {g:'4 séries',items:[{t:'45 double unders'},{t:'7 burpees rápidos'},{t:'7/5 ring muscle ups em alta potência'},{t:'1:00 bike leve'}]},
      {g:'Pausa',items:[{t:'3:00 de pausa'}]},
      {g:'Depois — 3 séries',items:[{t:'10/7 cal air bike bem forte'},{t:'15 m handstand walk rápido',notes:[{w:'Daniel',x:'◆ Se o pescoço reclamar no apoio invertido, troque por 15 m de bear crawl com halteres.'}]},{t:'1:00 air bike leve'}]}
@@ -1181,17 +1181,6 @@ var WEEK4 = [
      {g:'4 séries',items:[{t:'45 double unders'},{t:'7 burpees rápidos'},{t:'1:00 bike leve'}]},
      {g:'Pausa',items:[{t:'3:00 de pausa'}]},
      {g:'Depois — 3 séries',items:[{t:'10 cal air bike bem forte'},{t:'20 m farmers walk pesado'},{t:'1:00 air bike leve'}]}
-   ]},
-   {l:'VB1',n:'◆ Empurrada e puxada',meta:'Somente Victor Boson · no lugar dos blocos C e D',only:'Victor Boson',
-    intro:'Tudo por percepção de esforço. RPE 6–7 significa parar com 3 a 4 reps na reserva em todas as séries.',items:[
-     {t:'Push press do rack — 5 × 5',d:'Subindo a carga a cada série até RPE 7 na quinta. Sem split, sem single.',rest:'Pausa 2:00',sets:[5,5,5,5,5],L:{src:'last',lo:100,hi:110}},
-     {t:'Bench press — 4 × 8',d:'RPE 7 na última série.',rest:'Pausa 2:00',sets:[8,8,8,8],L:{src:'last',lo:100,hi:105}},
-     {t:'Remada curvada com apoio no peito — 4 × 10',d:'Peito apoiado no banco inclinado.',rest:'Pausa 1:30',sets:[10,10,10,10],repRange:[8,10]},
-     {t:'Strict pull up — 4 × 6',d:'Com elástico se precisar fechar as 6 limpas. Sem kipping.',rest:'Pausa 1:30',sets:[6,6,6,6]}
-   ]},
-   {l:'E2',n:'Ginástica — volume base',meta:'Somente Victor Boson · no lugar do bloco E',only:'Victor Boson',items:[
-     {t:'4 séries: 40 single unders + 6 burpees + 4 transições na argola + 1:00 bike leve'},
-     {t:'3 séries: 8 cal air bike forte + 12 m urso/handstand hold + 1:00 air bike leve'}
    ]}
  ]},
 
@@ -1206,30 +1195,14 @@ var WEEK4 = [
        {t:'Pausa 1:00'}
      ]}
    ]},
-   {l:'B',n:'Potência',skip:['Matheus','Victor Boson'],items:[
+   {l:'B',n:'Potência',skip:['Matheus'],items:[
      {t:'Clean high pull — 3 × 3 @ 90–105%',d:'Aqueça com 70–80% antes.',rest:'Pausa 1:30',L:{b:'sc',lo:90,hi:105},sets:[3,3,3],notes:[VBN]},
      {t:'Power clean — 3 séries de 5 touch and go @ 235–255 / 135–150',d:'Cinco touch and go de verdade, sem largar a barra. Se não sair 5, baixa o peso.',rest:'Pausa 2:00',sets:[5,5,5],
       notes:[{w:'Victor',x:'Mantenha em 3 séries de 8 com carga que o punho aceite no rack frontal.'}]},
      {t:'Squat box jump — 3 × 5',d:'Pausa de 1" embaixo antes de saltar. Sobe 5 cm em relação à semana passada.',rest:'Pausa 1:00',
       notes:[{w:'Daniel',x:'◆ Como o burpee passa sem dor, teste 3 × 3 de box jump com step down, caixa mais baixa que a do grupo. Se o tendão falar na aterrissagem, troque por step up na caixa com halteres — 3 × 8/8, sem impulso da perna de trás.'}]}
    ]},
-   {l:'VB2',n:'◆ Agachamento e potência',meta:'Somente Victor Boson · no lugar do bloco B',only:'Victor Boson',
-    intro:'Este é o único dia de agachamento pesado da sua semana. Tudo por percepção: a última série para com 3 reps na reserva.',items:[
-     {t:'Back squat — 5 × 5',d:'Aqueça com séries de 5 até a carga de trabalho e suba a cada série até RPE 7 na quinta.',rest:'Pausa 2:30',sets:[5,5,5,5,5],L:{src:'last',lo:100,hi:110}},
-     {t:'Clean high pull — 4 × 3',d:'Carga que permita o cotovelo alto nas três reps. Sem percentual — pela técnica.',rest:'Pausa 1:30',sets:[3,3,3,3]},
-     {t:'Power clean — 4 × 3',d:'Carga leve, prioridade total na recepção. Para a série se a técnica cair.',rest:'Pausa 2:00',sets:[3,3,3,3]},
-     {t:'Box jump com step down — 3 × 5',d:'Caixa confortável. Desce andando, sem rebote.',rest:'Pausa 1:00'}
-   ]},
-   {l:'VB3',n:'◆ Metcon curto',meta:'Somente Victor Boson · 3 séries · no lugar do limiar',only:'Victor Boson',
-    intro:'Ritmo que você consegue repetir igual nas três séries.',groups:[
-     {g:'3 séries',items:[
-       {t:'10 cal remo'},
-       {t:'10 wall ball @ 20/14'},
-       {t:'10 burpees'},
-       {t:'Pausa 2:00'}
-     ]}
-   ],logs:['Tempo da série 1','Tempo da série 2','Tempo da série 3']},
-   {l:'C',n:'Limiar over/under',meta:'4 séries · 44:00 com o desaquecimento',skip:['Victor Boson'],
+   {l:'C',n:'Limiar over/under',meta:'4 séries · 44:00 com o desaquecimento',
     notes:[{w:'Daniel',x:'◆ Se o tendão doer na corrida, faça o mesmo protocolo na bike ou no remo, mantendo os tempos e a mesma sensação de esforço em cada trecho.'}],
     intro:'"Under" fica um pouco abaixo do limiar; "over" fica um pouco acima, sem virar tiro. O cronômetro do bloco já vem com as 4 séries inteiras e o desaquecimento — dá play uma vez depois do trote de 1 km.',
     SEQ:{r:4,segs:[['Under',120],['Over',90],['Under',120],['Over',90],['Trote leve ou caminhada',120]],tail:[['Velocidade livre',300],['Volta à calma',180]]},groups:[
@@ -1259,14 +1232,14 @@ var WEEK4 = [
      {t:'Power clean — 3 séries de 5 touch and go @ 235–255',d:'Cinco touch and go de verdade, sem largar a barra. Se não sair 5, baixa o peso.',rest:'Pausa 2:00',sets:[5,5,5]},
      {t:'Squat box jump — 3 × 5',d:'Pausa de 1" embaixo antes de saltar. Sobe 5 cm em relação à semana passada.',rest:'Pausa 1:00'}
    ]},
-   {l:'VB4',n:'◆ Posterior e carregamento',meta:'Somente Victor Boson · antes do remo',only:'Victor Boson',
-    intro:'Padrão de dobradiça, que não aparece em nenhum outro dia seu nesta semana.',items:[
-     {t:'RDL com barra — 4 × 8',d:'Barra rente à perna, joelho levemente flexionado. RPE 7 na última.',rest:'Pausa 2:00',sets:[8,8,8,8],L:{src:'last',lo:100,hi:105}},
-     {t:'Glute ham raise — 3 × 10',d:'Peso no peito ou menor elástico possível.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[8,10]},
-     {t:'Farmers walk — 4 × 30 m',d:'Pesado, sem perder a postura. Pausa até a mão recuperar.',rest:'Pausa 1:30'}
+   {l:'VB1',n:'◆ Agachamento',meta:'Somente Victor Boson · antes do remo',only:'Victor Boson',
+    intro:'Traz o back squat e o trabalho de arranco da segunda, que você não pega nesta semana.',items:[
+     {t:'Back squat — até um 3 RM do dia em 4 subidas + 2 × 3 @ 90%',d:'Conte as 4 subidas a partir da primeira série de 3 com carga de trabalho. Depois volte para 90% do que subiu nas duas últimas.',rest:'Pausa 3:00',sets:[3,3,3,3,3,3],L:{build:{n:4,reps:3,open:{src:'last',pct:90}},back:{n:2,reps:3,pct:90}}},
+     {t:'Overhead squat com pausa no bottom — 3 × 3',d:'Pausa de 2" no fundo.',rest:'Pausa 1:30',sets:[3,3,3],L:{src:'last',inc:[5,5]}},
+     {t:'Snatch high pull — 3 × 3',d:'Cotovelo alto e barra rente ao corpo.',rest:'Pausa 1:30',sets:[3,3,3],L:{src:'last',lo:100,hi:105}},
+     {t:'Glute ham raise — 3 × 10 a 12',d:'Peso no peito ou menor elástico possível.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[10,12]}
    ]},
    {l:'B',n:'Remo — limiar',meta:'3 séries · 31:30 · optativo, pra quem não consegue ficar parado',
-    notes:[{w:'Victor Boson',x:'◆ Pra você este bloco não é optativo — é a sua única sessão aérobia da semana. Ritmo calculado pelo seu teste de 3 min (830 m).'}],
     intro:'Ritmo calculado pelo seu teste de remo. O cronômetro do bloco já vem com as 3 séries inteiras — dá play uma vez e não mexe mais.',
     SEQ:{r:3,segs:[['Trabalho',480],['Flutuação',150]]},groups:[
      {g:'3 séries',items:[
@@ -1310,8 +1283,7 @@ var WEEK4 = [
      ]}
    ],logs:['Tempo da rodada 1','Tempo da rodada 2','Tempo da rodada 3'],
     notes:[{w:'Matheus',x:'115 lb nas três rodadas. Semana passada as três saíram abaixo de 2:30 a 95.'},
-           {w:'Victor',x:'Se o punho não aceitar o rack frontal com barra, faça thruster com halteres no mesmo número de reps.'},
-           {w:'Victor Boson',x:'15 thrusters @ 95, 12 bar facing burpees e 12 cal de air bike, mantendo as 3 rodadas.'}]},
+           {w:'Victor',x:'Se o punho não aceitar o rack frontal com barra, faça thruster com halteres no mesmo número de reps.'}]},
    {l:'D2',n:'☆ WOD sem overhead',meta:'João e Daniel · A cada 4:30, por 13:30 · 3 rodadas',only:['João','Daniel'],
     intro:'Tente fechar cada round entre 2:15 e 3:15. Se passar de 3:15, reduza o peso.',groups:[
      {g:'A cada 4:30, por 13:30',items:[
@@ -1333,18 +1305,12 @@ var WEEK4 = [
        {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
      ]}
    ]},
-   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 12:00',skip:['Victor Boson'],items:[
+   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 12:00',items:[
      {t:'Shoulder press + push press — 6 × (1+2)',d:'Últimas duas séries a 1–2 RIR.',L:{src:'last',lo:90,hi:105},sets:[3,3,3,3,3,3],
       notes:[{w:'Daniel',x:'◆ Faça só push press, 6 × 3 @ 70–80% do split jerk — sem shoulder press estrito, que exige mais do pescoço. Se incomodar, supino inclinado com halteres 6 × 5 ao mpp (2 RIR).'},{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 6 × (2+4) com o peso que o punho aceita.'},{w:'João',x:'☆ Troque por push jerk, 6 × 3 @ 70–80% do split jerk. Sem shoulder press e sem push press esta semana.'}]}
    ]},
-   {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',skip:['Victor Boson'],items:[
+   {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
      {t:'1 snatch high pull + 2 power snatch touch and go @ 85–95%',L:{b:'ps',lo:85,hi:95},sets:[3,3,3,3,3],notes:[VBN,{w:'João',x:'☆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Sem recepção overhead.'},{w:'Daniel',x:'◆ Faça só o snatch high pull, 5 × 3 @ 100–110% do power snatch. Se o pescoço estiver limpo, pode fazer o complexo como está, mas a 70–75% em vez de 85–95%.'}]}
-   ]},
-   {l:'VB5',n:'◆ Front squat, empurrada e arranco técnico',meta:'Somente Victor Boson · no lugar dos blocos C e D',only:'Victor Boson',
-    intro:'Segunda exposição de agachamento da semana, mais leve que a de quarta.',items:[
-     {t:'Front squat — 4 × 6',d:'Cotovelo alto até a última rep. RPE 7 na última série.',rest:'Pausa 2:30',sets:[6,6,6,6],L:{src:'last',lo:100,hi:110}},
-     {t:'Shoulder press — 4 × 6',d:'Estrito, sem perna. RPE 7 na última.',rest:'Pausa 2:00',sets:[6,6,6,6],L:{src:'last',lo:100,hi:105}},
-     {t:'Hang power snatch — 5 × 3',d:'Barra leve, do alto do joelho. É técnica, não carga — pare a série se a recepção ficar inconsistente.',rest:'Pausa 1:30',sets:[3,3,3,3,3]}
    ]},
    {l:'E',n:'WOD',meta:'Por tempo · 3 rodadas · cap 15:00',
     notes:[{w:'Daniel',x:'◆ Se o tendão doer, troque os 400 m de corrida por 500 m de remo em cada rodada.'}],
@@ -1357,8 +1323,7 @@ var WEEK4 = [
        {t:'20/15 cal remo'}
      ]}
    ],logs:['Tempo final (ou reps no cap)'],
-    notes:[{w:'Victor',x:'Troque toes to bar por 15 sit ups com halter e o hang clean por 12 goblet squats, enquanto o punho não aceitar pendurar.'},
-           {w:'Victor Boson',x:'Faça 2 rodadas em vez de 3, com 12 toes to bar e 9 hang cleans.'}]}
+    notes:[{w:'Victor',x:'Troque toes to bar por 15 sit ups com halter e o hang clean por 12 goblet squats, enquanto o punho não aceitar pendurar.'}]}
  ]},
 
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
@@ -1425,18 +1390,21 @@ var b=baseFor(S.athlete,o.b||L.b); return b?r5(b.v*(o.pct||100)/100):null;
 }
 function loadHTML(L,it,id){
 var base=loadBase(L,it,id);
+if(L.build){
+var ow=openWeight(L,it,id), bt=buildTop(it,id), hb='<div class="loads num">';
+hb+='<div class="load"><b>'+(ow?ow+' lb':'livre')+'</b><small>abre aqui</small></div>';
+hb+='<div class="load"><b>'+L.build.n+' subidas</b><small>até '+L.build.reps+'-RM do dia</small></div>';
+hb+='<div class="load"><b data-bo="'+id+'">'+(bt?r5(bt*L.back.pct/100)+' lb':'—')+'</b><small>back-off '+L.back.n+'×'+L.back.reps+' @ '+L.back.pct+'%</small></div>';
+hb+=base?'<span class="loadbase">Base: '+base.n+' '+base.v+' lb</span>':'<span class="loadbase">Sem registro anterior — abra pela sensação. O back-off calcula sozinho a partir do que você registrar.</span>';
+return hb+'</div>';
+}
 if(!base){
 if(L.src==='last') return '<div class="missing">Sem registro anterior deste exercício para '+esc(S.athlete)+'. Preencha pela sensação hoje — na próxima semana o alvo aparece.</div>';
 var want = L.b==='jk' ? 'split jerk ou clean & jerk' : BASES[L.b].n.toLowerCase();
 return '<div class="missing">Sem 1RM de '+want+' para '+esc(S.athlete)+'. <button type="button" data-goto="atleta">Registrar</button></div>';
 }
 var h='<div class="loads num">';
-if(L.build){
-var ow=openWeight(L,it,id), bt=buildTop(it,id);
-h+='<div class="load"><b>'+(ow?ow+' lb':'livre')+'</b><small>abre aqui</small></div>';
-h+='<div class="load"><b>'+L.build.n+' subidas</b><small>até '+L.build.reps+'-RM do dia</small></div>';
-h+='<div class="load"><b data-bo="'+id+'">'+(bt?r5(bt*L.back.pct/100)+' lb':'—')+'</b><small>back-off '+L.back.n+'×'+L.back.reps+' @ '+L.back.pct+'%</small></div>';
-} else if(L.same){
+if(L.same){
 h+='<div class="load"><b>'+r5(base.v)+' lb</b><small>mesma carga · progride nas reps</small></div>';
 } else if(L.inc){
 h+='<div class="load"><b>'+(L.inc[0]===L.inc[1]?r5(base.v+L.inc[0])+' lb':r5(base.v+L.inc[0])+'–'+r5(base.v+L.inc[1])+' lb')+'</b><small>'+(L.inc[0]===L.inc[1]?'+'+L.inc[0]+' lb':'+'+L.inc[0]+' a '+L.inc[1]+' lb')+' sobre a semana passada</small></div>';
@@ -2291,7 +2259,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-06a';
+var APP_VER='2026-10-06b';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
