@@ -715,6 +715,8 @@ return null;
 function jerkBase(ath){
 var sj=getMax(ath,'sj'); if(sj) return {v:sj,n:'Split jerk'};
 var cj=getMax(ath,'cj'); if(cj) return {v:cj,n:'Clean & jerk'};
+var pt=findTest('Push jerk 1RM'), pv=pt&&pt.v[ath]?parseFloat(String(pt.v[ath]).replace(',','.')):null;
+if(pv&&!isNaN(pv)) return {v:pv,n:'Push jerk'};
 return null;
 }
 function baseFor(ath,b){
@@ -1175,7 +1177,7 @@ var WEEK4 = [
    {l:'E',n:'Ginástica em potência',meta:'Qualidade e velocidade de execução, não volume',skip:['João'],groups:[
      {g:'4 séries',items:[{t:'45 double unders'},{t:'7 burpees rápidos'},{t:'7/5 ring muscle ups em alta potência'},{t:'1:00 bike leve'}]},
      {g:'Pausa',items:[{t:'3:00 de pausa'}]},
-     {g:'Depois — 3 séries',items:[{t:'10/7 cal air bike bem forte'},{t:'15 m handstand walk rápido',notes:[{w:'Daniel',x:'◆ Se o pescoço reclamar no apoio invertido, troque por 15 m de bear crawl com halteres.'}]},{t:'1:00 air bike leve'}]}
+     {g:'Depois — 3 séries',items:[{t:'10/7 cal air bike bem forte'},{t:'15 m handstand walk rápido',notes:[{w:'Daniel',x:'◆ Se o pescoço reclamar no apoio invertido, troque por 10 inchworm to push up.'}]},{t:'1:00 air bike leve'}]}
    ]},
    {l:'E3',n:'☆ Potência sem pendurar',meta:'Somente João · no lugar do bloco E',only:'João',groups:[
      {g:'4 séries',items:[{t:'45 double unders'},{t:'7 burpees rápidos'},{t:'1:00 bike leve'}]},
@@ -2259,7 +2261,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-06b';
+var APP_VER='2026-10-06c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
