@@ -1331,7 +1331,159 @@ var WEEK4 = [
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
 ];
 
-var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2,'2026-09-28':WEEK3,'2026-10-05':WEEK4};
+var WEEK5 = [
+ {id:'seg',short:'SEG',name:'Segunda',focus:'LPO + Força',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 air bike',d:'3 tiros de 5" a cada minuto.'}]},
+     {g:'2 séries',items:[{t:'12/12 low to high superband woodchopper'},{t:'12/12 single leg hip thrust'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'10 good morning @ barra vazia'},
+       {t:'5 strict muscle snatch + 3 clean grip OHS devagar + 3 snatch grip Sots press + 5 snatch balance @ 45/35',d:'Sots press com base confortável de agachamento, mesmo que sacrifique ADM.'}
+     ]}
+   ]},
+   {l:'B2',n:'Aquecimento técnico',meta:'A cada 1:30, por 2 séries · 75/55 a 135/85',items:[
+     {t:'1 snatch high pull + 1 hang muscle snatch + 1 snatch balance + 1 squat snatch @ 135–155 / 75–110',d:'Pare no chão em todas as reps que saem de lá.',
+      notes:[{w:'Victor',x:'1 snatch deadlift + 1 snatch pull + 1 snatch high pull + 1 hang snatch high pull @ 95–135, com a pegada que o punho aceitar.'}]}
+   ]},
+   {l:'C',n:'LPO e força',
+    notes:[{w:'Daniel',x:'◆ Box squat no lugar do pause back squat, mesma faixa de carga. No fim do bloco, 3 × 6/6 de pistol sentando no banco no lugar da isometria de extensão de joelho.'}],items:[
+     {t:'Squat snatch — 2-1-1 @ 80-88-92%',rest:'Pausa 2:00',L:{b:'ss',sch:[[2,80],[1,88],[1,92]]},sets:[2,1,1],notes:[VBN]},
+     {t:'Snatch high pull — 3 × 3 @ 90–100%',d:'Cotovelo alto e barra rente ao corpo.',rest:'Pausa 1:30',L:{b:'ss',lo:90,hi:100},sets:[3,3,3]},
+     {t:'Pause back squat — 3 × 3 @ 75–80%',d:'Pausa de 2" no fundo, sem perder a postura. Suba o mais rápido que der.',rest:'Pausa 2:30',L:{b:'bs',lo:75,hi:80},sets:[3,3,3],notes:[VBN]},
+     {t:'Glute ham raise — 3 × 10 a 12',d:'Peso no peito ou menor elástico possível. Mesma carga da semana passada, somando reps.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[10,12],L:{src:'last',same:1}}
+   ]},
+   {l:'D',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
+     {t:'35 min bike erg ou remo @ 130–140 bpm'}
+   ]}
+ ]},
+
+ {id:'ter',short:'TER',name:'Terça',focus:'LPO + Ginástica',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 bike erg'}]},
+     {g:'2 séries',items:[
+       {t:'10 band pull apart'},
+       {t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
+       {t:'5 behind the neck press + 5 snatch balance @ barra vazia'},
+       {t:'8 air squat com pausa 2" embaixo'}
+     ]}
+   ]},
+   {l:'C',n:'LPO — jerk com iso prévia',meta:'4 séries · pausa 1:30 a 2:00',
+    intro:'A isometria emenda direto no jerk: empurre a barra travada, solte e entre na série.',items:[
+     {t:'*0:10 overcoming back squat iso hold',d:'Coloque a barra embaixo do suporte do rack e empurre pra cima. Esforço máximo.'},
+     {t:'2 pause split jerk @ 80–85%',d:'Pausa de 2" no dip antes de lançar.',rest:'Pausa 1:30 a 2:00',L:{b:'jk',lo:80,hi:85},sets:[2,2,2,2],notes:[VBN]}
+   ]},
+   {l:'D',n:'Força',meta:'3 séries',items:[
+     {t:'3 legless',d:'Sem exigência de L sit esta semana.',
+      notes:[{w:'Victor',x:'Troque por 8 strict pull ups com pegada neutra enquanto a corda não liberar.'}]},
+     {t:'Pausa 1:00 ativa leve',d:'Bike erg, ou só as pernas na air bike.'},
+     {t:'Bench press — 3-3 @ 90% da semana passada',rest:'Pausa 2:00',L:{src:'last',lo:90},sets:[3,3],
+      notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'}]}
+   ]},
+   {l:'E',n:'Ginástica — acumulação',meta:'Sem condição de fadiga · a bike é recuperação, não trabalho',
+    intro:'Reps bem abaixo do máximo nas duas partes. Nada aqui é contra o relógio.',groups:[
+     {g:'5 séries',items:[
+       {t:'Ring muscle up @ 40–60% do máximo unbroken',G:{t:'Ring muscle up UB',lo:40,hi:60}},
+       {t:'2:00 bike leve'}
+     ]},
+     {g:'Depois — 4 séries',items:[
+       {t:'15 toes to bar'},
+       {t:'15 m handstand walk',d:'Sem exigência de pirueta.',
+        notes:[{w:'Matheus',x:'Pode fazer 15 strict handstand push up no lugar.'}]},
+       {t:'2:00 bike leve'}
+     ]}
+   ]}
+ ]},
+
+ {id:'qua',short:'QUA',name:'Quarta',focus:'Potência + Z3',blocks:[
+   {l:'A',n:'Warm up geral',groups:[
+     {g:'2 séries',items:[
+       {t:'20 pogo hops'},
+       {t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril.'},
+       {t:'50 m A-skips'},
+       {t:'50 m B-skips',d:'O A-skip só eleva o joelho; no B-skip você estende a perna à frente e "puxa" o solo pra trás.'},
+       {t:'100 m corrida leve'},
+       {t:'Pausa 1:00'}
+     ]}
+   ]},
+   {l:'B',n:'Potência',items:[
+     {t:'Clean high pull — 3 × 5 @ 85–90%',d:'Aqueça com 70–80% antes. Maior altura possível na barra.',rest:'Pausa 2:00',L:{b:'sc',lo:85,hi:90},sets:[5,5,5],notes:[VBN]},
+     {t:'Squat box jump — 3 × 3',d:'Pausa de 1" embaixo antes de saltar.',rest:'Pausa 1:00'}
+   ]},
+   {l:'C',n:'Z3 contínuo',meta:'40:00 · sub-limiar',
+    intro:'Ritmo único do começo ao fim, calculado pelo seu teste de 5 km.',groups:[
+     {items:[
+       {t:'10:00 de trote leve'},
+       {t:'40:00 contínuo',R:{thr:1,band:[1.06,1.10],k:'Z3'}},
+       {t:'5:00 de volta à calma'}
+     ]}
+   ]},
+   {l:'D',n:'Alongamentos',items:[
+     {t:'1:00 pigeon cada lado'},{t:'1:00 couch stretch cada lado'},{t:'1:00 posterior de coxa cada lado'},
+     {t:'1:00 panturrilha (leve) cada lado'},{t:'1:00 rotação torácica isométrica no solo, cada lado'}
+   ]}
+ ]},
+
+ {id:'qui',short:'QUI',name:'Quinta',focus:'Recuperação',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Remo leve',meta:'20:00 · optativo',items:[
+     {t:'20:00 de remo leve, ritmo livre'}
+   ]},
+   {l:'C',n:'Rolinho',meta:'1:30 em cada parte, cada lado',items:[
+     {t:'Adutores (devagar)'},{t:'Lateral do quadríceps'},{t:'Glúteos'},{t:'Posterior de coxa'},{t:'Panturrilhas'}
+   ]}
+ ]},
+
+ {id:'sex',short:'SEX',name:'Sexta',focus:'LPO + Front squat + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',meta:'2 séries',groups:[
+     {g:'2 séries',items:[
+       {t:'10 cal remo'},
+       {t:'10 band pull apart'},
+       {t:'5 muscle clean + 5 front squat + 5 push press @ barra vazia'},
+       {t:'8 cossack squat alternado'}
+     ]}
+   ]},
+   {l:'C',n:'LPO e força',items:[
+     {t:'3 séries: 1 squat clean + 1 jerk @ 75–80%',rest:'Pausa 2:00',L:{b:'cj',lo:75,hi:80},sets:[2,2,2],notes:[VBN]},
+     {t:'Front squat — 3 × 3 @ 75–80%',d:'Tronco ereto e cotovelo alto até a última rep.',rest:'Pausa 2:30',L:{b:'fs',lo:75,hi:80},sets:[3,3,3],
+      notes:[{w:'Matheus',x:'Pode fazer back squat no lugar — 3 × 3 @ 70–75% do back squat, pra tirar o punho do front rack.'},
+             {w:'Daniel',x:'◆ Box squat no lugar, mesma faixa de carga.'}]},
+     {t:'Single arm KB overhead squat — 2 × 8/8',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[16,16],repHint:'8/8'}
+   ]},
+   {l:'D',n:'WOD',meta:'A definir',items:[
+     {t:'A definir'}
+   ]}
+ ]},
+
+ {id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'800 m corrida'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'8 scap pull ups devagar + 8 ring rows close grip'},
+       {t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
+       {t:'5 inch worm to push up',d:'2 push ups por rep.'},
+       {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
+     ]}
+   ]},
+   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 8:00',items:[
+     {t:'Shoulder press + push press — 4 × (1+2)',d:'Mesma carga da semana passada nas quatro séries.',L:{src:'last',lo:100},sets:[3,3,3,3],
+      notes:[{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 4 × (2+4) com o peso que o punho aceita.'}]}
+   ]},
+   {l:'D',n:'LPO',meta:'A cada 2:00, por 6:00',items:[
+     {t:'Power snatch — 3 × 3 singles @ 80–85%',d:'Solte a barra e recomece a cada rep. Sem touch and go.',rest:'Pausa 2:00',L:{b:'ps',lo:80,hi:85},sets:[3,3,3],notes:[VBN]}
+   ]},
+   {l:'E',n:'WOD',meta:'A definir',items:[
+     {t:'A definir'}
+   ]}
+ ]},
+
+ {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
+];
+
+var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2,'2026-09-28':WEEK3,'2026-10-05':WEEK4,'2026-10-12':WEEK5};
 var ORDER={'2026-10-05':{'Matheus':[0,1,6,4,3,5,2]}};
 function visibleBlock(b){ if(b.only && [].concat(b.only).indexOf(S.athlete)<0) return false; if(b.skip && b.skip.indexOf(S.athlete)>=0) return false; return true; }
 var DSHORT=['SEG','TER','QUA','QUI','SEX','SÁB','DOM'], DNAME=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
@@ -1453,10 +1605,17 @@ if(!rb) return '<div class="missing">Sem teste de remo anotado para '+esc(S.athl
 var a=fmtPace(rb.p*R.lo), b=fmtPace(rb.p*R.hi);
 return '<div class="loads num"><div class="load"><b>'+(a===b?a:a+'–'+b)+'</b><small>/500 m'+(R.k?' · '+esc(R.k):'')+'</small></div><span class="loadbase">Base: '+esc(rb.src)+'</span></div>';
 }
+function gymHTML(G){
+var t=findTest(G.t), raw=t&&t.v[S.athlete]?String(t.v[S.athlete]).replace(',','.'):'', v=raw?parseFloat(raw):null;
+if(!v||isNaN(v)) return '<div class="missing">Sem teste de '+esc(G.t)+' para '+esc(S.athlete)+'. Fa\u00e7a s\u00e9ries curtas, bem longe da falha. <button type="button" data-goto="testes">Anotar teste</button></div>';
+var a=Math.max(1,Math.round(v*G.lo/100)), b=Math.max(1,Math.round(v*G.hi/100));
+return '<div class="loads num"><div class="load"><b>'+(a===b?a:a+'\u2013'+b)+' reps</b><small>'+G.lo+'\u2013'+G.hi+'% do m\u00e1ximo</small></div><span class="loadbase">Base: '+esc(G.t)+' '+v+'</span></div>';
+}
 function runHTML(R){
 if(R.thr){
 var tb=thrBase(S.athlete);
 if(!tb) return '<div class="missing">Sem teste de 5 km anotado para '+esc(S.athlete)+'. Faça por percepção: under em RPE 6, over em RPE 7–8. <button type="button" data-goto="testes">Anotar teste</button></div>';
+if(R.band) return '<div class="loads num"><div class="load"><b>'+fmtPace(tb.p*R.band[0])+'\u2013'+fmtPace(tb.p*R.band[1])+'/km</b><small>'+esc(R.k||'')+'</small></div><span class="loadbase">Limiar '+fmtPace(tb.p)+'/km \u00b7 base: '+tb.src+'</span></div>';
 if(R.m) return '<div class="loads num"><div class="load"><b>'+fmtPace(tb.p*R.m)+'/km</b><small>'+esc(R.k||'')+'</small></div><span class="loadbase">Limiar '+fmtPace(tb.p)+'/km · base: '+tb.src+'</span></div>';
 return '<div class="loads num"><div class="load"><b>'+fmtPace(tb.p*R.under)+'/km</b><small>under</small></div><div class="load"><b>'+fmtPace(tb.p*R.over)+'/km</b><small>over</small></div><span class="loadbase">Limiar estimado '+fmtPace(tb.p)+'/km · base: teste de '+tb.src+'</span></div>';
 }
@@ -1485,6 +1644,7 @@ var vu=vidFor(it);
 if(vu) h+='<a class="vid" href="'+esc(vu)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Ver vídeo</a>';
 if(it.L) h+=loadHTML(it.L,it,id);
 if(it.R) h+=runHTML(it.R);
+if(it.G) h+=gymHTML(it.G);
 if(it.Rw) h+=rowHTML(it.Rw);
 var coachAll=S.auth&&S.auth.athlete===COACH&&S.athlete===COACH;
 (it.notes||[]).forEach(function(n){
@@ -2261,7 +2421,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-06c';
+var APP_VER='2026-10-12a';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
