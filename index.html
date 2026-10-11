@@ -1446,7 +1446,7 @@ var WEEK5 = [
      ]}
    ]},
    {l:'C',n:'LPO e força',items:[
-     {t:'3 séries: 1 squat clean + 1 jerk @ 75–80%',rest:'Pausa 2:00',L:{b:'cj',lo:75,hi:80},sets:[2,2,2],notes:[VBN]},
+     {t:'3 séries: 1 squat clean + 1 jerk @ 75–80%',rest:'Pausa 2:00',L:{b:'cj',lo:75,hi:80},sets:[2,2,2],notes:[VBN,{w:'Daniel',x:'◆ Power clean no lugar do squat clean — recepção alta, sem agachar. O jerk fica igual.'}]},
      {t:'Front squat — 3 × 3 @ 75–80%',d:'Tronco ereto e cotovelo alto até a última rep.',rest:'Pausa 2:30',L:{b:'fs',lo:75,hi:80},sets:[3,3,3],
       notes:[{w:'Matheus',x:'Pode fazer back squat no lugar — 3 × 3 @ 70–75% do back squat, pra tirar o punho do front rack.'},
              {w:'Daniel',x:'◆ Box squat no lugar, mesma faixa de carga.'}]},
@@ -1468,9 +1468,9 @@ var WEEK5 = [
        {t:'10 strict toes to bar',d:'Descendo em 2–3" por rep.'}
      ]}
    ]},
-   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 8:00',items:[
-     {t:'Shoulder press + push press — 4 × (1+2)',d:'Mesma carga da semana passada nas quatro séries.',L:{src:'last',lo:100},sets:[3,3,3,3],
-      notes:[{w:'Victor',x:'Mantenha o padrão de mais reps e menos carga: 4 × (2+4) com o peso que o punho aceita.'}]}
+   {l:'C',n:'Força MMSS',meta:'1 série a cada 2:00, por 6:00',items:[
+     {t:'Push press — 3 × 5 @ 80% do complex da semana passada',d:'Do rack, dip curto e vertical. Sem split.',rest:'Pausa 2:00',hist:'Shoulder press + push press',L:{src:'last',lo:80},sets:[5,5,5],
+      notes:[{w:'Victor',x:'Com a pegada que o punho aceitar. Se a barra não aceitar, push press com halteres no mesmo número de reps.'}]}
    ]},
    {l:'D',n:'LPO',meta:'A cada 2:00, por 6:00',items:[
      {t:'Power snatch — 3 × 3 singles @ 80–85%',d:'Solte a barra e recomece a cada rep. Sem touch and go.',rest:'Pausa 2:00',L:{b:'ps',lo:80,hi:85},sets:[3,3,3],notes:[VBN]}
@@ -1768,7 +1768,7 @@ return m?+m[1]/100:0;
 var HC={k:'',m:{}};
 function histFor(it,id){
 if(!it.sets) return null;
-var nm=shortName(it.t), date=id.split('.')[0], sets=st(), best=null;
+var nm=it.hist||shortName(it.t), date=id.split('.')[0], sets=st(), best=null;
 var ck=S.athlete+'|'+Object.keys(sets).length, mk=nm+'|'+date;
 if(HC.k!==ck){ HC.k=ck; HC.m={}; }
 if(HC.m.hasOwnProperty(mk)) return HC.m[mk];
@@ -2421,7 +2421,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-12a';
+var APP_VER='2026-10-12b';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
