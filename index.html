@@ -1452,9 +1452,19 @@ var WEEK5 = [
              {w:'Daniel',x:'◆ Box squat no lugar, mesma faixa de carga.'}]},
      {t:'Single arm KB overhead squat — 2 × 8/8',d:'Peso desafiador que mantenha a postura boa.',rest:'Pausa 1:00–1:30',sets:[16,16],repHint:'8/8'}
    ]},
-   {l:'D',n:'WOD',meta:'A definir',items:[
-     {t:'A definir'}
-   ]}
+   {l:'D',n:'WOD',meta:'AMRAP 4:00 · 4 séries · pausa 3:00',
+    intro:'O pace tem que ser sustentável mas forte. O burpee é a parte que vai mais minar a série pro front squat, então tente não se matar aqui. Se 135/95 ficar muito pesado, abaixe pra 115/75, porque tem que ser unbroken (se possível sem parar em cima). Se o volume for o problema, reduza 3 reps de cada exercício antes do double under.',
+    SEQ:{r:4,segs:[['AMRAP',240],['Pausa · ritmo regenerativo',180]]},groups:[
+     {g:'AMRAP 4:00',items:[
+       {t:'21 GHD sit ups'},
+       {t:'18 bar facing burpees'},
+       {t:'15 front squats @ 135/95'},
+       {t:'Max double unders no tempo restante'}
+     ]},
+     {g:'Pausa',items:[
+       {t:'3:00 de bike erg em ritmo regenerativo',d:'Damper 3.'}
+     ]}
+   ],logs:['Série 1 — double unders','Série 2 — double unders','Série 3 — double unders','Série 4 — double unders']}
  ]},
 
  {id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + WOD',blocks:[
@@ -2421,7 +2431,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-12b';
+var APP_VER='2026-10-12c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
