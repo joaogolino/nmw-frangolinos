@@ -1485,9 +1485,14 @@ var WEEK5 = [
    {l:'D',n:'LPO',meta:'A cada 2:00, por 6:00',items:[
      {t:'Power snatch — 3 × 3 singles @ 80–85%',d:'Solte a barra e recomece a cada rep. Sem touch and go.',rest:'Pausa 2:00',L:{b:'ps',lo:80,hi:85},sets:[3,3,3],notes:[VBN]}
    ]},
-   {l:'E',n:'WOD',meta:'A definir',items:[
-     {t:'A definir'}
-   ]}
+   {l:'E',n:'WOD — Quartas de final 2026',meta:'Por tempo · cap 20:00',groups:[
+     {items:[
+       {t:'1000 m de remo'},
+       {t:'30 clean and jerks @ 135/95'},
+       {t:'1000 m de remo'},
+       {t:'30 strict HSPU'}
+     ]}
+   ],logs:['Tempo final (ou reps no cap)']}
  ]},
 
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
@@ -2431,7 +2436,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-12c';
+var APP_VER='2026-10-12d';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
