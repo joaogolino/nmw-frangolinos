@@ -1556,9 +1556,12 @@ var WEEK6 = [
      {t:'Bench press — 5-3-3, subindo a cada série',d:'Abre nos 5 e sobe nas duas séries de 3.',rest:'Pausa 2:00',L:{src:'last',lo:90,hi:105},sets:[5,3,3],
       notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'}]}
    ]},
-   {l:'E',n:'Thruster + puxada',meta:'4 séries · pausa 2:00',items:[
-     {t:'Thruster — 4 × 8 a 12 @ 30–50% do front squat (2 RIR)',d:'Do rack. Cotovelo alto na recepção e barra direto pra cima, sem pausa entre o agachamento e o empurrão.',rest:'Pausa 2:00',L:{b:'fs',lo:30,hi:50},sets:[10,10,10,10],repRange:[8,12]},
-     {t:'12 chest to bar',d:'Logo depois do thruster, antes da pausa.'}
+   {l:'E',n:'Thruster + puxada',groups:[
+     {g:'4 séries',items:[
+       {t:'8 a 12 thrusters @ 30–50% do front squat',d:'Do rack. Cotovelo alto na recepção e barra direto pra cima, sem pausa entre o agachamento e o empurrão.',L:{b:'fs',lo:30,hi:50},sets:[10,10,10,10],repRange:[8,12]},
+       {t:'15 chest to bar'},
+       {t:'Pausa 1:30'}
+     ]}
    ]}
  ]},
 
@@ -1640,7 +1643,7 @@ var WEEK6 = [
    ]},
    {l:'D',n:'Ginástica',meta:'4 séries · pausa 2:00',groups:[
      {g:'4 séries',items:[
-       {t:'50 double under crossovers'},
+       {t:'50 single under crossovers'},
        {t:'15 toes to bar'},
        {t:'12 box jump overs'},
        {t:'Pausa 2:00'}
@@ -1666,14 +1669,25 @@ var WEEK6 = [
    {l:'D',n:'LPO',meta:'A cada 2:00, por 10:00',items:[
      {t:'Power snatch — 5 × 2 @ 80–88%',d:'Solte a barra entre as reps.',L:{b:'ps',lo:80,hi:88},sets:[2,2,2,2,2],notes:[VBN]}
    ]},
-   {l:'E',n:'WOD — Open 24.1',meta:'Por tempo · cap 15:00',groups:[
-     {g:'21-15-9',items:[
-       {t:'DB snatches — braço 1'},
-       {t:'Lateral burpees over DB'},
-       {t:'DB snatches — braço 2'},
-       {t:'Lateral burpees over DB'}
+   {l:'E',n:'WOD — Open 24.1',meta:'Por tempo · cap 15:00 · DB 50/35 lb',groups:[
+     {g:'21',items:[
+       {t:'21 DB snatches — braço 1'},
+       {t:'21 lateral burpees over DB'},
+       {t:'21 DB snatches — braço 2'},
+       {t:'21 lateral burpees over DB'}
      ]},
-     {items:[{t:'DB 50/35 lb',d:'Todas as reps de um braço antes de trocar. Sequência: 21 de cada, depois 15, depois 9.'}]}
+     {g:'15',items:[
+       {t:'15 DB snatches — braço 1'},
+       {t:'15 lateral burpees over DB'},
+       {t:'15 DB snatches — braço 2'},
+       {t:'15 lateral burpees over DB'}
+     ]},
+     {g:'9',items:[
+       {t:'9 DB snatches — braço 1'},
+       {t:'9 lateral burpees over DB'},
+       {t:'9 DB snatches — braço 2'},
+       {t:'9 lateral burpees over DB'}
+     ]}
    ],logs:['Tempo final (ou reps no cap)']}
  ]},
 
@@ -2618,7 +2632,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-19a';
+var APP_VER='2026-10-19b';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
