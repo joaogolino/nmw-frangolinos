@@ -1717,11 +1717,11 @@ var WEEK7 = [
      {t:'Back squat — 5 × 3 @ 85–90%',rest:'Pausa 2:30',L:{b:'bs',lo:85,hi:90},sets:[3,3,3,3,3],notes:[VBN]},
      {t:'Glute ham raise — 3 × 10 a 12',d:'Peso no peito ou menor elástico possível. Mesma carga da semana passada, somando reps.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[10,12],L:{src:'last',same:1}}
    ]},
-   {l:'D',n:'Ginástica',meta:'3 séries',groups:[
-     {g:'3 séries',items:[
-       {t:'15 toes to bar'},
-       {t:'15 burpees'},
-       {t:'1:30 de pausa ativa na bike leve'}
+   {l:'D',n:'Ginástica',meta:'21-15-12',groups:[
+     {g:'21-15-12',items:[
+       {t:'21-15-12 toes to bar'},
+       {t:'21-15-12 bar facing burpees'},
+       {t:'Pausa: metade do tempo gasto na série'}
      ]},
      {g:'Depois',items:[
        {t:'3 × 60 double unders',d:'Pausa 1:00 entre as séries.',notes:[{w:'Matheus',x:'Sem double under hoje.'}]}
@@ -1759,17 +1759,23 @@ var WEEK7 = [
      {t:'Bench press — 5-3-3, subindo a cada série',d:'Abre nos 5 e sobe nas duas séries de 3.',rest:'Pausa 2:00',L:{src:'last',lo:90,hi:105},sets:[5,3,3],
       notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'},{w:'Matheus',x:'No lugar do bench: ring dip com peso, 5-3-3 subindo a carga.'}]}
    ]},
-   {l:'E',n:'Thruster + puxada',groups:[
+   {l:'E',n:'Ginástica',groups:[
+     {g:'3 séries',items:[
+       {t:'Ring muscle up @ 40–60% do máximo unbroken',G:{t:'Ring muscle up UB',lo:40,hi:60}},
+       {t:'1:30 de bike leve'}
+     ]}
+   ]},
+   {l:'F',n:'Thruster + puxada',groups:[
      {g:'4 séries',items:[
        {t:'8 a 12 thrusters @ 35–55% do front squat',d:'Do rack. Cotovelo alto na recepção e barra direto pra cima, sem pausa entre o agachamento e o empurrão.',L:{b:'fs',lo:35,hi:55},sets:[10,10,10,10],repRange:[8,12]},
        {t:'15 chest to bar'},
        {t:'Pausa 1:30'}
      ]}
    ]},
-   {l:'F',n:'Ginástica',groups:[
-     {g:'5 séries',items:[
-       {t:'Ring muscle up @ 40–60% do máximo unbroken',G:{t:'Ring muscle up UB',lo:40,hi:60}},
-       {t:'1:30 de bike leve'}
+   {l:'G',n:'Muscle up em fadiga',groups:[
+     {g:'2 séries',items:[
+       {t:'Máximo de ring muscle ups, parando a 1–2 reps da falha'},
+       {t:'Pausa 2:00'}
      ]}
    ]}
  ]},
@@ -1790,9 +1796,12 @@ var WEEK7 = [
      {t:'Power clean — 3 séries de 5 touch and go @ 75–82%',d:'Cinco touch and go de verdade, sem largar a barra.',rest:'Pausa 2:00',L:{b:'pc',lo:75,hi:82},sets:[5,5,5],notes:[VBN]},
      {t:'Squat box jump — 3 × 5',d:'Pausa de 1" embaixo antes de saltar.',rest:'Pausa 1:00'}
    ]},
-   {l:'C',n:'Dumbbell',items:[
-     {t:'DB snatch alternado — 4 × 6/6 ao mpp',d:'Do chão, troca de mão embaixo. Braço travado em cima antes de descer.',rest:'Pausa 1:30',sets:[12,12,12,12],repHint:'6/6'},
-     {t:'Wall walk — 3 × 4',d:'Peito e nariz tocam a parede em cima. Desce controlando até a mão encostar na linha de largada.',rest:'Pausa 1:30'}
+   {l:'C',n:'Dumbbell + wall walk',groups:[
+     {g:'4 séries',items:[
+       {t:'9/9 DB snatch sem alternar @ 50/35',d:'9 seguidos com um braço, depois 9 com o outro. Do chão, braço travado em cima antes de descer.'},
+       {t:'3 wall walks',d:'Peito e nariz tocam a parede em cima. Desce controlando até a mão encostar na linha de largada.'},
+       {t:'Pausa: 1× o tempo gasto na série'}
+     ]}
    ]},
    {l:'D',n:'Limiar over/under',meta:'4 séries · 44:00 com o desaquecimento',skip:['Matheus'],
     notes:[{w:'Daniel',x:'◆ Se o tendão doer na corrida, faça o mesmo protocolo na bike ou no remo, mantendo os tempos e a mesma sensação de esforço em cada trecho.'}],
@@ -1871,8 +1880,8 @@ var WEEK7 = [
    {l:'D',n:'Ginástica',meta:'4 séries · pausa 2:00',groups:[
      {g:'4 séries',items:[
        {t:'50 single under crossovers'},
-       {t:'15 toes to bar'},
-       {t:'12 box jump overs'},
+       {t:'20 GHD sit ups'},
+       {t:'14 box jump overs @ 60/50 cm'},
        {t:'Pausa 2:00'}
      ]}
    ]}
@@ -1902,13 +1911,14 @@ var WEEK7 = [
        {t:'1:30 de bike leve'}
      ]}
    ]},
-   {l:'F',n:'WOD — Open 18.4',meta:'Por tempo · cap 9:00',groups:[
+   {l:'F',n:'WOD — Open 18.4 (adaptado)',meta:'Por tempo · cap 9:00',
+    intro:'Adaptado: a segunda parte é 12-9-6 deadlifts @ 275/175. Vamos progredir esse WOD nas próximas semanas.',groups:[
      {g:'21-15-9',items:[
        {t:'21-15-9 deadlifts @ 225/155'},
        {t:'21-15-9 handstand push ups'}
      ]},
-     {g:'Depois — 21-15-9',items:[
-       {t:'21-15-9 deadlifts @ 315/205'},
+     {g:'Depois — 12-9-6',items:[
+       {t:'12-9-6 deadlifts @ 275/175'},
        {t:'50 ft de handstand walk depois de cada série de deadlift'}
      ]}
    ],logs:['Tempo final (ou reps no cap)']}
@@ -2855,7 +2865,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-26b';
+var APP_VER='2026-10-26c';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
