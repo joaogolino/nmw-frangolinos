@@ -1743,14 +1743,21 @@ var WEEK7 = [
        {t:'8 air squat com pausa 2" embaixo'}
      ]}
    ]},
-   {l:'C',n:'Jerk',meta:'5 séries · pausa 1:30 a 2:00',items:[
-     {t:'Split jerk — 2-2-2-1-1 @ 82-86-89-92-92%',rest:'Pausa 1:30 a 2:00',L:{b:'jk',sch:[[2,82],[2,86],[2,89],[1,92],[1,92]]},sets:[2,2,2,1,1],notes:[VBN,{w:'Victor Boson',x:'◆ Pare a escada no penúltimo percentual.'},{w:'Matheus',x:'No lugar do split jerk: single arm DB shoulder press, pegada neutra — 4 × 12 a 18/12 a 18 ao mpp, pausa 1:30.'}]}
+   {l:'C',n:'Jerk',meta:'5 séries · pausa 1:30 a 2:00',skip:['Matheus'],items:[
+     {t:'Split jerk — 2-2-2-1-1 @ 82-86-89-92-92%',rest:'Pausa 1:30 a 2:00',L:{b:'jk',sch:[[2,82],[2,86],[2,89],[1,92],[1,92]]},sets:[2,2,2,1,1],notes:[VBN,{w:'Victor Boson',x:'◆ Pare a escada no penúltimo percentual.'}]}
+   ]},
+   {l:'C2',n:'Ginástica',meta:'5 séries',only:'Matheus',groups:[
+     {g:'5 séries',items:[
+       {t:'2 legless rope climbs (15 ft)'},
+       {t:'15 m de handstand walk'},
+       {t:'Pausa 1:30'}
+     ]}
    ]},
    {l:'D',n:'Força',meta:'3 séries',items:[
      {t:'8 strict pull ups com peso',d:'Maior peso possível na perna.',sets:[8,8,8]},
      {t:'Pausa 0:30'},
      {t:'Bench press — 5-3-3, subindo a cada série',d:'Abre nos 5 e sobe nas duas séries de 3.',rest:'Pausa 2:00',L:{src:'last',lo:90,hi:105},sets:[5,3,3],
-      notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'}]}
+      notes:[{w:'Victor',x:'Aqui pode ir de halteres: mais reps, menos carga, punho neutro.'},{w:'Matheus',x:'No lugar do bench: ring dip com peso, 5-3-3 subindo a carga.'}]}
    ]},
    {l:'E',n:'Thruster + puxada',groups:[
      {g:'4 séries',items:[
@@ -1849,11 +1856,16 @@ var WEEK7 = [
        {t:'8 cossack squat alternado'}
      ]}
    ]},
-   {l:'C',n:'LPO e força',items:[
+   {l:'C',n:'LPO e força',skip:['Matheus'],items:[
      {t:'Squat clean & jerk — 2-2-2-1-1 @ 82-86-89-92-92%',rest:'Pausa 2:00',L:{b:'cj',sch:[[2,82],[2,86],[2,89],[1,92],[1,92]]},sets:[2,2,2,1,1],
-      notes:[VBN,{w:'Victor Boson',x:'◆ Pare a escada no penúltimo percentual.'},{w:'Daniel',x:'◆ Power clean no lugar do squat clean — recepção alta, sem agachar. O jerk fica igual.'},{w:'Matheus',x:'Só o squat clean, sem o jerk. Mesmos percentuais.'}]},
+      notes:[VBN,{w:'Victor Boson',x:'◆ Pare a escada no penúltimo percentual.'},{w:'Daniel',x:'◆ Power clean no lugar do squat clean — recepção alta, sem agachar. O jerk fica igual.'}]},
      {t:'Front squat — 4 × 3 @ 83–88%',d:'Tronco ereto e cotovelo alto até a última rep.',rest:'Pausa 2:30',L:{b:'fs',lo:83,hi:88},sets:[3,3,3,3],
       notes:[VBN,{w:'Daniel',x:'◆ Box squat no lugar, mesma faixa de carga.'}]},
+     {t:'Double DB box step up — 3 × 8/8 @ até 70/50 lb',d:'Caixa 24/20. Sobe sem impulso da perna de trás e desce controlando.',rest:'Pausa 1:30',sets:[16,16,16],repHint:'8/8'}
+   ]},
+   {l:'C2',n:'LPO e força',only:'Matheus',items:[
+     {t:'Squat clean — 2-2-2-1-1 @ 82-86-89-92-92%',rest:'Pausa 2:00',L:{b:'sc',sch:[[2,82],[2,86],[2,89],[1,92],[1,92]]},sets:[2,2,2,1,1]},
+     {t:'Front squat — 4 × 3 @ 83–88%',d:'Tronco ereto e cotovelo alto até a última rep.',rest:'Pausa 2:30',L:{b:'fs',lo:83,hi:88},sets:[3,3,3,3]},
      {t:'Double DB box step up — 3 × 8/8 @ até 70/50 lb',d:'Caixa 24/20. Sobe sem impulso da perna de trás e desce controlando.',rest:'Pausa 1:30',sets:[16,16,16],repHint:'8/8'}
    ]},
    {l:'D',n:'Ginástica',meta:'4 séries · pausa 2:00',groups:[
@@ -2843,7 +2855,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-26a';
+var APP_VER='2026-10-26b';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
