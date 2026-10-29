@@ -1927,8 +1927,243 @@ var WEEK7 = [
  {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
 ];
 
-var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2,'2026-09-28':WEEK3,'2026-10-05':WEEK4,'2026-10-12':WEEK5,'2026-10-19':WEEK6,'2026-10-26':WEEK7};
-var ORDER={'2026-10-05':{'Matheus':[0,1,6,4,3,5,2]},'2026-10-26':{'Sarah':[0,1,3,4,5,6,2],'Matheus':[0,1,3,6,4,5,2]}};
+var WEEK8 = [
+ {id:'seg',short:'SEG',name:'Segunda',focus:'LPO + Agachamento + Posteriores + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 air bike',d:'3 tiros de 5" a cada minuto.'}]},
+     {g:'2 séries',items:[{t:'12/12 low to high superband woodchopper'},{t:'12/12 single leg hip thrust'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'10 good morning @ barra vazia'},
+       {t:'5 strict muscle snatch + 3 clean grip OHS devagar + 3 snatch grip Sots press + 5 snatch balance @ 45/35',d:'Sots press com base confortável de agachamento, mesmo que sacrifique ADM.'}
+     ]}
+   ]},
+   {l:'B2',n:'Aquecimento técnico',meta:'A cada 1:30, por 2 séries · 75/55 a 135/85',items:[
+     {t:'1 snatch high pull + 1 hang muscle snatch + 1 snatch balance + 1 squat snatch @ 135–155 / 75–110',d:'Pare no chão em todas as reps que saem de lá.',
+      notes:[{w:'Victor',x:'1 snatch deadlift + 1 snatch pull + 1 snatch high pull + 1 hang snatch high pull @ 95–135, com a pegada que o punho aceitar.'}]}
+   ]},
+   {l:'C',n:'LPO e força',
+    notes:[{w:'Daniel',x:'◆ Box squat no lugar do back squat, mesma faixa de carga. No fim do bloco, 3 × 6/6 de pistol sentando no banco.'}],items:[
+     {t:'Squat snatch — 4 × 3 @ 82–85%',d:'Solte a barra entre as reps.',rest:'Pausa 2:00',L:{b:'ss',lo:82,hi:85},sets:[3,3,3,3],
+      notes:[{w:'Victor',x:'Power snatch ou snatch pull no lugar do squat snatch, até onde o punho aceitar a recepção.'}]},
+     {t:'Snatch pull — 3 × 4 @ 90–95%',d:'Barra rente ao corpo, extensão completa antes de puxar com os braços.',rest:'Pausa 1:30',L:{b:'ss',lo:90,hi:95},sets:[4,4,4]},
+     {t:'Back squat — 4 × 5 @ 75–80%',rest:'Pausa 2:30',L:{b:'bs',lo:75,hi:80},sets:[5,5,5,5]},
+     {t:'Nordic hamstring curl — 3 × 4 a 6',d:'Desce o mais devagar possível, quadril estendido. Empurra o chão com as mãos pra voltar.',rest:'Pausa 1:30',sets:[5,5,5],repRange:[4,6]}
+   ]},
+   {l:'D',n:'WOD',meta:'Por tempo · cap 12:00',groups:[
+     {items:[
+       {t:'50 wall balls @ 20/14'},
+       {t:'100 double unders',notes:[{w:'Matheus',x:'No lugar dos double unders: 20 cal remo.'}]},
+       {t:'30 toes to bar'},
+       {t:'50 wall balls @ 20/14'},
+       {t:'100 double unders',notes:[{w:'Matheus',x:'No lugar dos double unders: 20 cal remo.'}]},
+       {t:'30 toes to bar'}
+     ]}
+   ],logs:['Tempo final (ou reps no cap)']},
+   {l:'E',n:'Zona 2',meta:'Pode ser feito em outro horário',items:[
+     {t:'35 min bike erg ou remo @ 130–140 bpm'}
+   ]}
+ ]},
+
+ {id:'ter',short:'TER',name:'Terça',focus:'Jerk + Força MMSS + Thruster + MU em fadiga',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'3:00 bike erg'}]},
+     {g:'2 séries',items:[
+       {t:'12 rotações externas com elástico, cotovelo colado no corpo'},
+       {t:'12 face pulls com elástico'},
+       {t:'8 miniband wall slides',d:'Devagar, com rolinho na parede, sem abrir os cotovelos.'},
+       {t:'5 behind the neck press + 5 snatch balance @ barra vazia'},
+       {t:'8 air squat com pausa 2" embaixo'}
+     ]}
+   ]},
+   {l:'C',n:'Jerk',meta:'4 séries · pausa 2:00',skip:['Matheus'],items:[
+     {t:'Split jerk — 4 × 3 @ 78–83%',d:'Do rack. Recompõe os pés a cada rep.',rest:'Pausa 2:00',L:{b:'jk',lo:78,hi:83},sets:[3,3,3,3]}
+   ]},
+   {l:'C2',n:'Ginástica',meta:'5 séries',only:'Matheus',groups:[
+     {g:'5 séries',items:[
+       {t:'2 legless rope climbs (15 ft)'},
+       {t:'15 m de handstand walk'},
+       {t:'Pausa 1:30'}
+     ]}
+   ]},
+   {l:'D',n:'Força',meta:'3 séries',items:[
+     {t:'5 strict pull ups com peso',d:'Maior peso possível na perna.',sets:[5,5,5]},
+     {t:'Pausa 0:30'},
+     {t:'Bench press — 3 × 6 @ 75%',rest:'Pausa 1:00',L:{b:'bp',lo:75},sets:[6,6,6],
+      notes:[VBN,{w:'Victor',x:'Aqui pode ir de halteres: punho neutro.'},{w:'Matheus',x:'No lugar do bench: ring dip com peso, 3 × 6.'}]},
+     {t:'Remada curvada com apoio no peito — 3 × 10',d:'Peito colado no banco inclinado, escápula fecha antes de o cotovelo dobrar.',rest:'Pausa 1:30',sets:[10,10,10]}
+   ]},
+   {l:'E',n:'Ring muscle up',groups:[
+     {g:'3 séries',items:[
+       {t:'Ring muscle up @ 40–60% do máximo unbroken',G:{t:'Ring muscle up UB',lo:40,hi:60}},
+       {t:'1:30 de bike leve'}
+     ]}
+   ]},
+   {l:'F',n:'WOD',meta:'Por tempo · cap 14:00',groups:[
+     {g:'3 rounds',items:[
+       {t:'12 thrusters @ 95/65'},
+       {t:'12 chest to bar'}
+     ]},
+     {g:'Depois — 3 rounds',items:[
+       {t:'9 thrusters @ 115/75'},
+       {t:'15 GHD sit ups'},
+       {t:'6 ring muscle ups'}
+     ]}
+   ],logs:['Tempo final (ou reps no cap)']}
+ ]},
+
+ {id:'qua',short:'QUA',name:'Quarta',focus:'Potência + Limiar',blocks:[
+   {l:'A',n:'Warm up geral',groups:[
+     {g:'2 séries',items:[
+       {t:'20 pogo hops'},
+       {t:'50 m ankle dribbles',d:'O pé toca o solo logo abaixo do quadril.'},
+       {t:'50 m A-skips'},
+       {t:'50 m B-skips',d:'O A-skip só eleva o joelho; no B-skip você estende a perna à frente e "puxa" o solo pra trás.'},
+       {t:'100 m corrida leve'},
+       {t:'Pausa 1:00'}
+     ]}
+   ]},
+   {l:'B',n:'Potência',items:[
+     {t:'Clean high pull — 3 × 3 @ 95–100%',d:'Aqueça com 70–80% antes. Maior altura possível na barra.',rest:'Pausa 1:30',L:{b:'sc',lo:95,hi:100},sets:[3,3,3]},
+     {t:'Power clean — 4 × 3 @ 80–85%',d:'Solte a barra entre as reps.',rest:'Pausa 2:00',L:{b:'pc',lo:80,hi:85},sets:[3,3,3,3],notes:[VBN]}
+   ]},
+   {l:'C',n:'Limiar over/under',meta:'4 séries · 44:00 com o desaquecimento',
+    notes:[{w:'Daniel',x:'◆ Se o tendão doer na corrida, faça o mesmo protocolo na bike ou no remo, mantendo os tempos e a mesma sensação de esforço em cada trecho.'}],
+    intro:'"Under" fica um pouco abaixo do limiar; "over" fica um pouco acima, sem virar tiro. O cronômetro do bloco já vem com as 4 séries inteiras e o desaquecimento — dá play uma vez depois do trote de 1 km.',
+    SEQ:{r:4,segs:[['Under',120],['Over',90],['Under',120],['Over',90],['Trote leve ou caminhada',120]],tail:[['Velocidade livre',300],['Volta à calma',180]]},groups:[
+     {items:[{t:'1 km @ trote livre'}]},
+     {g:'4 séries',items:[
+       {t:'2:00 under',R:{thr:1,m:1.04,k:'alvo'}},
+       {t:'1:30 over',R:{thr:1,m:0.97,k:'alvo'}},
+       {t:'2:00 under',R:{thr:1,m:1.04,k:'alvo'}},
+       {t:'1:30 over',R:{thr:1,m:0.97,k:'alvo'}},
+       {t:'2:00 trote leve ou caminhada'}
+     ]},
+     {g:'Depois da última série',items:[
+       {t:'5:00 @ velocidade livre'},
+       {t:'3:00 de volta à calma'}
+     ]}
+   ]},
+   {l:'D',n:'Bíceps',items:[
+     {t:'Hammer curl — 3 × 10 a 12',d:'Cotovelo parado ao lado do corpo, desce em 2".',rest:'Pausa 1:00',sets:[10,10,10],repRange:[10,12]}
+   ]},
+   {l:'E',n:'Alongamentos',items:[
+     {t:'1:00 pigeon cada lado'},{t:'1:00 couch stretch cada lado'},{t:'1:00 posterior de coxa cada lado'},
+     {t:'1:00 panturrilha (leve) cada lado'},{t:'1:00 rotação torácica isométrica no solo, cada lado'}
+   ]}
+ ]},
+
+ {id:'qui',short:'QUI',name:'Quinta',focus:'Dumbbell + Wall walk',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Remo — limiar',meta:'3 séries · 31:30 · optativo',skip:['Matheus'],
+    intro:'Ritmo calculado pelo seu teste de remo. O cronômetro do bloco já vem com as 3 séries inteiras — dá play uma vez e não mexe mais.',
+    SEQ:{r:3,segs:[['Trabalho',480],['Flutuação',150]]},groups:[
+     {g:'3 séries',items:[
+       {t:'8:00 de trabalho',Rw:{lo:1.05,hi:1.10,k:'trabalho'}},
+       {t:'2:30 de flutuação',Rw:{lo:1.20,hi:1.30,k:'flutuação'}}
+     ]}
+   ]},
+   {l:'B2',n:'Corrida leve',meta:'30:00',only:'Matheus',items:[
+     {t:'30:00 de corrida contínua',R:{thr:1,band:[1.20,1.30],k:'leve'}}
+   ]},
+   {l:'C',n:'Dumbbell + wall walk',groups:[
+     {g:'4 séries',items:[
+       {t:'10/10 DB snatch sem alternar @ 50/35',d:'10 seguidos com um braço, depois 10 com o outro. Do chão, braço travado em cima antes de descer.'},
+       {t:'4 wall walks',d:'Peito e nariz tocam a parede em cima. Desce controlando até a mão encostar na linha de largada.'},
+       {t:'Pausa: 1× o tempo gasto na série'}
+     ]}
+   ]},
+   {l:'D',n:'Rolinho',meta:'1:30 em cada parte, cada lado',items:[
+     {t:'Adutores (devagar)'},{t:'Lateral do quadríceps'},{t:'Glúteos'},{t:'Posterior de coxa'},{t:'Panturrilhas'}
+   ]}
+ ]},
+
+ {id:'sex',short:'SEX',name:'Sexta',focus:'C&J + Posteriores + WOD',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',meta:'2 séries',groups:[
+     {g:'2 séries',items:[
+       {t:'10 cal remo'},
+       {t:'10 band pull apart'},
+       {t:'5 muscle clean + 5 front squat + 5 push press @ barra vazia'},
+       {t:'8 cossack squat alternado'}
+     ]}
+   ]},
+   {l:'C',n:'LPO e força',skip:['Matheus'],items:[
+     {t:'Squat clean & jerk — 4 × (2 cleans + 1 jerk) @ 80–85%',d:'Solte a barra entre os cleans. Jerk depois do segundo clean.',rest:'Pausa 2:00',L:{b:'cj',lo:80,hi:85},sets:[3,3,3,3],
+      notes:[{w:'Daniel',x:'◆ Power clean no lugar do squat clean — recepção alta, sem agachar. O jerk fica igual.'}]},
+     {t:'Glute ham raise — 3 × 10 a 12',d:'Peso no peito ou menor elástico possível.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[10,12],L:{src:'last',same:1}}
+   ]},
+   {l:'C2',n:'LPO e força',only:'Matheus',items:[
+     {t:'Squat clean — 4 × 3 @ 80–85%',d:'Solte a barra entre as reps.',rest:'Pausa 2:00',L:{b:'sc',lo:80,hi:85},sets:[3,3,3,3]},
+     {t:'Glute ham raise — 3 × 10 a 12',d:'Peso no peito ou menor elástico possível.',rest:'Pausa 1:30',sets:[10,10,10],repRange:[10,12],L:{src:'last',same:1}}
+   ]},
+   {l:'D',n:'Puxada + bíceps',meta:'3 séries · pausa 1:00',items:[
+     {t:'Remada com halter apoiado no banco — 3 × 10/10',d:'Escápula fecha antes de o cotovelo dobrar.',sets:[20,20,20],repHint:'10/10'},
+     {t:'Rosca direta com barra — 3 × 10',d:'Sem balançar o tronco.',sets:[10,10,10]}
+   ]},
+   {l:'E',n:'WOD',meta:'Por tempo · cap 15:00',groups:[
+     {g:'3 rounds',items:[
+       {t:'40 double unders'},
+       {t:'12 burpees over the bar'},
+       {t:'9 power cleans @ 135/95'}
+     ]},
+     {g:'Depois — 3 rounds',items:[
+       {t:'40 double unders'},
+       {t:'12 burpees over the bar'},
+       {t:'6 power cleans @ 185/125'}
+     ]}
+   ],logs:['Tempo final (ou reps no cap)']},
+   {l:'F',n:'Abdômen',groups:[
+     {g:'3 séries',items:[
+       {t:'12 sit ups com anilha'},
+       {t:'0:30 hollow hold'}
+     ]}
+   ]}
+ ]},
+
+ {id:'sab',short:'SÁB',name:'Sábado',focus:'Força MMSS + LPO + MU + Open',blocks:[
+   {l:'A',n:'Flexibilidade',items:FLEX_A},
+   {l:'B',n:'Aquecimento geral',groups:[
+     {items:[{t:'800 m corrida'}]},
+     {g:'Depois — 2 séries',items:[
+       {t:'12 rotações externas com elástico, cotovelo colado no corpo'},
+       {t:'12 face pulls com elástico'},
+       {t:'8 scap pull ups devagar + 8 ring rows close grip'},
+       {t:'5 inch worm to push up',d:'2 push ups por rep.'}
+     ]}
+   ]},
+   {l:'C',n:'Força MMSS',meta:'4 séries · pausa 2:00',skip:['Matheus'],items:[
+     {t:'Shoulder press — 4 × 5 @ 70–75%',rest:'Pausa 2:00',L:{b:'sp',lo:70,hi:75},sets:[5,5,5,5],
+      notes:[VBN,{w:'Victor',x:'Pode ir de halteres, punho neutro.'}]}
+   ]},
+   {l:'D',n:'LPO',meta:'A cada 2:00, por 8:00',items:[
+     {t:'Power snatch — 4 × 3 @ 72–78%',d:'Solte a barra entre as reps.',L:{b:'ps',lo:72,hi:78},sets:[3,3,3,3],notes:[VBN]}
+   ]},
+   {l:'E',n:'Bar muscle up',groups:[
+     {g:'4 séries',items:[
+       {t:'Bar muscle up @ 30–40% do máximo unbroken',G:{t:'Bar muscle up UB',lo:30,hi:40}},
+       {t:'1:30 de bike leve'}
+     ]}
+   ]},
+   {l:'F',n:'WOD — Open 19.3',meta:'Por tempo · cap 10:00 · DB 50/35 · caixa 24/20',groups:[
+     {items:[
+       {t:'200 ft de DB overhead walking lunge',d:'Um DB, troca de braço quando quiser.'},
+       {t:'50 DB box step ups',d:'Um DB, em qualquer posição.'},
+       {t:'50 strict handstand push ups'},
+       {t:'200 ft de handstand walk'}
+     ]}
+   ],logs:['Tempo final (ou reps no cap)']},
+   {l:'G',n:'Posteriores',items:[
+     {t:'RDL — 3 × 8 @ 50–60% do deadlift',d:'Joelho levemente flexionado, barra rente à coxa, desce até sentir o posterior alongar.',rest:'Pausa 1:30',L:{b:'dl',lo:50,hi:60},sets:[8,8,8]}
+   ]}
+ ]},
+
+ {id:'dom',short:'DOM',name:'Domingo',focus:'Full rest',rest:true,blocks:[]}
+];
+
+var PROGRAMS={'2026-09-14':WEEK,'2026-09-21':WEEK2,'2026-09-28':WEEK3,'2026-10-05':WEEK4,'2026-10-12':WEEK5,'2026-10-19':WEEK6,'2026-10-26':WEEK7,'2026-11-02':WEEK8};
+var ORDER={'2026-10-05':{'Matheus':[0,1,6,4,3,5,2]},'2026-10-26':{'Sarah':[0,1,3,4,5,6,2],'Matheus':[0,1,3,6,4,5,2]},'2026-11-02':{'Sarah':[0,1,3,4,5,6,2],'Matheus':[0,1,3,6,4,5,2]}};
 function visibleBlock(b){ if(b.only && [].concat(b.only).indexOf(S.athlete)<0) return false; if(b.skip && b.skip.indexOf(S.athlete)>=0) return false; return true; }
 var DSHORT=['SEG','TER','QUA','QUI','SEX','SÁB','DOM'], DNAME=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
 var MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
@@ -2865,7 +3100,7 @@ st()[sid]=arr; save(); refreshVol(sid); refreshTargets(sid); syncDay(sid.split('
 }
 });
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ pull(); if(S.tab==='treino') loadRes(S.day,true); } else if(Object.keys(RESQ).length){ flushRes(); } });
-var APP_VER='2026-10-26c';
+var APP_VER='2026-11-02a';
 (function checkVer(){ try{ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER){ location.replace(location.pathname+'?v='+m[1]); } }).catch(function(){}); }catch(e){} })();
 document.addEventListener('visibilitychange',function(){ if(!document.hidden){ fetch(location.pathname+'?cb='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){ var m=t.match(/var APP_VER='([^']+)'/); if(m && m[1]!==APP_VER) location.replace(location.pathname+'?v='+m[1]); }).catch(function(){}); } });
 render();
